@@ -28,6 +28,39 @@ function handleGravity()
 	}
 }
 
+function handleInflictedAcceleration()
+{
+	if (!process_inflicted_acceleration) { return; }
+	
+	//Prepare.
+	var new_h_speed = inflicted_h_speed;
+	var new_v_speed = inflicted_v_speed;
+	
+	var absolute_h_speed = abs(new_h_speed);
+	var absolute_v_speed = abs(new_v_speed);
+	
+	var h_sign = sign(new_h_speed);
+	var v_sign = sign(new_v_speed);
+	
+	//Handle horizontal deceleration.
+	if (absolute_h_speed > global.player_1.decel_rate)
+	{ new_h_speed -= h_sign * global.player_1.decel_rate; }
+		
+	else
+	{ new_h_speed = 0; }
+	
+	//Handle vertical deceleration.
+	if (absolute_v_speed > global.player_1.decel_rate)
+	{ new_v_speed -= v_sign * global.player_1.decel_rate; }
+		
+	else
+	{ new_v_speed = 0; }
+	
+	//Set new speeds.
+	inflicted_h_speed = new_h_speed;
+	inflicted_v_speed = new_v_speed;
+}
+
 function handlePixelAccumulation()
 {
 	if (!process_pixel_accumulation) { return; }

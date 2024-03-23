@@ -40,10 +40,9 @@ handlePlayerMovementAndCollision = function()
 	handleGravity(); //Genericized
 	
 	handleHorizontalAcceleration();
-	handleInflictedHorizontalAcceleration();
-	
 	handleVerticalAcceleration();
-	handleInflictedVerticalAcceleration()
+	
+	handleInflictedAcceleration();
 	
 	handlePixelAccumulation();
 	updateObjectPosition(); //Genericized
@@ -116,26 +115,6 @@ handleHorizontalAcceleration = function()
 	}
 }
 
-///@func handleInflictedHorizontalAcceleration()
-handleInflictedHorizontalAcceleration = function()
-{
-	if (!process_inflicted_acceleration) { return; }
-	
-	//Prepare.
-	var new_speed = inflicted_h_speed;
-	var absolute_speed = abs(new_speed);
-	
-	//Handle deceleration.
-	if (absolute_speed > global.player_1.decel_rate)
-	{ new_speed += ((sign(new_speed) * -1) * global.player_1.decel_rate); }
-		
-	else
-	{ new_speed = 0; }
-	
-	//Set new speed.
-	inflicted_h_speed = new_speed;
-}
-
 ///@func handleVerticalAcceleration()
 handleVerticalAcceleration = function()
 {
@@ -189,26 +168,6 @@ handleVerticalAcceleration = function()
 			{ v_speed = 0; }
 		}
 	}
-}
-
-///@func handleInflictedVerticalAcceleration()
-handleInflictedVerticalAcceleration = function()
-{
-	if (!process_inflicted_acceleration) { return; }
-	
-	//Prepare.
-	var new_speed = inflicted_v_speed;
-	var absolute_speed = abs(new_speed);
-	
-	//Handle deceleration.
-	if (absolute_speed > global.player_1.decel_rate)
-	{ new_speed += ((sign(new_speed) * -1) * global.player_1.decel_rate); }
-		
-	else
-	{ new_speed = 0; }
-	
-	//Set new speed.
-	inflicted_v_speed = new_speed;
 }
 
 ///@func checkForImpassable()
