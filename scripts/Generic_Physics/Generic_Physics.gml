@@ -1,7 +1,3 @@
-function handleMovementAndCollision()
-{
-}
-
 function handleGravity()
 {
 	if (!process_gravity) { return; }
@@ -28,37 +24,165 @@ function handleGravity()
 	}
 }
 
-function handleInflictedAcceleration()
+function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
+{
+	if (!process_acceleration) { return; }
+	
+	//Handle acceleration;
+	var absolute_speed = abs(h_speed);
+	var h_sign = sign(h_speed);
+	
+	//If we have not yet reached top speed, accelerate.
+	if (absolute_speed < current_top_speed)
+	{ 
+		var adjustment = (_input * _acceleration);
+		
+		var new_speed = h_speed + adjustment;
+	
+		//If the proposed new speed would exceed the current top speed,
+		//Then cap it to the current top speed.
+		if (abs(new_speed) > current_top_speed)
+		{ new_speed = _input * current_top_speed; }
+	
+		//Update h_speed.
+		h_speed = new_speed;
+	}
+	
+	//Update tracking.
+	h_sign = sign(h_speed);
+	absolute_speed = abs(h_speed);
+	
+	//Handle deceleration.
+	if (absolute_speed != 0)
+	&& (cap_to_top_speed)
+	{
+		if (_input == 0)
+		|| (absolute_speed > current_top_speed)
+		{
+			//If it's possible to decelerate without crossing zero
+			//Then do so.
+			if (absolute_speed > _deceleration)
+			{
+				adjustment = h_sign * _deceleration;
+				
+				new_speed = h_speed - adjustment;
+			}
+		
+			//Otherwise, snap to zero.
+			else
+			{ new_speed = 0; }
+			
+			h_speed = new_speed;
+		}
+	}
+	
+	//Update tracking.
+	h_sign = sign(h_speed);
+	absolute_speed = abs(h_speed);
+	
+	//Handle braking.
+	if (absolute_speed != 0)
+	{
+		if (_input != 0)
+		&& (_input != h_sign)
+		{
+			//If it's possible to decelerate without crossing zero
+			//Then do so.
+			if (absolute_speed > _deceleration)
+			{ h_speed -= h_sign * _deceleration; }
+		
+			//Otherwise, snap to zero.
+			else
+			{ h_speed = 0; }
+		}
+	}
+}
+
+function handleVerticalAcceleration(_short_jump_triggered, _deceleration)
+{
+	if (!process_acceleration) { return; }
+	
+	//Handle acceleration;
+	var absolute_speed = abs(v_speed);
+	var v_sign = sign(v_speed);
+	
+	var g_power = abs(inflicted_v_gravity);
+	var g_sign = sign(inflicted_v_gravity);
+	var terminal_velocity = global.gravity_data[gravity_context].terminal_velocity;
+	
+	if (v_speed < terminal_velocity)
+	{ 
+		var adjustment = (g_sign * g_power);
+		
+		var new_speed = v_speed + adjustment;
+		
+		if (new_speed > terminal_velocity)
+		{ new_speed = g_sign * terminal_velocity; }
+	
+		v_speed = new_speed;
+	}
+	
+	//Update tracking.
+	v_sign = sign(v_speed);
+	absolute_speed = abs(v_speed);
+	
+	//Handle short jumping.
+	if (_short_jump_triggered)
+	&& (v_sign != 0)
+	&& (v_sign != g_sign)
+	{ v_speed = 0; }
+	
+	//Update tracking.
+	v_sign = sign(v_speed);
+	absolute_speed = abs(v_speed);
+	
+	//Handle deceleration.
+	if (absolute_speed != 0)
+	{
+		if (g_sign == 0)
+		|| (g_sign != v_sign)
+		|| (absolute_speed > terminal_velocity)
+		{
+			if (absolute_speed > _deceleration)
+			{ v_speed -= (v_sign * _deceleration); }
+		
+			else
+			{ v_speed = 0; }
+		}
+	}
+}
+
+function handleInflictedAcceleration(_deceleration)
 {
 	if (!process_inflicted_acceleration) { return; }
 	
 	//Prepare.
-	var new_h_speed = inflicted_h_speed;
-	var new_v_speed = inflicted_v_speed;
+	var new_inflicted_h_speed = inflicted_h_speed;
+	var new_inflicted_v_speed = inflicted_v_speed;
 	
-	var absolute_h_speed = abs(new_h_speed);
-	var absolute_v_speed = abs(new_v_speed);
+	var absolute_inflicted_h_speed = abs(new_inflicted_h_speed);
+	var absolute_inflicted_v_speed = abs(new_inflicted_v_speed);
 	
-	var h_sign = sign(new_h_speed);
-	var v_sign = sign(new_v_speed);
+	var h_sign = sign(new_inflicted_h_speed);
+	var v_sign = sign(new_inflicted_v_speed);
 	
 	//Handle horizontal deceleration.
-	if (absolute_h_speed > global.player_1.decel_rate)
-	{ new_h_speed -= h_sign * global.player_1.decel_rate; }
+	if (absolute_inflicted_h_speed > _deceleration)
+	{ new_inflicted_h_speed -= h_sign * _deceleration; }
 		
 	else
-	{ new_h_speed = 0; }
+	{ new_inflicted_h_speed = 0; }
 	
 	//Handle vertical deceleration.
-	if (absolute_v_speed > global.player_1.decel_rate)
-	{ new_v_speed -= v_sign * global.player_1.decel_rate; }
+	if (absolute_inflicted_v_speed > _deceleration)
+	{ new_inflicted_v_speed -= v_sign * _deceleration; }
 		
 	else
-	{ new_v_speed = 0; }
+	{ new_inflicted_v_speed = 0; }
 	
 	//Set new speeds.
-	inflicted_h_speed = new_h_speed;
-	inflicted_v_speed = new_v_speed;
+	inflicted_h_speed = new_inflicted_h_speed;
+	inflicted_v_speed = new_inflicted_v_speed;
 }
 
 function handlePixelAccumulation()
@@ -111,7 +235,7 @@ function handlePixelAccumulation()
 	}
 	
 	if (checkForImpassable(x, y + v_sign))
-	{
+	{	
 		v_speed = 0;
 		inflicted_v_speed = 0;
 		
@@ -186,4 +310,41 @@ function updateObjectPosition()
 			}
 		}
 	}
+}
+
+function checkForImpassable(_x, _y)
+{
+	if (!process_collision_detection) { return false; }
+	
+	ds_list_clear(impassable_list);
+        
+	var _num = instance_place_list(_x, _y, obj_parent_collision, impassable_list, true);
+	
+	var h_sign = sign(_x - x);
+	var v_sign = sign(_y - y);
+	
+	for (var i = 0;  i < _num; i++)
+	{
+		var this_object = impassable_list[|i];
+		
+		//This is to make sure we can't get stuck inside of objects.
+		if (instance_place(x,y,this_object))
+		{ continue; }
+		
+		
+		if (this_object.object_index = obj_collision_1way)
+		{
+			var pass_through_direction = this_object.image_angle;
+			
+			if (pass_through_direction == 0)   && (h_sign != -1)  { continue; }
+			if (pass_through_direction == 90)  && (v_sign != 1)   { continue; }
+			if (pass_through_direction == 180) && (h_sign != 1)	  { continue; }
+			if (pass_through_direction == 270) && (v_sign != -1)  { continue; }
+		}
+			
+		if (this_object.impassable == true)
+		{ return true; }
+	}
+    
+	return false;
 }
