@@ -1,0 +1,2 @@
+updateSprites();
+readPlayerInput();

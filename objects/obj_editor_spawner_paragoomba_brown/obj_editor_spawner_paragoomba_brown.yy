@@ -1,0 +1,43 @@
+{
+  "$GMObject":"",
+  "%Name":"obj_editor_spawner_paragoomba_brown",
+  "eventList":[
+    {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
+  "managed":true,
+  "name":"obj_editor_spawner_paragoomba_brown",
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_parent_spawner_enemy","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"propertyId":{"name":"contents","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"obj_enemy_goomba_brown",},
+  ],
+  "parent":{
+    "name":"- Level Editor",
+    "path":"folders/Objects/- Level Editor.yy",
+  },
+  "parentObjectId":{
+    "name":"obj_parent_spawner_enemy",
+    "path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",
+  },
+  "persistent":false,
+  "physicsAngularDamping":0.1,
+  "physicsDensity":0.5,
+  "physicsFriction":0.2,
+  "physicsGroup":1,
+  "physicsKinematic":false,
+  "physicsLinearDamping":0.1,
+  "physicsObject":false,
+  "physicsRestitution":0.1,
+  "physicsSensor":false,
+  "physicsShape":1,
+  "physicsShapePoints":[],
+  "physicsStartAwake":true,
+  "properties":[],
+  "resourceType":"GMObject",
+  "resourceVersion":"2.0",
+  "solid":false,
+  "spriteId":{
+    "name":"spr_editor_paragoomba_brown",
+    "path":"sprites/spr_editor_paragoomba_brown/spr_editor_paragoomba_brown.yy",
+  },
+  "spriteMaskId":null,
+  "visible":false,
+}

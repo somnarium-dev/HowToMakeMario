@@ -1,0 +1,1 @@
+global.show_debug_data = !global.show_debug_data;
