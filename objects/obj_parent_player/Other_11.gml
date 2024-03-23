@@ -108,6 +108,7 @@ state_machine[player_state.run_fall] = function()
 	handlePlayerMovementAndCollision();
 	
 	checkTransitionToWalk();
+	checkTransitionToRun();
 	checkTransitionToStand();
 }
 
@@ -202,7 +203,10 @@ checkTransitionToWalk = function()
 ///@func checkTransitionToRun()
 checkTransitionToRun = function()
 {
-	if (atMaxPLevel())
+	var on_the_ground = checkForImpassable(x, y+1);
+	
+	if (on_the_ground)
+	&& (atMaxPLevel())
 	{ updateState(player_state.run); }
 }
 
