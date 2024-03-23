@@ -1,7 +1,3 @@
-function handleMovementAndCollision()
-{
-}
-
 function handleGravity()
 {
 	if (!process_gravity) { return; }
@@ -110,7 +106,7 @@ function handleVerticalAcceleration(_short_jump_triggered, _deceleration)
 		
 		var new_speed = v_speed + adjustment;
 		
-		if (abs(new_speed) > terminal_velocity)
+		if (new_speed > terminal_velocity)
 		{ new_speed = g_sign * terminal_velocity; }
 	
 		v_speed = new_speed;
@@ -124,10 +120,7 @@ function handleVerticalAcceleration(_short_jump_triggered, _deceleration)
 	if (_short_jump_triggered)
 	&& (v_sign != 0)
 	&& (v_sign != g_sign)
-	{ 
-		v_speed = 0; 
-		show_debug_message("SHORT JUMP");
-	}
+	{ v_speed = 0; }
 	
 	//Update tracking.
 	v_sign = sign(v_speed);
@@ -144,10 +137,7 @@ function handleVerticalAcceleration(_short_jump_triggered, _deceleration)
 			{ v_speed -= (v_sign * _deceleration); }
 		
 			else
-			{ 
-				v_speed = 0;
-				show_debug_message("DECELERATION LOCK");	
-			}
+			{ v_speed = 0; }
 		}
 	}
 }
@@ -236,8 +226,6 @@ function handlePixelAccumulation()
 	
 	if (checkForImpassable(x, y + v_sign))
 	{	
-		show_debug_message("ACCUMULATION: IMPASSABLE");
-		
 		v_speed = 0;
 		inflicted_v_speed = 0;
 		
@@ -301,7 +289,6 @@ function updateObjectPosition()
 			if (checkForImpassable(x, y + v_adjustment))
 			&& (v_sign == v_adjustment)
 			{ 
-				show_debug_message("V.P.Q. BONK");
 				v_speed = 0;
 				vertical_pixels_queued = 0;
 			}
