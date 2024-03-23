@@ -28,6 +28,65 @@ function handleGravity()
 	}
 }
 
+function handlePixelAccumulation()
+{
+	if (!process_pixel_accumulation) { return; }
+	
+	var combined_h_speed = h_speed + inflicted_h_speed;
+	var combined_v_speed = v_speed + inflicted_v_speed;
+	
+	//Accumulate pixels.
+	horizontal_pixels_accumulated += combined_h_speed;
+	vertical_pixels_accumulated += combined_v_speed;
+	
+	//Count complete pixels.
+	var integer_h_pixels = horizontal_pixels_accumulated div 1;
+	var integer_v_pixels = vertical_pixels_accumulated div 1;
+	
+	//Remove complete pixels from accumulated pixels.
+	horizontal_pixels_accumulated -= integer_h_pixels;
+	vertical_pixels_accumulated -= integer_v_pixels;
+	
+	//Queue complete pixels.
+	horizontal_pixels_queued += integer_h_pixels;
+	vertical_pixels_queued += integer_v_pixels;
+	
+	//Count complete adjustment pixels.
+	var integer_adjustment_h_pixels = adjustment_h_pixels div 1;
+	var integer_adjustment_v_pixels = adjustment_v_pixels div 1;
+	
+	//Remove complete adjustment pixels from accumulated adjustment pixels.
+	adjustment_h_pixels -= integer_adjustment_h_pixels;
+	adjustment_v_pixels -= integer_adjustment_v_pixels;
+	
+	//Accumulate pixels.
+	horizontal_pixels_queued += integer_adjustment_h_pixels;
+	vertical_pixels_queued += integer_adjustment_v_pixels;
+	
+	//If it's not possible to move in the queued direction,
+	//clear the related variables to prevent issues.
+	var h_sign = sign(horizontal_pixels_queued);
+	var v_sign = sign(vertical_pixels_queued);
+	
+	if (checkForImpassable(x + h_sign, y))
+	{
+		h_speed = 0;
+		inflicted_h_speed = 0;
+		
+		horizontal_pixels_accumulated = 0;
+		horizontal_pixels_queued = 0;
+	}
+	
+	if (checkForImpassable(x, y + v_sign))
+	{
+		v_speed = 0;
+		inflicted_v_speed = 0;
+		
+		vertical_pixels_accumulated = 0;
+		vertical_pixels_queued = 0;
+	}
+}
+
 function updateObjectPosition()
 {
 	if (!process_movement) { return; }
