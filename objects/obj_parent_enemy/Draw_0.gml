@@ -1,7 +1,7 @@
 if (global.pause_during_transition) { exit; }
 
-if (global.show_debug_data)
-{ draw_sprite(mask_index, 0, x, y); }
+//if (global.show_debug_data)
+//{ draw_sprite(mask_index, 0, x, y); }
 
 draw_sprite_ext
 (

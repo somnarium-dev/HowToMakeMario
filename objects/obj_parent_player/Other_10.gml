@@ -47,9 +47,7 @@ handlePlayerMovementAndCollision = function()
 	handleInflictedVerticalAcceleration()
 	handleVerticalPixelAccumulation();
 	
-	handleDiagonalMovement();
-	handleHorizontalMovement(horizontal_pixels_queued);
-	handleVerticalMovement(vertical_pixels_queued);
+	updateObjectPosition();
 	
 	updatePLevel();
 }
@@ -282,88 +280,72 @@ handleVerticalPixelAccumulation = function()
 	}
 }
 
-///@func handleDiagonalMovement()
-handleDiagonalMovement = function()
+///@func updateObjectPosition()
+updateObjectPosition = function()
 {
 	if (!process_movement) { return; }
 	
-	//Determine the number of diagonal pixels.
-	//A diagonal pixel is when we have at least one horizontal and one
-	//vertical pixel to cover at the same time.
+	var h_sign = sign(h_speed);
+	var v_sign = sign(v_speed);
 	
-	//We're going to handle those pixels by alternating between
-	//horizontal and vertical checks.
+	var h_adjustment = sign(horizontal_pixels_queued);
+	var v_adjustment = sign(vertical_pixels_queued);
 	
-	var horizontal_sign = sign(horizontal_pixels_queued);
-	var vertical_sign = sign(vertical_pixels_queued);
+	var h_pixels = abs(horizontal_pixels_queued);
+	var v_pixels = abs(vertical_pixels_queued);
 	
-	var abs_horizontal_pixels_queued = abs(horizontal_pixels_queued);
-	var abs_vertical_pixels_queued = abs(vertical_pixels_queued);
-	
-	var diagonal_pixels = min(abs_horizontal_pixels_queued, abs_vertical_pixels_queued);
-	
-	repeat (diagonal_pixels)
-	{
-		handleHorizontalMovement(horizontal_sign);
-		handleVerticalMovement(vertical_sign);
-	}
-}
-
-///@func handleHorizontalMovement(_pixels);
-handleHorizontalMovement = function(_pixels)
-{
-	if (!process_movement) { return; }
-	
-	var repetitions = abs(_pixels);
-	var adjustment = sign(_pixels);
+	var repetitions = max(abs(h_pixels), abs(v_pixels));
 	
 	repeat (repetitions)
 	{
-		if (checkForImpassable(x + adjustment, y))
+		//If both queues have zeroed out, break.
+		if (vertical_pixels_queued == 0)
+		&& (horizontal_pixels_queued == 0)
+		{ break; }
+		
+		//============
+		// HORIZONTAL
+		//============
+		if (horizontal_pixels_queued != 0)
 		{
-			var h_speed_sign = sign(h_speed)
-			
-			if (h_speed_sign == adjustment)
+			//If it's not possible to move in the direction queued
+			//AND that is the direction the player is intending to move
+			//Zero out speed and queued pixels.
+			if (checkForImpassable(x + h_adjustment, y))
+			&& (h_sign == h_adjustment)
 			{ 
 				h_speed = 0;
 				horizontal_pixels_queued = 0;
-				break;
+			}
+			
+			else
+			{
+				x += h_adjustment;
+				horizontal_pixels_queued -= h_adjustment;
 			}
 		}
 		
-		else
-		{ x += adjustment; }
-		
-		horizontal_pixels_queued -= adjustment;
-	}
-}
-
-///@func handleVerticalMovement(_pixels);
-handleVerticalMovement = function(_pixels)
-{
-	if (!process_movement) { return; }
-	
-	var repetitions = abs(_pixels);
-	var adjustment = sign(_pixels);
-	
-	repeat (repetitions)
-	{
-		if (checkForImpassable(x, y + adjustment))
+		//============
+		// VERTICAL
+		//============
+		if (vertical_pixels_queued != 0)
 		{
-			var v_speed_sign = sign(v_speed)
-			
-			if (v_speed_sign == adjustment)
+			//If it's not possible to move in the direction queued
+			//AND that is the direction the player is intending to move
+			//Zero out speed and queued pixels.
+			if (checkForImpassable(x, y + v_adjustment))
+			&& (v_sign == v_adjustment)
 			{ 
 				v_speed = 0;
 				vertical_pixels_queued = 0;
-				break;
+			}
+		
+			else
+			{ 
+				y += v_adjustment;
+				vertical_pixels_queued -= v_adjustment;
 			}
 		}
-		
-		else
-		{ y += adjustment; }
-		
-		vertical_pixels_queued -= adjustment;
 	}
 }
 
