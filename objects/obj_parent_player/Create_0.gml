@@ -29,13 +29,6 @@ input_direction = 0;
 previous_input_direction = input_direction;
 
 //Movement and collision detection.
-process_gravity = true;
-process_acceleration = true;
-process_inflicted_acceleration = true;
-process_pixel_accumulation = true;
-process_movement = true;
-process_collision_detection = true;
-
 gravity_context = gravity_type.air;
 
 inflicted_h_gravity = 0;
@@ -79,6 +72,13 @@ can_reach_max_speed = false;
 can_reach_run_speed = false;
 
 cap_to_top_speed = true;
+
+process_gravity = true;
+process_acceleration = true;
+process_inflicted_acceleration = true;
+process_pixel_accumulation = true;
+process_movement = true;
+process_collision_detection = true;
 
 states_that_can_accelerate_to_max_speed =
 [

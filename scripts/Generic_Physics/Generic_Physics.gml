@@ -28,6 +28,70 @@ function handleGravity()
 	}
 }
 
+function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
+{
+	if (!process_acceleration) { return; }
+	
+	//Handle acceleration;
+	var absolute_speed = abs(h_speed);
+	var h_sign = sign(h_speed);
+	
+	if (absolute_speed < current_top_speed)
+	{ 
+		var adjustment = (_input * _acceleration);
+		
+		var new_speed = h_speed + adjustment;
+		
+		if (abs(new_speed) > current_top_speed)
+		{ new_speed = _input * current_top_speed; }
+	
+		h_speed = new_speed;
+	}
+	
+	//Update tracking.
+	h_sign = sign(h_speed);
+	absolute_speed = abs(h_speed);
+	
+	//Handle deceleration.
+	if (absolute_speed != 0)
+	&& (cap_to_top_speed)
+	{
+		if (_input == 0)
+		|| (absolute_speed > current_top_speed)
+		{
+			if (absolute_speed > _deceleration)
+			{
+				adjustment = h_sign * _deceleration;
+				
+				new_speed = h_speed - adjustment;
+			}
+		
+			else
+			{ new_speed = 0; }
+			
+			h_speed = new_speed;
+		}
+	}
+	
+	//Update tracking.
+	h_sign = sign(h_speed);
+	absolute_speed = abs(h_speed);
+	
+	//Handle braking.
+	if (absolute_speed != 0)
+	{
+		if (_input != 0)
+		&& (_input != h_sign)
+		{
+			if (absolute_speed > _deceleration)
+			{ h_speed -= h_sign * _deceleration; }
+		
+			else
+			{ h_speed = 0; }
+		}
+	}
+}
+
 function handleInflictedAcceleration()
 {
 	if (!process_inflicted_acceleration) { return; }
@@ -186,4 +250,41 @@ function updateObjectPosition()
 			}
 		}
 	}
+}
+
+function checkForImpassable(_x, _y)
+{
+	if (!process_collision_detection) { return false; }
+	
+	ds_list_clear(impassable_list);
+        
+	var _num = instance_place_list(_x, _y, obj_parent_collision, impassable_list, true);
+	
+	var h_sign = sign(_x - x);
+	var v_sign = sign(_y - y);
+	
+	for (var i = 0;  i < _num; i++)
+	{
+		var this_object = impassable_list[|i];
+		
+		//This is to make sure we can't get stuck inside of objects.
+		if (instance_place(x,y,this_object))
+		{ continue; }
+		
+		
+		if (this_object.object_index = obj_collision_1way)
+		{
+			var pass_through_direction = this_object.image_angle;
+			
+			if (pass_through_direction == 0)   && (h_sign != -1)  { continue; }
+			if (pass_through_direction == 90)  && (v_sign != 1)   { continue; }
+			if (pass_through_direction == 180) && (h_sign != 1)	  { continue; }
+			if (pass_through_direction == 270) && (v_sign != -1)  { continue; }
+		}
+			
+		if (this_object.impassable == true)
+		{ return true; }
+	}
+    
+	return false;
 }

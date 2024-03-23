@@ -1,3 +1,6 @@
+//=====================================================
+// PAUSE FUNCTIONS
+//=====================================================
 function handleExecutionPauses(_id)
 {
 	with (_id)
@@ -55,4 +58,13 @@ function applyPauseTypeTo(_pause_type, _target)
 function unapplyPauseTypeTo(_pause_type, _target)
 {
 	_target.pauses_inflicted[_pause_type] = false;
+}
+
+//=====================================================
+// DISPLAY FUNCTIONS
+//=====================================================
+function setSpriteDirectionPerLRInput(_input_horizontal)
+{
+	if (_input_horizontal != 0)
+	{ sprite_direction = _input_horizontal; }
 }
