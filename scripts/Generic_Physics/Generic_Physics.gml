@@ -32,15 +32,19 @@ function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
 	var absolute_speed = abs(h_speed);
 	var h_sign = sign(h_speed);
 	
+	//If we have not yet reached top speed, accelerate.
 	if (absolute_speed < current_top_speed)
 	{ 
 		var adjustment = (_input * _acceleration);
 		
 		var new_speed = h_speed + adjustment;
-		
+	
+		//If the proposed new speed would exceed the current top speed,
+		//Then cap it to the current top speed.
 		if (abs(new_speed) > current_top_speed)
 		{ new_speed = _input * current_top_speed; }
 	
+		//Update h_speed.
 		h_speed = new_speed;
 	}
 	
@@ -55,6 +59,8 @@ function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
 		if (_input == 0)
 		|| (absolute_speed > current_top_speed)
 		{
+			//If it's possible to decelerate without crossing zero
+			//Then do so.
 			if (absolute_speed > _deceleration)
 			{
 				adjustment = h_sign * _deceleration;
@@ -62,6 +68,7 @@ function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
 				new_speed = h_speed - adjustment;
 			}
 		
+			//Otherwise, snap to zero.
 			else
 			{ new_speed = 0; }
 			
@@ -79,9 +86,12 @@ function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
 		if (_input != 0)
 		&& (_input != h_sign)
 		{
+			//If it's possible to decelerate without crossing zero
+			//Then do so.
 			if (absolute_speed > _deceleration)
 			{ h_speed -= h_sign * _deceleration; }
 		
+			//Otherwise, snap to zero.
 			else
 			{ h_speed = 0; }
 		}
