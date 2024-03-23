@@ -15,5 +15,3 @@ draw_sprite_ext
 	image_blend,
 	image_alpha
 );
-
-//debugDrawState();

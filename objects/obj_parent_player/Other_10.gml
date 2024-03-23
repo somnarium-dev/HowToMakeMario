@@ -463,8 +463,8 @@ atMaxPLevel = function()
 
 ///@func updateState(_new_state)
 updateState = function(_new_state, _change_sprite = true)
-{
-	show_debug_message($"New state: {_new_state}, Change sprite: {_change_sprite}");
+{	
+	//show_debug_message($"Old state: {state},\n New state: {_new_state},\n Change sprite: {_change_sprite}");
 	
 	state = _new_state;
 	
