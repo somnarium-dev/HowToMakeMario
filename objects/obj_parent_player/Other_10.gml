@@ -47,7 +47,7 @@ handlePlayerMovementAndCollision = function()
 	handleInflictedVerticalAcceleration()
 	handleVerticalPixelAccumulation();
 	
-	updateObjectPositionIncrementally();
+	updateObjectPosition();
 	
 	updatePLevel();
 }
@@ -280,93 +280,8 @@ handleVerticalPixelAccumulation = function()
 	}
 }
 
-///@func handleDiagonalMovement()
-handleDiagonalMovement = function()
-{
-	if (!process_movement) { return; }
-	
-	//Determine the number of diagonal pixels.
-	//A diagonal pixel is when we have at least one horizontal and one
-	//vertical pixel to cover at the same time.
-	
-	//We're going to handle those pixels by alternating between
-	//horizontal and vertical checks.
-	
-	var horizontal_sign = sign(horizontal_pixels_queued);
-	var vertical_sign = sign(vertical_pixels_queued);
-	
-	var abs_horizontal_pixels_queued = abs(horizontal_pixels_queued);
-	var abs_vertical_pixels_queued = abs(vertical_pixels_queued);
-	
-	var diagonal_pixels = min(abs_horizontal_pixels_queued, abs_vertical_pixels_queued);
-	
-	repeat (diagonal_pixels)
-	{
-		handleHorizontalMovement(horizontal_sign);
-		handleVerticalMovement(vertical_sign);
-	}
-}
-
-///@func handleHorizontalMovement(_pixels);
-handleHorizontalMovement = function(_pixels)
-{
-	if (!process_movement) { return; }
-	
-	var repetitions = abs(_pixels);
-	var adjustment = sign(_pixels);
-	
-	repeat (repetitions)
-	{
-		if (checkForImpassable(x + adjustment, y))
-		{
-			var h_speed_sign = sign(h_speed)
-			
-			if (h_speed_sign == adjustment)
-			{ 
-				h_speed = 0;
-				horizontal_pixels_queued = 0;
-				break;
-			}
-		}
-		
-		else
-		{ x += adjustment; }
-		
-		horizontal_pixels_queued -= adjustment;
-	}
-}
-
-///@func handleVerticalMovement(_pixels);
-handleVerticalMovement = function(_pixels)
-{
-	if (!process_movement) { return; }
-	
-	var repetitions = abs(_pixels);
-	var adjustment = sign(_pixels);
-	
-	repeat (repetitions)
-	{
-		if (checkForImpassable(x, y + adjustment))
-		{
-			var v_speed_sign = sign(v_speed)
-			
-			if (v_speed_sign == adjustment)
-			{ 
-				v_speed = 0;
-				vertical_pixels_queued = 0;
-				break;
-			}
-		}
-		
-		else
-		{ y += adjustment; }
-		
-		vertical_pixels_queued -= adjustment;
-	}
-}
-
-///@func updateObjectPositionIncrementally()
-updateObjectPositionIncrementally = function()
+///@func updateObjectPosition()
+updateObjectPosition = function()
 {
 	if (!process_movement) { return; }
 	
