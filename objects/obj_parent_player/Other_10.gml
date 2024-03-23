@@ -37,16 +37,15 @@ handlePlayerMovementAndCollision = function()
 {
 	determineTopHSpeed();
 	
-	handleGravity();
+	handleGravity(); //Genericized
 	
 	handleHorizontalAcceleration();
-	handleInflictedHorizontalAcceleration();
-	
 	handleVerticalAcceleration();
-	handleInflictedVerticalAcceleration()
+	
+	handleInflictedAcceleration();
 	
 	handlePixelAccumulation();
-	updateObjectPosition();
+	updateObjectPosition(); //Genericized
 	
 	updatePLevel();
 }
@@ -116,26 +115,6 @@ handleHorizontalAcceleration = function()
 	}
 }
 
-///@func handleInflictedHorizontalAcceleration()
-handleInflictedHorizontalAcceleration = function()
-{
-	if (!process_inflicted_acceleration) { return; }
-	
-	//Prepare.
-	var new_speed = inflicted_h_speed;
-	var absolute_speed = abs(new_speed);
-	
-	//Handle deceleration.
-	if (absolute_speed > global.player_1.decel_rate)
-	{ new_speed += ((sign(new_speed) * -1) * global.player_1.decel_rate); }
-		
-	else
-	{ new_speed = 0; }
-	
-	//Set new speed.
-	inflicted_h_speed = new_speed;
-}
-
 ///@func handleVerticalAcceleration()
 handleVerticalAcceleration = function()
 {
@@ -191,155 +170,6 @@ handleVerticalAcceleration = function()
 	}
 }
 
-///@func handleInflictedVerticalAcceleration()
-handleInflictedVerticalAcceleration = function()
-{
-	if (!process_inflicted_acceleration) { return; }
-	
-	//Prepare.
-	var new_speed = inflicted_v_speed;
-	var absolute_speed = abs(new_speed);
-	
-	//Handle deceleration.
-	if (absolute_speed > global.player_1.decel_rate)
-	{ new_speed += ((sign(new_speed) * -1) * global.player_1.decel_rate); }
-		
-	else
-	{ new_speed = 0; }
-	
-	//Set new speed.
-	inflicted_v_speed = new_speed;
-}
-
-///@func handlePixelAccumulation()
-handlePixelAccumulation = function()
-{
-	if (!process_pixel_accumulation) { return; }
-	
-	var combined_h_speed = h_speed + inflicted_h_speed;
-	var combined_v_speed = v_speed + inflicted_v_speed;
-	
-	//Accumulate pixels.
-	horizontal_pixels_accumulated += combined_h_speed;
-	vertical_pixels_accumulated += combined_v_speed;
-	
-	//Count complete pixels.
-	var integer_h_pixels = horizontal_pixels_accumulated div 1;
-	var integer_v_pixels = vertical_pixels_accumulated div 1;
-	
-	//Remove complete pixels from accumulated pixels.
-	horizontal_pixels_accumulated -= integer_h_pixels;
-	vertical_pixels_accumulated -= integer_v_pixels;
-	
-	//Queue complete pixels.
-	horizontal_pixels_queued += integer_h_pixels;
-	vertical_pixels_queued += integer_v_pixels;
-	
-	//Count complete adjustment pixels.
-	var integer_adjustment_h_pixels = adjustment_h_pixels div 1;
-	var integer_adjustment_v_pixels = adjustment_v_pixels div 1;
-	
-	//Remove complete adjustment pixels from accumulated adjustment pixels.
-	adjustment_h_pixels -= integer_adjustment_h_pixels;
-	adjustment_v_pixels -= integer_adjustment_v_pixels;
-	
-	//Accumulate pixels.
-	horizontal_pixels_queued += integer_adjustment_h_pixels;
-	vertical_pixels_queued += integer_adjustment_v_pixels;
-	
-	//If it's not possible to move in the queued direction,
-	//clear the related variables to prevent issues.
-	var h_sign = sign(horizontal_pixels_queued);
-	var v_sign = sign(vertical_pixels_queued);
-	
-	if (checkForImpassable(x + h_sign, y))
-	{
-		h_speed = 0;
-		inflicted_h_speed = 0;
-		
-		horizontal_pixels_accumulated = 0;
-		horizontal_pixels_queued = 0;
-	}
-	
-	if (checkForImpassable(x, y + v_sign))
-	{
-		v_speed = 0;
-		inflicted_v_speed = 0;
-		
-		vertical_pixels_accumulated = 0;
-		vertical_pixels_queued = 0;
-	}
-}
-
-///@func updateObjectPosition()
-updateObjectPosition = function()
-{
-	if (!process_movement) { return; }
-	
-	var h_sign = sign(h_speed);
-	var v_sign = sign(v_speed);
-	
-	var h_adjustment = sign(horizontal_pixels_queued);
-	var v_adjustment = sign(vertical_pixels_queued);
-	
-	var h_pixels = abs(horizontal_pixels_queued);
-	var v_pixels = abs(vertical_pixels_queued);
-	
-	var repetitions = max(abs(h_pixels), abs(v_pixels));
-	
-	repeat (repetitions)
-	{
-		//If both queues have zeroed out, break.
-		if (vertical_pixels_queued == 0)
-		&& (horizontal_pixels_queued == 0)
-		{ break; }
-		
-		//============
-		// HORIZONTAL
-		//============
-		if (horizontal_pixels_queued != 0)
-		{
-			//If it's not possible to move in the direction queued
-			//AND that is the direction the player is intending to move
-			//Zero out speed and queued pixels.
-			if (checkForImpassable(x + h_adjustment, y))
-			&& (h_sign == h_adjustment)
-			{ 
-				h_speed = 0;
-				horizontal_pixels_queued = 0;
-			}
-			
-			else
-			{
-				x += h_adjustment;
-				horizontal_pixels_queued -= h_adjustment;
-			}
-		}
-		
-		//============
-		// VERTICAL
-		//============
-		if (vertical_pixels_queued != 0)
-		{
-			//If it's not possible to move in the direction queued
-			//AND that is the direction the player is intending to move
-			//Zero out speed and queued pixels.
-			if (checkForImpassable(x, y + v_adjustment))
-			&& (v_sign == v_adjustment)
-			{ 
-				v_speed = 0;
-				vertical_pixels_queued = 0;
-			}
-		
-			else
-			{ 
-				y += v_adjustment;
-				vertical_pixels_queued -= v_adjustment;
-			}
-		}
-	}
-}
-
 ///@func checkForImpassable()
 checkForImpassable = function(_x, _y)
 {
@@ -363,9 +193,6 @@ checkForImpassable = function(_x, _y)
 		
 		if (this_object.object_index = obj_collision_1way)
 		{
-			
-			show_debug_message("BLIP");
-			
 			var pass_through_direction = this_object.image_angle;
 			
 			if (pass_through_direction == 0)   && (h_sign != -1)  { continue; }
@@ -463,8 +290,8 @@ atMaxPLevel = function()
 
 ///@func updateState(_new_state)
 updateState = function(_new_state, _change_sprite = true)
-{
-	show_debug_message($"New state: {_new_state}, Change sprite: {_change_sprite}");
+{	
+	//show_debug_message($"Old state: {state},\n New state: {_new_state},\n Change sprite: {_change_sprite}");
 	
 	state = _new_state;
 	
