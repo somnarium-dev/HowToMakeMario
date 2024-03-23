@@ -37,5 +37,5 @@
     "path":"sprites/spr_editor_piranhaplant_green_spitter/spr_editor_piranhaplant_green_spitter.yy",
   },
   "spriteMaskId":null,
-  "visible":false,
+  "visible":true,
 }

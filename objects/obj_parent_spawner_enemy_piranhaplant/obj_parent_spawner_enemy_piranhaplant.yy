@@ -7,8 +7,8 @@
   "managed":true,
   "name":"obj_parent_spawner_enemy_piranhaplant",
   "overriddenProperties":[
-    {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_parent_spawner_enemy","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"propertyId":{"name":"x_offset","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"16",},
-    {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_parent_spawner_enemy","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"propertyId":{"name":"y_offset","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"8",},
+    {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_parent_spawner_enemy","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"propertyId":{"name":"x_offset","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"8",},
+    {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_parent_spawner_enemy","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"propertyId":{"name":"y_offset","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"16",},
   ],
   "parent":{
     "name":"- Parents",
