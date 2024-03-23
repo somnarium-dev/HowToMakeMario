@@ -39,7 +39,7 @@ state_machine[player_state.exit_pipe] = function()
 
 state_machine[player_state.fall] = function()
 {
-	setSpriteDirectionPerLRInput();
+	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
 	
@@ -73,7 +73,7 @@ state_machine[player_state.grab_walk] = function()
 
 state_machine[player_state.jump] = function()
 {
-	setSpriteDirectionPerLRInput();
+	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
 	
@@ -88,11 +88,11 @@ state_machine[player_state.kick] = function()
 
 state_machine[player_state.run] = function()
 {
-	setSpriteDirectionPerLRInput();
+	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
 	
-	setImageSpeedPerHSpeed();
+	setImageSpeedPerHSpeed(global.player_1.walk_speed);
 	
 	checkTransitionToFall();
 	checkTransitionToStand();
@@ -103,7 +103,7 @@ state_machine[player_state.run] = function()
 
 state_machine[player_state.run_fall] = function()
 {	
-	setSpriteDirectionPerLRInput();
+	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
 	
@@ -112,7 +112,7 @@ state_machine[player_state.run_fall] = function()
 
 state_machine[player_state.run_jump] = function()
 {
-	setSpriteDirectionPerLRInput();
+	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
 	
@@ -122,7 +122,7 @@ state_machine[player_state.run_jump] = function()
 
 state_machine[player_state.skid] = function()
 {
-	setSpriteDirectionPerLRInput();
+	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
 	
@@ -138,11 +138,11 @@ state_machine[player_state.slide] = function()
 
 state_machine[player_state.stand] = function()
 {
-	setSpriteDirectionPerLRInput();
+	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
 	
-	setImageSpeedPerHSpeed();
+	setImageSpeedPerHSpeed(global.player_1.walk_speed);
 	
 	checkTransitionToFall();
 	checkTransitionToWalk();
@@ -156,11 +156,11 @@ state_machine[player_state.swim] = function()
 
 state_machine[player_state.walk] = function()
 {	
-	setSpriteDirectionPerLRInput();
+	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
 	
-	setImageSpeedPerHSpeed();
+	setImageSpeedPerHSpeed(global.player_1.walk_speed);
 	
 	checkTransitionToFall();
 	checkTransitionToStand();

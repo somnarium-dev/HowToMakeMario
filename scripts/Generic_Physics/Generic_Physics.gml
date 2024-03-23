@@ -92,6 +92,60 @@ function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
 	}
 }
 
+function handleVerticalAcceleration(_short_jump_triggered, _deceleration)
+{
+	if (!process_acceleration) { return; }
+	
+	//Handle acceleration;
+	var absolute_speed = abs(v_speed);
+	var v_sign = sign(v_speed);
+	
+	var g_power = abs(inflicted_v_gravity);
+	var g_sign = sign(inflicted_v_gravity);
+	var terminal_velocity = global.gravity_data[gravity_context].terminal_velocity;
+	
+	if (v_speed < terminal_velocity)
+	{ 
+		var adjustment = (g_sign * g_power);
+		
+		var new_speed = v_speed + adjustment;
+		
+		if (abs(new_speed) > terminal_velocity)
+		{ new_speed = g_sign * terminal_velocity; }
+	
+		v_speed = new_speed;
+	}
+	
+	//Update tracking.
+	v_sign = sign(v_speed);
+	absolute_speed = abs(v_speed);
+	
+	//Handle short jumping.
+	if (_short_jump_triggered)
+	&& (v_sign != 0)
+	&& (v_sign != g_sign)
+	{ v_speed = 0; }
+	
+	//Update tracking.
+	v_sign = sign(v_speed);
+	absolute_speed = abs(v_speed);
+	
+	//Handle deceleration.
+	if (absolute_speed != 0)
+	{
+		if (g_sign == 0)
+		|| (g_sign != v_sign)
+		|| (absolute_speed > terminal_velocity)
+		{
+			if (absolute_speed > _deceleration)
+			{ v_speed -= (v_sign * _deceleration); }
+		
+			else
+			{ v_speed = 0; }
+		}
+	}
+}
+
 function handleInflictedAcceleration()
 {
 	if (!process_inflicted_acceleration) { return; }

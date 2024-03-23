@@ -1,11 +1,8 @@
 ///@desc Custom Methods
 
-///@func updateSprites()
-updateSprites = function()
-{
-	sprites = global.player_1.sprites[current_power];
-	mask_index = sprites[player_state.mask];
-}
+//=================================================================================================
+// INPUT HANDLING
+//=================================================================================================
 
 ///@func readPlayerInput()
 readPlayerInput = function()
@@ -32,98 +29,27 @@ readPlayerInput = function()
 		input_direction = point_direction(0,0, input_lr, input_ud);
 	}
 }
+
+//=================================================================================================
+// MOVEMENT AND COLLISION
+//=================================================================================================
+
 ///@func handlePlayerMovementAndCollision()
 handlePlayerMovementAndCollision = function()
 {
 	determineTopHSpeed();
 	
-	handleGravity(); //Genericized
+	handleGravity();
 	
 	handleHorizontalAcceleration(input_lr, global.player_1.accel_rate, global.player_1.decel_rate);
-	handleVerticalAcceleration();
+	handleVerticalAcceleration(input_jump_released, global.player_1.decel_rate);
 	
-	handleInflictedAcceleration(); //Genericized
+	handleInflictedAcceleration();
 	
-	handlePixelAccumulation(); //Genericized
-	updateObjectPosition(); //Genericized
+	handlePixelAccumulation();
+	updateObjectPosition();
 	
 	updatePLevel();
-}
-
-///@func handleVerticalAcceleration()
-handleVerticalAcceleration = function()
-{
-	if (!process_acceleration) { return; }
-	
-	//Handle acceleration;
-	var absolute_speed = abs(v_speed);
-	var v_sign = sign(v_speed);
-	
-	var g_power = abs(inflicted_v_gravity);
-	var g_sign = sign(inflicted_v_gravity);
-	var terminal_velocity = global.gravity_data[gravity_context].terminal_velocity;
-	
-	if (v_speed < terminal_velocity)
-	{ 
-		var adjustment = (g_sign * g_power);
-		
-		var new_speed = v_speed + adjustment;
-		
-		if (abs(new_speed) > terminal_velocity)
-		{ new_speed = g_sign * terminal_velocity; }
-	
-		v_speed = new_speed;
-	}
-	
-	//Update tracking.
-	v_sign = sign(v_speed);
-	absolute_speed = abs(v_speed);
-	
-	//Handle short jumping.
-	if (input_jump_released)
-	&& (v_sign != 0)
-	&& (v_sign != g_sign)
-	{ v_speed = 0; }
-	
-	//Update tracking.
-	v_sign = sign(v_speed);
-	absolute_speed = abs(v_speed);
-	
-	//Handle deceleration.
-	if (absolute_speed != 0)
-	{
-		if (g_sign == 0)
-		|| (g_sign != v_sign)
-		|| (absolute_speed > terminal_velocity)
-		{
-			if (absolute_speed > global.player_1.decel_rate)
-			{ v_speed += ((-1 * v_sign) * global.player_1.decel_rate); }
-		
-			else
-			{ v_speed = 0; }
-		}
-	}
-}
-
-///@func updateAllNearbyCollisions()
-updateAllNearbyCollisions = function()
-{
-	all_nearby_collisions[0]	= checkForImpassable(x + 1, y);
-	all_nearby_collisions[45]	= checkForImpassable(x + 1, y - 1);
-	all_nearby_collisions[90]	= checkForImpassable(x, y - 1);
-	all_nearby_collisions[135]	= checkForImpassable(x - 1, y - 1);
-	all_nearby_collisions[180]	= checkForImpassable(x - 1, y);
-	all_nearby_collisions[225]	= checkForImpassable(x - 1, y + 1);
-	all_nearby_collisions[270]	= checkForImpassable(x, y + 1);
-	all_nearby_collisions[315]	= checkForImpassable(x + 1, y + 1);
-}
-
-//========================================================================================
-
-///@func setImageSpeedPerHSpeed()
-setImageSpeedPerHSpeed = function()
-{
-	image_speed = (h_speed / global.player_1.walk_speed);
 }
 
 ///@func determineTopHSpeed()
@@ -169,6 +95,10 @@ updatePLevel = function()
 	global.player_1.plevel = plevel_charge div plevel_pip_value;
 }
 
+//=================================================================================================
+// STATE TRANSITION
+//=================================================================================================
+
 ///@func atMaxPLevel()
 atMaxPLevel = function()
 {
@@ -181,8 +111,6 @@ atMaxPLevel = function()
 ///@func updateState(_new_state)
 updateState = function(_new_state, _change_sprite = true)
 {	
-	//show_debug_message($"Old state: {state},\n New state: {_new_state},\n Change sprite: {_change_sprite}");
-	
 	state = _new_state;
 	
 	if (_change_sprite)
@@ -193,7 +121,21 @@ updateState = function(_new_state, _change_sprite = true)
 	cap_to_top_speed = array_contains(states_that_cap_to_top_speed, state);
 }
 
-//========================================================================================
+//=================================================================================================
+// INTERNAL FUNCTIONALITY
+//=================================================================================================
+
+///@func updateSprites()
+updateSprites = function()
+{
+	sprites = global.player_1.sprites[current_power];
+	mask_index = sprites[player_state.mask];
+}
+
+
+//=================================================================================================
+// INTERNAL FUNCTIONALITY - DEATH SEQUENCE
+//=================================================================================================
 
 ///@func processDeathSequencing()
 processDeathSequencing = function()
@@ -264,4 +206,21 @@ applyPauseForDeathSequence = function()
 	applyPauseTypeTo(pause_types.player_death_pause, obj_parent_enemy);
 	applyPauseTypeTo(pause_types.player_death_pause, obj_parent_block);
 	applyPauseTypeTo(pause_types.player_death_pause, obj_parent_collectible);
+}
+
+//=================================================================================================
+// DEBUG RELATED
+//=================================================================================================
+
+///@func updateAllNearbyCollisions()
+updateAllNearbyCollisions = function()
+{
+	all_nearby_collisions[0]	= checkForImpassable(x + 1, y);
+	all_nearby_collisions[45]	= checkForImpassable(x + 1, y - 1);
+	all_nearby_collisions[90]	= checkForImpassable(x, y - 1);
+	all_nearby_collisions[135]	= checkForImpassable(x - 1, y - 1);
+	all_nearby_collisions[180]	= checkForImpassable(x - 1, y);
+	all_nearby_collisions[225]	= checkForImpassable(x - 1, y + 1);
+	all_nearby_collisions[270]	= checkForImpassable(x, y + 1);
+	all_nearby_collisions[315]	= checkForImpassable(x + 1, y + 1);
 }

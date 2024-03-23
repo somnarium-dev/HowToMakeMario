@@ -6,7 +6,7 @@ handleEnemyMovementAndCollision = function()
 	determineTopHSpeed();
 	
 	handleHorizontalAcceleration(ai_input_lr, accel_rate, decel_rate);
-	handleVerticalAcceleration();
+	handleVerticalAcceleration(ai_input_jump_released, decel_rate);
 	
 	handleInflictedAcceleration();
 	
@@ -14,12 +14,10 @@ handleEnemyMovementAndCollision = function()
 	updateObjectPosition();
 }
 
-///@func determineTopHSpeed();
-determineTopHSpeed = function()
-{
-}
+//========================================================================================
 
-///@func handleVerticalAcceleration()
-handleVerticalAcceleration = function()
-{
+///@func determineTopHSpeed()
+determineTopHSpeed = function()
+{	
+	//This space left empty by design.
 }

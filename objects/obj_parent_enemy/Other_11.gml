@@ -8,7 +8,7 @@ state_machine[enemy_state.stand] = function()
 
 state_machine[enemy_state.walk] = function()
 {
-	
+	handleEnemyMovementAndCollision();
 }
 
 state_machine[enemy_state.die] = function()
