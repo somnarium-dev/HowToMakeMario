@@ -42,9 +42,9 @@ handlePlayerMovementAndCollision = function()
 	handleGravity();
 	
 	handleHorizontalAcceleration(input_lr, global.player_1.accel_rate, global.player_1.decel_rate);
-	handleVerticalAcceleration(input_jump_released, global.player_1.decel_rate);
+	handleVerticalAcceleration(input_jump_released, 0);
 	
-	handleInflictedAcceleration();
+	handleInflictedAcceleration(global.player_1.decel_rate);
 	
 	handlePixelAccumulation();
 	updateObjectPosition();

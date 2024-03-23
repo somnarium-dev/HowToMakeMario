@@ -43,7 +43,8 @@ state_machine[player_state.fall] = function()
 	
 	handlePlayerMovementAndCollision();
 	
-	checkTransitionToLand();
+	checkTransitionToWalk();
+	checkTransitionToStand();
 }
 
 state_machine[player_state.float] = function()
@@ -77,7 +78,6 @@ state_machine[player_state.jump] = function()
 	
 	handlePlayerMovementAndCollision();
 	
-	checkTransitionToLand();
 	checkTransitionToFall();
 }
 
@@ -107,7 +107,8 @@ state_machine[player_state.run_fall] = function()
 	
 	handlePlayerMovementAndCollision();
 	
-	checkTransitionToLand();
+	checkTransitionToWalk();
+	checkTransitionToStand();
 }
 
 state_machine[player_state.run_jump] = function()
@@ -116,7 +117,8 @@ state_machine[player_state.run_jump] = function()
 	
 	handlePlayerMovementAndCollision();
 	
-	checkTransitionToLand();
+	checkTransitionToWalk();
+	checkTransitionToStand();
 	checkTransitionToFall();
 }
 
@@ -145,8 +147,8 @@ state_machine[player_state.stand] = function()
 	setImageSpeedPerHSpeed(global.player_1.walk_speed);
 	
 	checkTransitionToFall();
+	checkTransitionToJump();
 	checkTransitionToWalk();
-	checkTransitionToJump();	
 }
 
 state_machine[player_state.swim] = function()
@@ -176,17 +178,23 @@ state_machine[player_state.walk] = function()
 ///@func checkTransitionToStand()
 checkTransitionToStand = function()
 {
-	if (h_speed != 0)
-	{ return; }
+	var on_the_ground = checkForImpassable(x, y+1);
 	
-	updateState(player_state.stand);
-	image_speed = 0
+	if (on_the_ground)
+	&& (h_speed == 0)
+	{ 
+		updateState(player_state.stand);
+		image_speed = 0;
+	}
 }
 
 ///@func checkTransitionToWalk()
 checkTransitionToWalk = function()
 {
-	if (h_speed != 0)
+	var on_the_ground = checkForImpassable(x, y+1);
+	
+	if (on_the_ground)
+	&& (h_speed != 0)
 	&& (!atMaxPLevel())
 	{ updateState(player_state.walk); }
 }
@@ -218,70 +226,62 @@ checkTransitionSkidToWalk = function()
 ///@func checkTransitionToJump()
 checkTransitionToJump = function()
 {
+	//If we are not trying to jump
+	//Or it is not possible to jump
+	//Then do not jump.
 	if (!input_jump_pressed) 
 	|| (!checkForImpassable(x, y+1))
 	{ return;}
 	
-	var current_speed = abs(h_speed);
+	//Play sound.
+	playSFX(sfx_jump);
 	
+	//Set jump strength.
 	var jump_strength = global.player_1.jump_strength;
+	
+	//Increase jump strength if moving.
+	var current_speed = abs(h_speed);
 	
 	if (current_speed > global.player_1.walk_speed)
 	{ jump_strength = global.player_1.moving_jump_strength; }
 	
+	//Convert jump strength to negative vertical speed.
 	v_speed = -jump_strength;
 		
+	//Determine the next appropriate state.
 	var new_state = player_state.jump;
 		
 	if (atMaxPLevel())
 	{ new_state = player_state.run_jump; }
 		
-	playSFX(sfx_jump);
-		
+	//Update state.
 	updateState(new_state);
 }
 
 ///@func checkTransitionToFall()
 checkTransitionToFall = function()
 {
+	//If we are on the ground
+	//Then we are not falling.
 	if (checkForImpassable(x, y+1))
 	{ return; }
 	
+	//If we are jumping
+	//And we are ascending
+	//Then we are not falling.
 	if (state == player_state.jump)
 	&& (v_speed < 0)
 	{ return; }
 	
+	//Determine the next appropraite state.
 	var new_state = player_state.fall;
 	
 	if (atMaxPLevel())
 	{ new_state = player_state.run_fall; }
 	
+	//Update state.
 	updateState(new_state);
 	image_speed = 0;
-}
-
-///@func checkTransitionToLand()
-checkTransitionToLand = function()
-{
-	if (v_speed < 0)
-	|| (!checkForImpassable(x, y+1))
-	{ exit; }
-	
-	if (h_speed == 0)
-	{
-		updateState(player_state.stand);
-		image_speed = 0;
-	}
-		
-	else
-	{
-		var new_state = player_state.walk;
-			
-		if (atMaxPLevel())
-		{ new_state = player_state.run; }
-			
-		updateState(new_state);
-	}
 }
 
 ///@func transitionToDeathState()

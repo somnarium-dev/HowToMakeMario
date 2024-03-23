@@ -124,7 +124,10 @@ function handleVerticalAcceleration(_short_jump_triggered, _deceleration)
 	if (_short_jump_triggered)
 	&& (v_sign != 0)
 	&& (v_sign != g_sign)
-	{ v_speed = 0; }
+	{ 
+		v_speed = 0; 
+		show_debug_message("SHORT JUMP");
+	}
 	
 	//Update tracking.
 	v_sign = sign(v_speed);
@@ -141,42 +144,45 @@ function handleVerticalAcceleration(_short_jump_triggered, _deceleration)
 			{ v_speed -= (v_sign * _deceleration); }
 		
 			else
-			{ v_speed = 0; }
+			{ 
+				v_speed = 0;
+				show_debug_message("DECELERATION LOCK");	
+			}
 		}
 	}
 }
 
-function handleInflictedAcceleration()
+function handleInflictedAcceleration(_deceleration)
 {
 	if (!process_inflicted_acceleration) { return; }
 	
 	//Prepare.
-	var new_h_speed = inflicted_h_speed;
-	var new_v_speed = inflicted_v_speed;
+	var new_inflicted_h_speed = inflicted_h_speed;
+	var new_inflicted_v_speed = inflicted_v_speed;
 	
-	var absolute_h_speed = abs(new_h_speed);
-	var absolute_v_speed = abs(new_v_speed);
+	var absolute_inflicted_h_speed = abs(new_inflicted_h_speed);
+	var absolute_inflicted_v_speed = abs(new_inflicted_v_speed);
 	
-	var h_sign = sign(new_h_speed);
-	var v_sign = sign(new_v_speed);
+	var h_sign = sign(new_inflicted_h_speed);
+	var v_sign = sign(new_inflicted_v_speed);
 	
 	//Handle horizontal deceleration.
-	if (absolute_h_speed > global.player_1.decel_rate)
-	{ new_h_speed -= h_sign * global.player_1.decel_rate; }
+	if (absolute_inflicted_h_speed > _deceleration)
+	{ new_inflicted_h_speed -= h_sign * _deceleration; }
 		
 	else
-	{ new_h_speed = 0; }
+	{ new_inflicted_h_speed = 0; }
 	
 	//Handle vertical deceleration.
-	if (absolute_v_speed > global.player_1.decel_rate)
-	{ new_v_speed -= v_sign * global.player_1.decel_rate; }
+	if (absolute_inflicted_v_speed > _deceleration)
+	{ new_inflicted_v_speed -= v_sign * _deceleration; }
 		
 	else
-	{ new_v_speed = 0; }
+	{ new_inflicted_v_speed = 0; }
 	
 	//Set new speeds.
-	inflicted_h_speed = new_h_speed;
-	inflicted_v_speed = new_v_speed;
+	inflicted_h_speed = new_inflicted_h_speed;
+	inflicted_v_speed = new_inflicted_v_speed;
 }
 
 function handlePixelAccumulation()
@@ -229,7 +235,9 @@ function handlePixelAccumulation()
 	}
 	
 	if (checkForImpassable(x, y + v_sign))
-	{
+	{	
+		show_debug_message("ACCUMULATION: IMPASSABLE");
+		
 		v_speed = 0;
 		inflicted_v_speed = 0;
 		
@@ -293,6 +301,7 @@ function updateObjectPosition()
 			if (checkForImpassable(x, y + v_adjustment))
 			&& (v_sign == v_adjustment)
 			{ 
+				show_debug_message("V.P.Q. BONK");
 				v_speed = 0;
 				vertical_pixels_queued = 0;
 			}
