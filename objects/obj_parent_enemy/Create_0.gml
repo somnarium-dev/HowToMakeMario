@@ -52,6 +52,8 @@ sprite_direction = 1;
 
 //Internal functionality
 timer = 0;
+state_timer = 0;
+behavior_timer = 0;
 
 marked_for_death = false;
 death_sequence_phase = 0;

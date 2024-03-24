@@ -71,7 +71,21 @@ function Initialize()
 	
 	global.enemy_state_string =
 	[
-		"stand"
+		"stand",
+		"walk",
+		"die"
+	]
+	
+	global.enemy_behavior_string =
+	[
+		"idle",
+		"patrol",
+		"hide",
+		"search",
+		"escape",
+		"pre_attack",
+		"attack",
+		"post_attack"
 	]
 
 	//Define assets.

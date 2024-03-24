@@ -45,7 +45,13 @@ enum enemy_state
 enum enemy_behavior
 {
 	idle,
-	patrol
+	patrol,
+	hide,
+	search,
+	escape,
+	pre_attack,
+	attack,
+	post_attack
 }
 
 enum gravity_type
