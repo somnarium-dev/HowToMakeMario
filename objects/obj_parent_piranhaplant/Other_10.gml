@@ -17,6 +17,9 @@ inputToAdjustmentPixels = function()
 	
 	adjustment_h_pixels += adjustment_x;
 	adjustment_v_pixels += adjustment_y;
+	
+	extension += adjustment_amount;
+	extension = clamp(extension, 0, max_extension)
 }
 
 //=================================================================================================
@@ -44,7 +47,10 @@ updateSpitterHeadSprite = function()
 	var current_target = instance_nearest(x, y, obj_parent_player);
 	var angle_to_target = point_direction(x, y, current_target.x, current_target.y);
 	
-	new_image_index = (angle_to_target div 90);
+	var new_image_index = image_index mod 4;
+	
+	if (!mouth_is_open)
+	{ new_image_index = (angle_to_target div 90); }
 	
 	if (mouth_is_open)
 	{ new_image_index += 4; }
@@ -88,4 +94,12 @@ createFireball = function()
 {
 	//Create instance
 	//Set speed at angle
+	
+	var shooting_angle = ((image_index mod 4) * 90) + 45;
+	
+	var x_offset = lengthdir_x(6, shooting_angle);
+	var y_offset = lengthdir_y(6, shooting_angle);
+	
+	var new_fireball = instance_create_layer(x + x_offset, y + y_offset, "Players", obj_piranha_spitter_fireball);
+	new_fireball.direction = shooting_angle;
 }

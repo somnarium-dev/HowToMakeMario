@@ -35,8 +35,3 @@ draw_sprite_ext
 	image_blend,
 	image_alpha
 );
-
-//Debug
-var behavior_string = global.enemy_behavior_string[behavior];
-
-draw_text(x + 16, y - 16, behavior_string);

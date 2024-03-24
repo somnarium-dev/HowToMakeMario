@@ -9,9 +9,12 @@ event_inherited();
 
 behavior_machine[enemy_behavior.hide] = function()
 {
-	ai_input_ud = 0;
-	
 	behavior_timer++;
+	
+	getProximityToNearestPlayer();
+	
+	if (horizontal_distance_to_nearest_player <= stay_hidden_range)
+	{ behavior_timer = 0; }
 	
 	if (behavior_timer >= hide_timing)
 	{ updateBehavior(enemy_behavior.search); }
@@ -20,7 +23,6 @@ behavior_machine[enemy_behavior.hide] = function()
 behavior_machine[enemy_behavior.search] = function()
 {
 	ai_input_ud = -1;
-	extension -= ai_input_ud;
 	
 	if (extension == max_extension)
 	{
@@ -46,7 +48,6 @@ behavior_machine[enemy_behavior.attack] = function()
 	
 	if (behavior_timer >= attack_timing)
 	{
-		mouth_is_open = false;
 		updateBehavior(enemy_behavior.post_attack);
 	}
 }
@@ -62,10 +63,12 @@ behavior_machine[enemy_behavior.post_attack] = function()
 behavior_machine[enemy_behavior.escape] = function()
 {
 	ai_input_ud = 1;
-	extension -= ai_input_ud;
 	
 	if (extension == 0)
-	{ updateBehavior(enemy_behavior.hide); }
+	{ 
+		ai_input_ud = 0;
+		updateBehavior(enemy_behavior.hide);
+	}
 }
 
 //=================================================================================================
