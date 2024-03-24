@@ -37,6 +37,7 @@
     {"$GMObjectProperty":"","%Name":"max_extension_y","filters":[],"listItems":[],"multiselect":false,"name":"max_extension_y","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":0,},
     {"$GMObjectProperty":"","%Name":"max_extension","filters":[],"listItems":[],"multiselect":false,"name":"max_extension","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":0,},
     {"$GMObjectProperty":"","%Name":"is_spitter","filters":[],"listItems":[],"multiselect":false,"name":"is_spitter","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"true","varType":0,},
+    {"$GMObjectProperty":"","%Name":"pipe_length_tiles","filters":[],"listItems":[],"multiselect":false,"name":"pipe_length_tiles","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"1","varType":0,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

@@ -1,0 +1,12 @@
+draw_sprite_ext
+(
+	sprite_index,
+	image_index,
+	x,
+	y,
+	width_tiles,
+	height_tiles,
+	direction,
+	image_blend,
+	image_alpha
+)
