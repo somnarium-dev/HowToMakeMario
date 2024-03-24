@@ -10,14 +10,18 @@ event_inherited();
 ///@func inputToAdjustmentPixels()
 inputToAdjustmentPixels = function()
 {	
+	//We treat "up" as extending from a pipe in any direction.
+	//Similarly, "down" is retreating into the pipe.
 	var adjustment_amount = extension_increment * ai_input_ud;
 	
+	//Extend "up" per the adjustment amount, relative to current direction.
 	var adjustment_x = lengthdir_x(adjustment_amount, direction);
 	var adjustment_y = lengthdir_y(adjustment_amount, direction);
 	
 	adjustment_h_pixels += adjustment_x;
 	adjustment_v_pixels += adjustment_y;
 	
+	//This ensures we don't over extend or retreat too far.
 	extension += adjustment_amount;
 	extension = clamp(extension, 0, max_extension)
 }
@@ -33,29 +37,67 @@ handleEnemyMovementAndCollision = function()
 	
 	//Piranha plants are not affected by gravity.
 	
-	handleHorizontalAcceleration(ai_input_lr, accel_rate, decel_rate);
-	handleVerticalAcceleration(ai_input_jump_released, decel_rate);
+	//Piranha plants only need to process inflicted acceleration.
 	handleInflictedAcceleration(decel_rate);
 	
 	handlePixelAccumulation();
 	updateObjectPosition();
 }
 
-///@func updateSpitterHeadSprite()
-updateSpitterHeadSprite = function()
+///@func updateHeadSprite()
+updateHeadSprite = function()
 {
-	var current_target = instance_nearest(x, y, obj_parent_player);
-	var angle_to_target = point_direction(x, y, current_target.x, current_target.y);
+	//Spitters
+	if (is_spitter)
+	{
+		image_speed = 0;
+		
+		//No point in continuing if there's nothing to spit at.
+		if (current_target == noone) { exit; }
+		
+		//Get the angle to the nearest player target.
+		var angle_to_target = point_direction(x, y, current_target.x, current_target.y);
 	
-	var new_image_index = image_index mod 4;
+		//Get the current image index- reducing by four if increased from being open mouthed.
+		//This closes the mouth automatically if the relevant variable resets to false.
+		var new_image_index = image_index mod 4;
 	
-	if (!mouth_is_open)
-	{ new_image_index = (angle_to_target div 90); }
+		//If the mouth is not currently open, rotate to aim per the calculated angle.
+		//There are four frames of rotation in the sprite's animation, so we div by 90.
+		//This leaves us with possible values of 0, 1, 2, or 3, which match nicely.
+		if (!mouth_is_open)
+		{ new_image_index = (angle_to_target div 90); }
 	
-	if (mouth_is_open)
-	{ new_image_index += 4; }
+		//If the mouth is open, then increase proposed new image index by four.
+		//The last four frames of the sprite are open mouthed (4, 5, 6, 7).
+		else
+		{ new_image_index += 4; }
 	
-	image_index = new_image_index;
+		//Update image index with final calculated result.
+		image_index = new_image_index;
+	}
+	
+	//Biters
+	else
+	{ image_angle = direction; }
+}
+
+//=================================================================================================
+// BEHAVIORAL
+//=================================================================================================
+
+///@func targetNearestPlayer()
+targetNearestPlayer = function()
+{
+	current_target = instance_nearest(x, y, obj_parent_player);
+}
+
+///@func isThreatened()
+isThreatened = function()
+{
+	//This will be based on an associated object placed over the pipe containing the piranha plant.
+	//NOT YET IMPLEMENTED.
+	return false;
 }
 
 //=================================================================================================
@@ -92,14 +134,22 @@ handleFireControl = function()
 ///@func createFireball()
 createFireball = function()
 {
-	//Create instance
-	//Set speed at angle
+	//No point in continuing if there's nothing to spit at.
+	if (current_target == noone) { exit; }
 	
-	var shooting_angle = ((image_index mod 4) * 90) + 45;
+	//Determine the simulated angle of the head.
+	var spitting_angle = ((image_index mod 4) * 90) + 45;
 	
-	var x_offset = lengthdir_x(6, shooting_angle);
-	var y_offset = lengthdir_y(6, shooting_angle);
+	//Use the spitting angle to determine the fireball's starting coordinates.
+	var x_offset = lengthdir_x(6, spitting_angle);
+	var y_offset = lengthdir_y(6, spitting_angle);
 	
-	var new_fireball = instance_create_layer(x + x_offset, y + y_offset, "Players", obj_piranha_spitter_fireball);
+	//Now determine the angle from the offset position to the target. 
+	var shooting_angle = point_direction(x + x_offset, y + y_offset, current_target.x, current_target.y);
+	
+	//Create the fireball.
+	var new_fireball = instance_create_layer(x + x_offset, y + y_offset, "Projectiles", obj_piranha_spitter_fireball);
+	
+	//Point the new fireball so that it travels along the shooting angle.
 	new_fireball.direction = shooting_angle;
 }

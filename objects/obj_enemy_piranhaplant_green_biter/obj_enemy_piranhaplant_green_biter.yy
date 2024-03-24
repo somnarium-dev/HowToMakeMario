@@ -4,7 +4,9 @@
   "eventList":[],
   "managed":true,
   "name":"obj_enemy_piranhaplant_green_biter",
-  "overriddenProperties":[],
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_parent_piranhaplant","path":"objects/obj_parent_piranhaplant/obj_parent_piranhaplant.yy",},"propertyId":{"name":"is_spitter","path":"objects/obj_parent_piranhaplant/obj_parent_piranhaplant.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"false",},
+  ],
   "parent":{
     "name":"Enemies",
     "path":"folders/Objects/Enemies.yy",

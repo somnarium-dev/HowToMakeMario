@@ -3,7 +3,7 @@ event_inherited();
 
 state_machine[enemy_state.stand] = function()
 {
-	updateSpitterHeadSprite();
+	updateHeadSprite();
 	
 	inputToAdjustmentPixels();
 	handleFireControl();

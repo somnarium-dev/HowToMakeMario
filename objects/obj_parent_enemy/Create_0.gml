@@ -46,8 +46,8 @@ accel_rate = 1;
 decel_rate = 1;
 
 directional_distance_to_nearest_player = -1;
-horizontal_distance_to_nearest_player = -1;
-vertical_distance_to_nearest_player = -1;
+x_distance_to_nearest_player = -1;
+y_distance_to_nearest_player = -1;
 
 current_top_speed = 1;
 

@@ -68,18 +68,19 @@ getProximityToNearestPlayer = function()
 {
 	var nearest_player = instance_nearest(x, y, obj_parent_player);
 	
-	var directional = -1;
-	var horizontal = -1;
-	var vertical = -1;
+	var direct_distance = -1;
+	var x_distance = -1;
+	var y_distance = -1;
 	
 	if (nearest_player != noone)
 	{
-		directional = point_distance(x, y, nearest_player.x, nearest_player.y);
-		horizontal = abs(x - nearest_player.x);
-		vertical = abs(y - nearest_player.y);
+		direct_distance = point_distance(x, y, nearest_player.x, nearest_player.y);
+		
+		x_distance = abs(nearest_player.x - x);
+		y_distance = abs(nearest_player.y - y);
 	}
 	
-	directional_distance_to_nearest_player = directional;
-	horizontal_distance_to_nearest_player = horizontal;
-	vertical_distance_to_nearest_player = vertical;
+	directional_distance_to_nearest_player = direct_distance;
+	x_distance_to_nearest_player = x_distance;
+	y_distance_to_nearest_player = y_distance;
 }
