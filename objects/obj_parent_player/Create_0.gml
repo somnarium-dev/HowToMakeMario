@@ -1,11 +1,4 @@
 event_inherited();
-//==============================================================================================
-//Do not edit anything above this line.
-//==============================================================================================
-
-//==============================================================================================
-//Do not edit anything beneath this line.
-//==============================================================================================
 
 //Custom Methods and State Machine.
 event_user(0);
@@ -80,6 +73,10 @@ states_that_cap_to_top_speed =
 	player_state.swim,
 	player_state.walk
 ];
+
+//Other configuration
+can_strike_objects = {above: true, below: false, left: false, right: false};
+can_break_objects = {above: false, below: false, left: false, right: false};
 
 //Debug
 all_nearby_collisions = [];

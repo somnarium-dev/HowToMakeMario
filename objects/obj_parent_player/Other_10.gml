@@ -36,7 +36,7 @@ readPlayerInput = function()
 
 ///@func handlePlayerMovementAndCollision()
 handlePlayerMovementAndCollision = function()
-{
+{	
 	determineTopHSpeed();
 	
 	handleGravity();

@@ -1,0 +1,2 @@
+ds_list_destroy(impassable_list);
+ds_list_destroy(strike_detection_list);

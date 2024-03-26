@@ -1,18 +1,20 @@
 {
   "$GMObject":"",
-  "%Name":"obj_parent_levelobject",
+  "%Name":"obj_coin_from_block",
   "eventList":[
     {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":12,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_parent_levelobject",
+  "name":"obj_coin_from_block",
   "overriddenProperties":[],
   "parent":{
-    "name":"- Parents",
-    "path":"folders/Objects/- Parents.yy",
+    "name":"World Objects",
+    "path":"folders/Objects/World Objects.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_item_box_contents",
+    "path":"objects/obj_item_box_contents/obj_item_box_contents.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -30,7 +32,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_coin_from_block",
+    "path":"sprites/spr_coin_from_block/spr_coin_from_block.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

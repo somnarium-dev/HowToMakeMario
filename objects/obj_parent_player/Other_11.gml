@@ -79,6 +79,8 @@ state_machine[player_state.jump] = function()
 	handlePlayerMovementAndCollision();
 	
 	checkTransitionToFall();
+	checkTransitionToWalk();
+	checkTransitionToStand();
 }
 
 state_machine[player_state.kick] = function()
@@ -118,9 +120,9 @@ state_machine[player_state.run_jump] = function()
 	
 	handlePlayerMovementAndCollision();
 	
+	checkTransitionToFall();
 	checkTransitionToWalk();
 	checkTransitionToStand();
-	checkTransitionToFall();
 }
 
 state_machine[player_state.skid] = function()

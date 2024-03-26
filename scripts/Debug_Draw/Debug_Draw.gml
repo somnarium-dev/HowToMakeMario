@@ -8,12 +8,23 @@ function debugDrawState()
 	var read_array;
 	
 	var is_player = object_is_ancestor(id.object_index, obj_parent_player);
+	var is_enemy = object_is_ancestor(id.object_index, obj_parent_enemy);
+	var is_block = object_is_ancestor(id.object_index, obj_parent_block);
 	
 	if (is_player)
 	{ read_array = global.player_state_string; }
 
-	else
+	else if (is_enemy)
 	{ read_array = global.enemy_state_string; }
+
+	else if (is_block)
+	{ read_array = global.block_state_string; }
+	
+	else
+	{ 
+		show_debug_message("[ERROR] debugDraw() - Attempted to display string array for undefined object type.");
+		show_debug_message("Game will now crash.");
+	}
 
 	//Display the current state of this object as text.
 	draw_set_font(global.font_system);

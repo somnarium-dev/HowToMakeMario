@@ -25,6 +25,15 @@ impassable = false;
 
 gravity_context = gravity_type.air;
 
+starting_x = x;
+starting_y = y;
+
+attempted_movement_this_frame_x = 0;
+attempted_movement_this_frame_y = 0;
+
+actual_movement_this_frame_x = 0;
+actual_movement_this_frame_y = 0;
+
 inflicted_h_gravity = 0;
 inflicted_v_gravity = 0;
 
@@ -45,7 +54,18 @@ adjustment_v_pixels = 0;
 horizontal_pixels_queued = 0;
 vertical_pixels_queued = 0;
 
+can_strike_objects = {above: false, below: false, left: false, right: false};
+can_break_objects = {above: false, below: false, left: false, right: false};
+
+strike_data = {striker: noone, animation_direction: -1};
+
 impassable_list = ds_list_create();
+strike_detection_list = ds_list_create();
 
 //Display
 sprite_direction = 1;
+
+//Internal functionality
+timer = 0;
+state_timer = 0;
+behavior_timer = 0;

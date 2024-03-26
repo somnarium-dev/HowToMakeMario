@@ -1,3 +1,5 @@
+if (!global.show_debug_data) { return; }
+
 //Draw detection range.
 var this_color = threat_detected ? c_red : c_lime;
 
