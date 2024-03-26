@@ -12,5 +12,8 @@ if (x_sign != 0)
 { sprite_direction = x_sign; }
 
 //Finally, this is used to move steadily in the object's direction.
-x += lengthdir_x(d_speed, direction);
-y += lengthdir_y(d_speed, direction);
+h_speed = lengthdir_x(d_speed, direction);
+v_speed = lengthdir_y(d_speed, direction);
+	
+handlePixelAccumulation();
+updateObjectPosition();
