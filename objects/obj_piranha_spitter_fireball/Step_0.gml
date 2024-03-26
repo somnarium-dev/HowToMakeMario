@@ -1,8 +1,6 @@
 handleExecutionPauses(id);
 if (paused) { exit; }
 
-show_debug_message($"Fireball is paused: {paused}");
-
 //Animation speed is based on movement speed.
 image_speed = d_speed / 2;
 
@@ -14,5 +12,5 @@ if (x_sign != 0)
 { sprite_direction = x_sign; }
 
 //Finally, this is used to move steadily in the object's direction.
-x += x_adjust;
+x += lengthdir_x(d_speed, direction);
 y += lengthdir_y(d_speed, direction);

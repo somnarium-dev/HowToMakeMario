@@ -95,9 +95,7 @@ targetNearestPlayer = function()
 ///@func isThreatened()
 isThreatened = function()
 {
-	//This will be based on an associated object placed over the pipe containing the piranha plant.
-	//NOT YET IMPLEMENTED.
-	return false;
+	return threat_detector.threat_detected;
 }
 
 //=================================================================================================
@@ -129,6 +127,100 @@ handleFireControl = function()
 		mouth_is_open = true;
 		createFireball();
 	}
+}
+
+//=================================================================================================
+// SPAWNERS
+//=================================================================================================
+
+///@func createPiranhaPlantThreatDetector()
+createPiranhaPlantThreatDetector = function()
+{
+	//Relative box coordinates pre-rotation.
+	var detector_cos_offset_amount_1 = 8 - (16 * pipe_length_in_tiles);
+	var detector_sin_offset_amount_1 = -16;
+	var detector_cos_offset_amount_2 = 7;
+	var detector_sin_offset_amount_2 = 15;
+
+	var cos_direction = direction;
+	var sin_direction = direction - 90;
+
+	//Cos and sin offsets for x1 and y1.
+	var detector_cos_offset_x_1 = lengthdir_x(detector_cos_offset_amount_1, cos_direction);
+	var detector_cos_offset_y_1 = lengthdir_y(detector_cos_offset_amount_1, cos_direction);
+
+	var detector_sin_offset_x_1 = lengthdir_x(detector_sin_offset_amount_1, sin_direction);
+	var detector_sin_offset_y_1 = lengthdir_y(detector_sin_offset_amount_1, sin_direction);
+
+	//Cos and sin offsets for x2 and y2.
+	var detector_cos_offset_x_2 = lengthdir_x(detector_cos_offset_amount_2, cos_direction);
+	var detector_cos_offset_y_2 = lengthdir_y(detector_cos_offset_amount_2, cos_direction);
+
+	var detector_sin_offset_x_2 = lengthdir_x(detector_sin_offset_amount_2, sin_direction);
+	var detector_sin_offset_y_2 = lengthdir_y(detector_sin_offset_amount_2, sin_direction);
+
+	//Final coordinate offsets.
+	var detector_x_1_offset = detector_cos_offset_x_1 + detector_sin_offset_x_1;
+	var detector_y_1_offset = detector_cos_offset_y_1 + detector_sin_offset_y_1;
+
+	var detector_x_2_offset = detector_cos_offset_x_2 + detector_sin_offset_x_2;
+	var detector_y_2_offset = detector_cos_offset_y_2 + detector_sin_offset_y_2;
+
+	//Final coordinates.
+	//If the first part of a pair is lower than the second, reverse the pair.
+	//Each coordinate is expanded outward so as to detect *near* the pipe.
+	var detector_x1 = min(detector_x_1_offset, detector_x_2_offset) - 1;
+	var detector_x2 = max(detector_x_1_offset, detector_x_2_offset) + 1;
+	var detector_y1 = min(detector_y_1_offset, detector_y_2_offset) - 1;
+	var detector_y2 = max(detector_y_1_offset, detector_y_2_offset) + 1;
+	
+	//Perform final adjustments.
+	detector_x2++; //I think this is weirdness from the position of the origin pixel.
+	
+	var quadrant = direction div 90; //This is trig magic, relates to rotational matrixes.
+	
+	switch (quadrant)
+	{
+		case 0:
+			break;
+			
+		case 1:
+			detector_y1--;
+			detector_y2--;
+			break;
+			
+		case 2:
+			detector_x1--;
+			detector_x2--;
+			detector_y1--;
+			detector_y2--;
+			break;
+			
+		case 3:
+			detector_x1--;
+			detector_x2--;
+			break;
+	}
+
+	//Create the threat detector.
+	var this_threat_detector =	instance_create_layer
+								(
+									x,
+									y,
+									"System",
+									obj_player_detector,
+									{
+										source: id,
+										direction: direction,
+										follow_source: false,
+										range_x1: detector_x1,
+										range_y1: detector_y1,
+										range_x2: detector_x2,
+										range_y2: detector_y2,
+									}
+								);
+						
+	return this_threat_detector;
 }
 
 ///@func createFireball()

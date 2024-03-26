@@ -2,9 +2,11 @@ function handleGravity()
 {
 	if (!process_gravity) { return; }
 	
+	//Get gravity direction and strength.
 	var g_direction = global.gravity_direction;
 	var g_strength = global.gravity_data[gravity_context].strength;
 	
+	//Apply strength per axis.
 	var horizontal_strength = lengthdir_x(g_strength, g_direction);
 	var vertical_strength = lengthdir_y(g_strength, g_direction);
 	
@@ -257,7 +259,7 @@ function updateObjectPosition()
 	var h_pixels = abs(horizontal_pixels_queued);
 	var v_pixels = abs(vertical_pixels_queued);
 	
-	var repetitions = max(abs(h_pixels), abs(v_pixels));
+	var repetitions = max(h_pixels, v_pixels);
 	
 	repeat (repetitions)
 	{
@@ -331,7 +333,6 @@ function checkForImpassable(_x, _y)
 		if (instance_place(x,y,this_object))
 		{ continue; }
 		
-		
 		if (this_object.object_index = obj_collision_1way)
 		{
 			var pass_through_direction = this_object.image_angle;
@@ -342,9 +343,13 @@ function checkForImpassable(_x, _y)
 			if (pass_through_direction == 270) && (v_sign != -1)  { continue; }
 		}
 			
-		if (this_object.impassable == true)
+		if (this_object.impassable)
 		{ return true; }
 	}
     
 	return false;
 }
+
+//=======================================================================================
+// VARIATIONS
+//=======================================================================================

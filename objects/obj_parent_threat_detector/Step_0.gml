@@ -12,4 +12,15 @@ if (follow_source)
 }
 
 if (threat != noone)
-{ threat_detected = instance_place(x, y, threat); }
+{
+	threat_detected =	collision_rectangle
+						(
+						x + range_x1,
+						y + range_y1,
+						x + range_x2,
+						y + range_y2,
+						threat,
+						range_precise,
+						true
+						);
+}
