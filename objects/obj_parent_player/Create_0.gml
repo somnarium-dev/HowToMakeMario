@@ -74,6 +74,10 @@ states_that_cap_to_top_speed =
 	player_state.walk
 ];
 
+//Other configuration
+can_strike_objects = {above: true, below: false, left: false, right: false};
+can_break_objects = {above: false, below: false, left: false, right: false};
+
 //Debug
 all_nearby_collisions = [];
 all_nearby_collisions[0] = false;

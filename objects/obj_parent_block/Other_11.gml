@@ -4,12 +4,25 @@ state_machine = [];
 //Awaiting a hit.
 state_machine[block_state.idle] = function()
 {
-	blockProcessHit();
+	blockDetectStrikes();
+	
+	if (strike_data.striker != noone)
+	{
+		sprite_index = hit_sprite;
+		
+		playSFX(sfx_bump);
+		
+		generateContents();
+		
+		animate_toward = strike_data.animation_direction;
+		
+		state = block_state.animate_out;
+	}
 }
 
 //Animate away from the direction of a hit.
 state_machine[block_state.animate_out] = function()
-{
+{	
 	state_timer++;
 	
 	display_offset_x += lengthdir_x(1, animate_toward);
@@ -32,6 +45,8 @@ state_machine[block_state.animate_in] = function()
 	
 	if (state_timer == animation_timing)
 	{
+		sprite_index = idle_sprite;
+		
 		state = block_state.idle;
 		state_timer = 0;
 		

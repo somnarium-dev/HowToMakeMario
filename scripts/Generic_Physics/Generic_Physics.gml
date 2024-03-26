@@ -251,8 +251,14 @@ function updateObjectPosition()
 {
 	if (!process_movement) { return; }
 	
-	var starting_x = x;
-	var starting_y = y;
+	starting_x = x;
+	starting_y = y;
+	
+	attempted_movement_this_frame_x = horizontal_pixels_queued;
+	attempted_movement_this_frame_y = vertical_pixels_queued;
+	
+	actual_movement_this_frame_x = 0;
+	actual_movement_this_frame_y = 0;
 	
 	var h_sign = sign(h_speed);
 	var v_sign = sign(v_speed);
@@ -280,10 +286,7 @@ function updateObjectPosition()
 			//If it's not possible to move in the direction queued*
 			//AND that is the direction the player is intending to move
 			//Zero out speed and queued pixels.
-			
-			//Note the third argument. If we have moved at all this frame,
-			//Then register a strike against the impassable object.
-			if (checkForImpassable(x + h_adjustment, y, x != starting_x))
+			if (checkForImpassable(x + h_adjustment, y))
 			&& (h_sign == h_adjustment)
 			{ 
 				h_speed = 0;
@@ -293,6 +296,7 @@ function updateObjectPosition()
 			else
 			{
 				x += h_adjustment;
+				actual_movement_this_frame_x += h_adjustment;
 				horizontal_pixels_queued -= h_adjustment;
 			}
 		}
@@ -305,10 +309,7 @@ function updateObjectPosition()
 			//If it's not possible to move in the direction queued*
 			//AND that is the direction the player is intending to move
 			//Zero out speed and queued pixels.
-			
-			//Note the third argument. If we have moved at all this frame,
-			//Then register a strike against the impassable object.
-			if (checkForImpassable(x, y + v_adjustment, y != starting_y))
+			if (checkForImpassable(x, y + v_adjustment))
 			&& (v_sign == v_adjustment)
 			{ 
 				v_speed = 0;
@@ -318,13 +319,14 @@ function updateObjectPosition()
 			else
 			{ 
 				y += v_adjustment;
+				actual_movement_this_frame_y += v_adjustment;
 				vertical_pixels_queued -= v_adjustment;
 			}
 		}
 	}
 }
 
-function checkForImpassable(_x, _y, _handle_strikes = false)
+function checkForImpassable(_x, _y)
 {
 	if (!process_collision_detection) { return false; }
 	
@@ -355,7 +357,6 @@ function checkForImpassable(_x, _y, _handle_strikes = false)
 			
 		if (this_object.impassable)
 		{
-			if (_handle_strikes) { handleCollisionStrike(h_sign, v_sign, this_object); }
 			return true;
 		}
 	}
@@ -365,6 +366,7 @@ function checkForImpassable(_x, _y, _handle_strikes = false)
 
 function handleCollisionStrike(_h_sign, _v_sign, _struck_object)
 {
+	/*
 	show_debug_message("FART?");
 	
 	//Prevent object from hitting itself (why do we need this check? Investigate.)
@@ -391,4 +393,6 @@ function handleCollisionStrike(_h_sign, _v_sign, _struck_object)
 		array_push(_struck_object.strike_array, {hit_by: id, hit_from_h_sign: _h_sign, hit_from_v_sign: _v_sign});
 		show_debug_message("FART SUCCESSFUL");
 	}
+	
+	*/
 }
