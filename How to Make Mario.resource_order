@@ -94,6 +94,7 @@
     {"name":"obj_powerup_star","order":6,"path":"objects/obj_powerup_star/obj_powerup_star.yy",},
     {"name":"obj_pswitch_blue","order":9,"path":"objects/obj_pswitch_blue/obj_pswitch_blue.yy",},
     {"name":"Level_1_1","order":1,"path":"rooms/Level_1_1/Level_1_1.yy",},
+    {"name":"Level_0","order":3,"path":"rooms/Level_0/Level_0.yy",},
     {"name":"The_Wall","order":2,"path":"rooms/The_Wall/The_Wall.yy",},
     {"name":"_Initialize","order":2,"path":"scripts/_Initialize/_Initialize.yy",},
     {"name":"Characters","order":1,"path":"scripts/Characters/Characters.yy",},

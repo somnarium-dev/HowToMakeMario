@@ -45,6 +45,8 @@ adjustment_v_pixels = 0;
 horizontal_pixels_queued = 0;
 vertical_pixels_queued = 0;
 
+strike_array = []
+
 impassable_list = ds_list_create();
 
 //Display

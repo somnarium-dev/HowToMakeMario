@@ -245,34 +245,14 @@ function handlePixelAccumulation()
 	//Accumulate pixels.
 	horizontal_pixels_queued += integer_adjustment_h_pixels;
 	vertical_pixels_queued += integer_adjustment_v_pixels;
-	
-	//If it's not possible to move in the queued direction,
-	//clear the related variables to prevent issues.
-	var h_sign = sign(horizontal_pixels_queued);
-	var v_sign = sign(vertical_pixels_queued);
-	
-	if (checkForImpassable(x + h_sign, y))
-	{
-		h_speed = 0;
-		inflicted_h_speed = 0;
-		
-		horizontal_pixels_accumulated = 0;
-		horizontal_pixels_queued = 0;
-	}
-	
-	if (checkForImpassable(x, y + v_sign))
-	{	
-		v_speed = 0;
-		inflicted_v_speed = 0;
-		
-		vertical_pixels_accumulated = 0;
-		vertical_pixels_queued = 0;
-	}
 }
 
 function updateObjectPosition()
 {
 	if (!process_movement) { return; }
+	
+	var starting_x = x;
+	var starting_y = y;
 	
 	var h_sign = sign(h_speed);
 	var v_sign = sign(v_speed);
@@ -297,10 +277,13 @@ function updateObjectPosition()
 		//============
 		if (horizontal_pixels_queued != 0)
 		{
-			//If it's not possible to move in the direction queued
+			//If it's not possible to move in the direction queued*
 			//AND that is the direction the player is intending to move
 			//Zero out speed and queued pixels.
-			if (checkForImpassable(x + h_adjustment, y))
+			
+			//Note the third argument. If we have moved at all this frame,
+			//Then register a strike against the impassable object.
+			if (checkForImpassable(x + h_adjustment, y, x != starting_x))
 			&& (h_sign == h_adjustment)
 			{ 
 				h_speed = 0;
@@ -319,10 +302,13 @@ function updateObjectPosition()
 		//============
 		if (vertical_pixels_queued != 0)
 		{
-			//If it's not possible to move in the direction queued
+			//If it's not possible to move in the direction queued*
 			//AND that is the direction the player is intending to move
 			//Zero out speed and queued pixels.
-			if (checkForImpassable(x, y + v_adjustment))
+			
+			//Note the third argument. If we have moved at all this frame,
+			//Then register a strike against the impassable object.
+			if (checkForImpassable(x, y + v_adjustment, y != starting_y))
 			&& (v_sign == v_adjustment)
 			{ 
 				v_speed = 0;
@@ -338,7 +324,7 @@ function updateObjectPosition()
 	}
 }
 
-function checkForImpassable(_x, _y)
+function checkForImpassable(_x, _y, _handle_strikes = false)
 {
 	if (!process_collision_detection) { return false; }
 	
@@ -368,8 +354,41 @@ function checkForImpassable(_x, _y)
 		}
 			
 		if (this_object.impassable)
-		{ return true; }
+		{
+			if (_handle_strikes) { handleCollisionStrike(h_sign, v_sign, this_object); }
+			return true;
+		}
 	}
     
 	return false;
+}
+
+function handleCollisionStrike(_h_sign, _v_sign, _struck_object)
+{
+	show_debug_message("FART?");
+	
+	//Prevent object from hitting itself (why do we need this check? Investigate.)
+	if (_struck_object.id == id) { return; }
+
+	var do_record = true;
+	var strikes = array_length(_struck_object.strike_array);
+			
+	//Loop through all recorded strikes to the impassable object.		
+	for (var i = 0; i < strikes; i++)
+	{
+		if (_struck_object.strike_array[i].hit_by == id)
+		{ 
+			do_record = false;
+			show_debug_message($"NO FARTING!! {strikes}");
+			break;
+		}
+	}
+			
+	//If it hasn't already recorded one from this object per the above loop,
+	//Then record.
+	if (do_record)
+	{ 
+		array_push(_struck_object.strike_array, {hit_by: id, hit_from_h_sign: _h_sign, hit_from_v_sign: _v_sign});
+		show_debug_message("FART SUCCESSFUL");
+	}
 }

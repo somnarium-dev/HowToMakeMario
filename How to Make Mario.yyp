@@ -126,6 +126,7 @@
     {"id":{"name":"obj_transition_iris","path":"objects/obj_transition_iris/obj_transition_iris.yy",},},
     {"id":{"name":"Initializer","path":"rooms/Initializer/Initializer.yy",},},
     {"id":{"name":"Level_1_1","path":"rooms/Level_1_1/Level_1_1.yy",},},
+    {"id":{"name":"Level_0","path":"rooms/Level_0/Level_0.yy",},},
     {"id":{"name":"The_Wall","path":"rooms/The_Wall/The_Wall.yy",},},
     {"id":{"name":"_Initialize","path":"scripts/_Initialize/_Initialize.yy",},},
     {"id":{"name":"Characters","path":"scripts/Characters/Characters.yy",},},
@@ -258,6 +259,7 @@
     {"roomId":{"name":"Initializer","path":"rooms/Initializer/Initializer.yy",},},
     {"roomId":{"name":"Level_1_1","path":"rooms/Level_1_1/Level_1_1.yy",},},
     {"roomId":{"name":"The_Wall","path":"rooms/The_Wall/The_Wall.yy",},},
+    {"roomId":{"name":"Level_0","path":"rooms/Level_0/Level_0.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

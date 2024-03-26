@@ -36,9 +36,7 @@ readPlayerInput = function()
 
 ///@func handlePlayerMovementAndCollision()
 handlePlayerMovementAndCollision = function()
-{
-	triggerInteractiveBlocks();
-	
+{	
 	determineTopHSpeed();
 	
 	handleGravity();
@@ -49,6 +47,8 @@ handlePlayerMovementAndCollision = function()
 	
 	handlePixelAccumulation();
 	updateObjectPosition();
+	
+	handleExternalInteractions();
 	
 	updatePLevel();
 }
@@ -126,13 +126,20 @@ updateState = function(_new_state, _change_sprite = true)
 // EXTERNAL INTERACTIONS
 //=================================================================================================
 
+///@func handleExternalInteractions()
+handleExternalInteractions = function()
+{
+	triggerInteractiveBlocks();
+}
+
 ///@func triggerInteractiveBlocks()
 triggerInteractiveBlocks = function()
 {
-	var block_above = instance_place(x, y-1, obj_parent_block);
+	if (v_speed >= 0) { return; }
 	
-	if (v_speed < 0)
-	&& (block_above != noone)
+	var block_above = instance_position(x, y - v_speed, obj_parent_block);
+	
+	if (block_above != noone)
 	{ 
 		block_above.process_hit = true;
 		block_above.hit_from = 270;
