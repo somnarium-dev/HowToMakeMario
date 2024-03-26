@@ -49,3 +49,8 @@ impassable_list = ds_list_create();
 
 //Display
 sprite_direction = 1;
+
+//Internal functionality
+timer = 0;
+state_timer = 0;
+behavior_timer = 0;

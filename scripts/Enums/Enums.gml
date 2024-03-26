@@ -54,6 +54,14 @@ enum enemy_behavior
 	post_attack
 }
 
+enum block_state
+{
+	idle,
+	animate_out,
+	animate_in,
+	destroyed
+}
+
 enum gravity_type
 {
 	air,

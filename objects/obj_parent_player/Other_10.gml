@@ -37,6 +37,8 @@ readPlayerInput = function()
 ///@func handlePlayerMovementAndCollision()
 handlePlayerMovementAndCollision = function()
 {
+	triggerInteractiveBlocks();
+	
 	determineTopHSpeed();
 	
 	handleGravity();
@@ -118,6 +120,23 @@ updateState = function(_new_state, _change_sprite = true)
 	can_reach_max_speed = array_contains(states_that_can_accelerate_to_max_speed, state);
 	can_reach_run_speed = array_contains(states_that_can_accelerate_to_run_speed, state);
 	cap_to_top_speed = array_contains(states_that_cap_to_top_speed, state);
+}
+
+//=================================================================================================
+// EXTERNAL INTERACTIONS
+//=================================================================================================
+
+///@func triggerInteractiveBlocks()
+triggerInteractiveBlocks = function()
+{
+	var block_above = instance_place(x, y-1, obj_parent_block);
+	
+	if (v_speed < 0)
+	&& (block_above != noone)
+	{ 
+		block_above.process_hit = true;
+		block_above.hit_from = 270;
+	}
 }
 
 //=================================================================================================
