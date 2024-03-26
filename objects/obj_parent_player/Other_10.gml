@@ -48,8 +48,6 @@ handlePlayerMovementAndCollision = function()
 	handlePixelAccumulation();
 	updateObjectPosition();
 	
-	handleExternalInteractions();
-	
 	updatePLevel();
 }
 
@@ -120,30 +118,6 @@ updateState = function(_new_state, _change_sprite = true)
 	can_reach_max_speed = array_contains(states_that_can_accelerate_to_max_speed, state);
 	can_reach_run_speed = array_contains(states_that_can_accelerate_to_run_speed, state);
 	cap_to_top_speed = array_contains(states_that_cap_to_top_speed, state);
-}
-
-//=================================================================================================
-// EXTERNAL INTERACTIONS
-//=================================================================================================
-
-///@func handleExternalInteractions()
-handleExternalInteractions = function()
-{
-	triggerInteractiveBlocks();
-}
-
-///@func triggerInteractiveBlocks()
-triggerInteractiveBlocks = function()
-{
-	if (v_speed >= 0) { return; }
-	
-	var block_above = instance_position(x, y - v_speed, obj_parent_block);
-	
-	if (block_above != noone)
-	{ 
-		block_above.process_hit = true;
-		block_above.hit_from = 270;
-	}
 }
 
 //=================================================================================================
