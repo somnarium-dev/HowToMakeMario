@@ -29,6 +29,8 @@ input_direction = 0;
 previous_input_direction = input_direction;
 
 //Stats
+h_startup_boost = global.player_1.h_startup_boost;
+
 current_top_speed = global.player_1.walk_speed;
 
 plevel_charge = 0;

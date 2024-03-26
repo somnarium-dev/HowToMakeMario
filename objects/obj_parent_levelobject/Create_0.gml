@@ -31,6 +31,8 @@ inflicted_v_gravity = 0;
 h_speed = 0;
 v_speed = 0;
 
+h_startup_boost = 0;
+
 inflicted_h_speed = 0;
 inflicted_v_speed = 0;
 
