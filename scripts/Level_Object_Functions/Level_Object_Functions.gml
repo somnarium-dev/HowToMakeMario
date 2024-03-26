@@ -52,12 +52,14 @@ function unpauseProcedure()
 
 function applyPauseTypeTo(_pause_type, _target)
 {
+	if (instance_number(_target) < 1) { return; }
 	_target.pauses_inflicted[_pause_type] = true;
 }
 
 function unapplyPauseTypeTo(_pause_type, _target)
-{
-	_target.pauses_inflicted[_pause_type] = false;
+{ 
+	if (instance_number(_target) < 1) { return; }
+	_target.pauses_inflicted[_pause_type] = false;	
 }
 
 //=====================================================

@@ -4,7 +4,9 @@
   "eventList":[],
   "managed":true,
   "name":"obj_editor_spawner_piranhaplant_green_biter",
-  "overriddenProperties":[],
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_parent_spawner_enemy","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"propertyId":{"name":"contents","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"obj_enemy_piranhaplant_green_biter",},
+  ],
   "parent":{
     "name":"- Level Editor",
     "path":"folders/Objects/- Level Editor.yy",

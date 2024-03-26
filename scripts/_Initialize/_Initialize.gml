@@ -71,7 +71,21 @@ function Initialize()
 	
 	global.enemy_state_string =
 	[
-		"stand"
+		"stand",
+		"walk",
+		"die"
+	]
+	
+	global.enemy_behavior_string =
+	[
+		"idle",
+		"patrol",
+		"hide",
+		"search",
+		"escape",
+		"pre_attack",
+		"attack",
+		"post_attack"
 	]
 
 	//Define assets.
@@ -116,6 +130,7 @@ function Initialize()
 		accel_rate: 0.05,
 		decel_rate: 0.1,
 		walk_speed: 1.25,
+		h_startup_boost: .2,
 		run_speed: 3,
 		max_speed: 3.5,
 		jump_strength: 6.25,

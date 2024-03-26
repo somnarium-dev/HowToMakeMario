@@ -23,10 +23,6 @@ var stem_offset_direction = (direction + 180) mod 360;
 var stem_offset_x = lengthdir_x(stem_offset_amount, stem_offset_direction);
 var stem_offset_y = lengthdir_y(stem_offset_amount, stem_offset_direction);
 
-//show_debug_message($"Direction : {direction}");
-//show_debug_message($"S.O.X : {stem_offset_x}");
-//show_debug_message($"S.O.Y : {stem_offset_y}");
-
 draw_sprite_ext
 (
 	spr_piranhaplant_stem,

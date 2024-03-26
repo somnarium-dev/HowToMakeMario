@@ -2,9 +2,11 @@ function handleGravity()
 {
 	if (!process_gravity) { return; }
 	
+	//Get gravity direction and strength.
 	var g_direction = global.gravity_direction;
 	var g_strength = global.gravity_data[gravity_context].strength;
 	
+	//Apply strength per axis.
 	var horizontal_strength = lengthdir_x(g_strength, g_direction);
 	var vertical_strength = lengthdir_y(g_strength, g_direction);
 	
@@ -35,14 +37,22 @@ function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
 	//If we have not yet reached top speed, accelerate.
 	if (absolute_speed < current_top_speed)
 	{ 
+		var starting_speed = h_speed;
+		
 		var adjustment = (_input * _acceleration);
 		
-		var new_speed = h_speed + adjustment;
+		var new_speed = starting_speed + adjustment;
 	
 		//If the proposed new speed would exceed the current top speed,
 		//Then cap it to the current top speed.
 		if (abs(new_speed) > current_top_speed)
 		{ new_speed = _input * current_top_speed; }
+	
+		//If the starting speed was zero,
+		if (starting_speed == 0)
+		&& (abs(new_speed) != 0)
+		&& (abs(new_speed) < 1)
+		{ new_speed += sign(new_speed) * h_startup_boost; }
 	
 		//Update h_speed.
 		h_speed = new_speed;
@@ -96,6 +106,14 @@ function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
 			{ h_speed = 0; }
 		}
 	}
+	
+	//Update tracking.
+	h_sign = sign(h_speed);
+	absolute_speed = abs(h_speed);
+	
+	//Zero out h_speed if it's not possible to move in the indicated direction.
+	if (checkForImpassable(x + h_sign, y))
+	{ h_speed = 0; }
 }
 
 function handleVerticalAcceleration(_short_jump_triggered, _deceleration)
@@ -150,6 +168,14 @@ function handleVerticalAcceleration(_short_jump_triggered, _deceleration)
 			{ v_speed = 0; }
 		}
 	}
+	
+	//Update tracking.
+	v_sign = sign(v_speed);
+	absolute_speed = abs(v_speed);
+	
+	//Zero out v_speed if it's not possible to move in the indicated direction.
+	if (checkForImpassable(x, y + v_sign))
+	{ v_speed = 0; }
 }
 
 function handleInflictedAcceleration(_deceleration)
@@ -257,7 +283,7 @@ function updateObjectPosition()
 	var h_pixels = abs(horizontal_pixels_queued);
 	var v_pixels = abs(vertical_pixels_queued);
 	
-	var repetitions = max(abs(h_pixels), abs(v_pixels));
+	var repetitions = max(h_pixels, v_pixels);
 	
 	repeat (repetitions)
 	{
@@ -331,7 +357,6 @@ function checkForImpassable(_x, _y)
 		if (instance_place(x,y,this_object))
 		{ continue; }
 		
-		
 		if (this_object.object_index = obj_collision_1way)
 		{
 			var pass_through_direction = this_object.image_angle;
@@ -342,7 +367,7 @@ function checkForImpassable(_x, _y)
 			if (pass_through_direction == 270) && (v_sign != -1)  { continue; }
 		}
 			
-		if (this_object.impassable == true)
+		if (this_object.impassable)
 		{ return true; }
 	}
     

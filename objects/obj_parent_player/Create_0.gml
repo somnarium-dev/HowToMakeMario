@@ -28,39 +28,15 @@ input_ud = 0;
 input_direction = 0;
 previous_input_direction = input_direction;
 
-//Movement and collision detection.
-gravity_context = gravity_type.air;
-
-inflicted_h_gravity = 0;
-inflicted_v_gravity = 0;
-
-h_speed = 0;
-v_speed = 0;
-
-inflicted_h_speed = 0;
-inflicted_v_speed = 0;
-
-horizontal_pixels_accumulated = 0;
-vertical_pixels_accumulated = 0;
-
-adjustment_h_pixels = 0;
-adjustment_v_pixels = 0;
-
-horizontal_pixels_queued = 0;
-vertical_pixels_queued = 0;
-
-impassable_list = ds_list_create();
-
 //Stats
+h_startup_boost = global.player_1.h_startup_boost;
+
 current_top_speed = global.player_1.walk_speed;
 
 plevel_charge = 0;
 plevel_charge_rate = 3;
 plevel_pip_value = 24;
 plevel_charge_max = plevel_pip_value * global.plevel_max;
-
-//Display.
-sprite_direction = 1;
 
 //Internal functionality.
 timer = 0;
@@ -72,13 +48,6 @@ can_reach_max_speed = false;
 can_reach_run_speed = false;
 
 cap_to_top_speed = true;
-
-process_gravity = true;
-process_acceleration = true;
-process_inflicted_acceleration = true;
-process_pixel_accumulation = true;
-process_movement = true;
-process_collision_detection = true;
 
 states_that_can_accelerate_to_max_speed =
 [
