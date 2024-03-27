@@ -13,8 +13,8 @@
     "path":"folders/Objects/World Objects.yy",
   },
   "parentObjectId":{
-    "name":"obj_item_box_contents",
-    "path":"objects/obj_item_box_contents/obj_item_box_contents.yy",
+    "name":"obj_parent_item_box_contents",
+    "path":"objects/obj_parent_item_box_contents/obj_parent_item_box_contents.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -30,7 +30,7 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"","%Name":"collector","filters":[],"listItems":[],"multiselect":false,"name":"collector","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"global.player_1","varType":0,},
+    {"$GMObjectProperty":"","%Name":"collector","filters":[],"listItems":[],"multiselect":false,"name":"collector","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"noone","varType":0,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

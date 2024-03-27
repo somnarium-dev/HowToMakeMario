@@ -6,8 +6,7 @@ event_user(0);
 event_user(1);
 
 //Internal functionality.
-idle_sprite = sprite_index;
-hit_sprite = spr_block_empty;
+sprite_index = idle_sprite;
 
 animate_toward = 90;
 

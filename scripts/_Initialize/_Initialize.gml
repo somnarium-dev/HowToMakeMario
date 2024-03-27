@@ -28,7 +28,7 @@ function Initialize()
 		play_off_length: convertSamplesToFrames(122419, 44100)
 	}
 	
-	global.next_room = Level_0;
+	global.next_room = Level_1_1;
 	
 	global.world = 1;
 	
