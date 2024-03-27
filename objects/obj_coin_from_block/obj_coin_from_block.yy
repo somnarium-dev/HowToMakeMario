@@ -3,6 +3,7 @@
   "%Name":"obj_coin_from_block",
   "eventList":[
     {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":11,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_coin_from_block",
@@ -12,8 +13,8 @@
     "path":"folders/Objects/World Objects.yy",
   },
   "parentObjectId":{
-    "name":"obj_item_box_contents",
-    "path":"objects/obj_item_box_contents/obj_item_box_contents.yy",
+    "name":"obj_parent_item_box_contents",
+    "path":"objects/obj_parent_item_box_contents/obj_parent_item_box_contents.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -28,7 +29,9 @@
   "physicsShape":1,
   "physicsShapePoints":[],
   "physicsStartAwake":true,
-  "properties":[],
+  "properties":[
+    {"$GMObjectProperty":"","%Name":"collector","filters":[],"listItems":[],"multiselect":false,"name":"collector","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"noone","varType":0,},
+  ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,

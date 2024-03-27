@@ -44,8 +44,8 @@
   },
   "origin":0,
   "parent":{
-    "name":"Level Editor",
-    "path":"folders/Sprites/Level Editor.yy",
+    "name":"Enemies",
+    "path":"folders/Sprites/Level Editor/Enemies.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

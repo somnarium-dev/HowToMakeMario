@@ -26,7 +26,7 @@ function handleGravity()
 	}
 }
 
-function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
+function handleHorizontalAcceleration(_input)
 {
 	if (!process_acceleration) { return; }
 	
@@ -39,7 +39,7 @@ function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
 	{ 
 		var starting_speed = h_speed;
 		
-		var adjustment = (_input * _acceleration);
+		var adjustment = (_input * accel_rate);
 		
 		var new_speed = starting_speed + adjustment;
 	
@@ -71,9 +71,9 @@ function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
 		{
 			//If it's possible to decelerate without crossing zero
 			//Then do so.
-			if (absolute_speed > _deceleration)
+			if (absolute_speed > decel_rate)
 			{
-				adjustment = h_sign * _deceleration;
+				adjustment = h_sign * decel_rate;
 				
 				new_speed = h_speed - adjustment;
 			}
@@ -98,8 +98,8 @@ function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
 		{
 			//If it's possible to decelerate without crossing zero
 			//Then do so.
-			if (absolute_speed > _deceleration)
-			{ h_speed -= h_sign * _deceleration; }
+			if (absolute_speed > decel_rate)
+			{ h_speed -= h_sign * decel_rate; }
 		
 			//Otherwise, snap to zero.
 			else
@@ -110,13 +110,9 @@ function handleHorizontalAcceleration(_input, _acceleration, _deceleration)
 	//Update tracking.
 	h_sign = sign(h_speed);
 	absolute_speed = abs(h_speed);
-	
-	//Zero out h_speed if it's not possible to move in the indicated direction.
-	if (checkForImpassable(x + h_sign, y))
-	{ h_speed = 0; }
 }
 
-function handleVerticalAcceleration(_short_jump_triggered, _deceleration)
+function handleVerticalAcceleration(_short_jump_triggered)
 {
 	if (!process_acceleration) { return; }
 	
@@ -161,8 +157,8 @@ function handleVerticalAcceleration(_short_jump_triggered, _deceleration)
 		|| (g_sign != v_sign)
 		|| (absolute_speed > terminal_velocity)
 		{
-			if (absolute_speed > _deceleration)
-			{ v_speed -= (v_sign * _deceleration); }
+			if (absolute_speed > decel_rate)
+			{ v_speed -= (v_sign * decel_rate); }
 		
 			else
 			{ v_speed = 0; }
@@ -172,13 +168,9 @@ function handleVerticalAcceleration(_short_jump_triggered, _deceleration)
 	//Update tracking.
 	v_sign = sign(v_speed);
 	absolute_speed = abs(v_speed);
-	
-	//Zero out v_speed if it's not possible to move in the indicated direction.
-	if (checkForImpassable(x, y + v_sign))
-	{ v_speed = 0; }
 }
 
-function handleInflictedAcceleration(_deceleration)
+function handleInflictedAcceleration()
 {
 	if (!process_inflicted_acceleration) { return; }
 	
@@ -193,15 +185,15 @@ function handleInflictedAcceleration(_deceleration)
 	var v_sign = sign(new_inflicted_v_speed);
 	
 	//Handle horizontal deceleration.
-	if (absolute_inflicted_h_speed > _deceleration)
-	{ new_inflicted_h_speed -= h_sign * _deceleration; }
+	if (absolute_inflicted_h_speed > decel_rate)
+	{ new_inflicted_h_speed -= h_sign * decel_rate; }
 		
 	else
 	{ new_inflicted_h_speed = 0; }
 	
 	//Handle vertical deceleration.
-	if (absolute_inflicted_v_speed > _deceleration)
-	{ new_inflicted_v_speed -= v_sign * _deceleration; }
+	if (absolute_inflicted_v_speed > decel_rate)
+	{ new_inflicted_v_speed -= v_sign * decel_rate; }
 		
 	else
 	{ new_inflicted_v_speed = 0; }
@@ -364,35 +356,24 @@ function checkForImpassable(_x, _y)
 	return false;
 }
 
-function handleCollisionStrike(_h_sign, _v_sign, _struck_object)
+function checkForCollisionWithAnotherEnemy(_x, _y)
 {
-	/*
-	show_debug_message("FART?");
+	if (!process_collision_detection) { return false; }
 	
-	//Prevent object from hitting itself (why do we need this check? Investigate.)
-	if (_struck_object.id == id) { return; }
-
-	var do_record = true;
-	var strikes = array_length(_struck_object.strike_array);
-			
-	//Loop through all recorded strikes to the impassable object.		
-	for (var i = 0; i < strikes; i++)
+	ds_list_clear(impassable_list);
+        
+	var _num = instance_place_list(_x, _y, obj_parent_enemy, impassable_list, true);
+	
+	for (var i = 0;  i < _num; i++)
 	{
-		if (_struck_object.strike_array[i].hit_by == id)
-		{ 
-			do_record = false;
-			show_debug_message($"NO FARTING!! {strikes}");
-			break;
-		}
-	}
+		var this_object = impassable_list[|i];
+		
+		//This is to make sure we can't get stuck inside of other enemies.
+		if (instance_place(x,y,this_object))
+		{ continue; }
 			
-	//If it hasn't already recorded one from this object per the above loop,
-	//Then record.
-	if (do_record)
-	{ 
-		array_push(_struck_object.strike_array, {hit_by: id, hit_from_h_sign: _h_sign, hit_from_v_sign: _v_sign});
-		show_debug_message("FART SUCCESSFUL");
+		return true;
 	}
-	
-	*/
+    
+	return false;
 }

@@ -1,19 +1,17 @@
 {
   "$GMObject":"",
-  "%Name":"obj_item_box_contents",
-  "eventList":[
-    {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":10,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"obj_effect_coin_collected",
+  "eventList":[],
   "managed":true,
-  "name":"obj_item_box_contents",
+  "name":"obj_effect_coin_collected",
   "overriddenProperties":[],
   "parent":{
-    "name":"- Parents",
-    "path":"folders/Objects/- Parents.yy",
+    "name":"Effects",
+    "path":"folders/Objects/Effects.yy",
   },
   "parentObjectId":{
-    "name":"obj_parent_levelobject",
-    "path":"objects/obj_parent_levelobject/obj_parent_levelobject.yy",
+    "name":"obj_parent_animate_then_destroy",
+    "path":"objects/obj_parent_animate_then_destroy/obj_parent_animate_then_destroy.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -32,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_effect_coincollected",
+    "path":"sprites/spr_effect_coincollected/spr_effect_coincollected.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

@@ -62,6 +62,20 @@ function unapplyPauseTypeTo(_pause_type, _target)
 	_target.pauses_inflicted[_pause_type] = false;	
 }
 
+//=================================================================================================
+// INPUT
+//=================================================================================================
+function clearAIFrameInputs()
+{
+	ai_input_run_pressed = false;
+	ai_input_run_held = false;
+	ai_input_run_released = false;
+
+	ai_input_jump_pressed = false;
+	ai_input_jump_held = false;
+	ai_input_jump_released = false;
+}
+
 //=====================================================
 // DISPLAY FUNCTIONS
 //=====================================================
@@ -72,6 +86,49 @@ function setSpriteDirectionPerLRInput(_input_horizontal)
 }
 
 function setImageSpeedPerHSpeed(_reference_point)
+{ image_speed = (h_speed / _reference_point); }
+
+//=================================================================================================
+// STATE AND BEHAVIOR CONTROL
+//=================================================================================================
+
+///@func updateObjectState(_new_state)
+updateObjectState = function(_new_state)
 {
-	image_speed = (h_speed / _reference_point);
+	state = _new_state;
+	
+	state_timer = 0;
+}
+
+///@func updateObjectBehavior(_new_behavior)
+updateObjectBehavior = function(_new_behavior)
+{
+	behavior = _new_behavior;
+	
+	behavior_timer = 0;
+}
+
+//=====================================================
+// COLLECTIBLE FUNCTIONS
+//=====================================================
+
+function collectCoin(_collector, _amount)
+{
+	_collector.coins += _amount;
+	
+	if (_collector.coins > 99)
+	{
+		_collector.coins -= 100;
+		collect1UP(_collector, 1);
+	}
+}
+
+function collect1UP(_collector, _amount)
+{
+	playSFX(sfx_1up);
+	
+	if (_collector.coins < 99)
+	{
+		_collector.lives_remaining += _amount;
+	}
 }

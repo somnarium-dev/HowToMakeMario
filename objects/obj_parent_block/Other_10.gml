@@ -47,7 +47,14 @@ blockStrikeDetection = function(_x, _y)
 		
 		if (v_sign == 1 && this_object.can_strike_objects.above)
 		|| (v_sign == -1 && this_object.can_strike_objects.below)
-		{ valid_striker_direction_v = true; }
+		{ 
+			//We should also make sure the striker's literal x position is within
+			//the left and right boundaries of this object.
+			
+			if (this_object.x > bbox_left) //Makes it so there's not a "gap" between blocks that does nothing.
+			&& (this_object.x <= bbox_right)
+			{valid_striker_direction_v = true;}
+		}
 		
 		//If it attempted to move toward this object, from a position directly next to it,
 		//Then we register a strike.
@@ -82,5 +89,17 @@ blockStrikeDetection = function(_x, _y)
 ///@func generateContents()
 generateContents = function()
 {
-	//This will vary depending on the object.
+	//This will vary depending on the object,
+	//but the below function should cover most cases.
+	
+	if (contents == noone) { return; }
+	
+	playSFX(contents_sfx);
+	
+	var these_contents = instance_create_layer(x, y, "Players", contents);
+	these_contents.depth = depth + 1;
+	these_contents.collector = strike_data.striker;
+	
+	contents = noone;
+	idle_sprite = hit_sprite;
 }

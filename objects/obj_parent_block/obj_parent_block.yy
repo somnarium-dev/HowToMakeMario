@@ -35,6 +35,9 @@
   "physicsStartAwake":true,
   "properties":[
     {"$GMObjectProperty":"","%Name":"contents","filters":[],"listItems":[],"multiselect":false,"name":"contents","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"noone","varType":0,},
+    {"$GMObjectProperty":"","%Name":"contents_sfx","filters":[],"listItems":[],"multiselect":false,"name":"contents_sfx","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"undefined","varType":0,},
+    {"$GMObjectProperty":"","%Name":"idle_sprite","filters":[],"listItems":[],"multiselect":false,"name":"idle_sprite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"spr_block_question","varType":0,},
+    {"$GMObjectProperty":"","%Name":"hit_sprite","filters":[],"listItems":[],"multiselect":false,"name":"hit_sprite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"spr_block_empty","varType":0,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

@@ -1,10 +1,16 @@
-/// @description Insert description here
-// You can write your code in this editor
-
 // Inherit the parent event
 event_inherited();
 
-v_speed = -5;
+//Load custom methods.
+event_user(0);
+event_user(1);
 
-starting_y_position = y;
-ending_y_position = y - 32;
+//Internal functionality.
+y -= 16;
+ending_y_position = y - 16;
+popup_strength = 8;
+
+//Configuration.
+process_collision_detection = false;
+
+gravity_context = gravity_type.coin;
