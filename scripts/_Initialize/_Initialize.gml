@@ -38,6 +38,7 @@ function Initialize()
 	global.gravity_data[gravity_type.air] = { strength: .2, terminal_velocity: 3 }; //was .2
 	global.gravity_data[gravity_type.water] = { strength: 0.05, terminal_velocity: 3 };
 	global.gravity_data[gravity_type.low] = { strength: 0.1, terminal_velocity: 2 };
+	global.gravity_data[gravity_type.coin] = { strength: 0.5, terminal_velocity: 5 }; // For coinblocks.
 	
 	global.level_timer = 300;
 	
@@ -91,6 +92,7 @@ function Initialize()
 	global.block_state_string = 
 	[
 		"idle",
+		"empty",
 		"ahimate_out",
 		"animate_in",
 		"destroyed"

@@ -35,6 +35,7 @@
   "physicsStartAwake":true,
   "properties":[
     {"$GMObjectProperty":"","%Name":"contents","filters":[],"listItems":[],"multiselect":false,"name":"contents","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"noone","varType":0,},
+    {"$GMObjectProperty":"","%Name":"contents_sfx","filters":[],"listItems":[],"multiselect":false,"name":"contents_sfx","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"sfx_coin","varType":0,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

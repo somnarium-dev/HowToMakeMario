@@ -57,8 +57,19 @@ enum enemy_behavior
 enum block_state
 {
 	idle,
+	empty,
 	animate_out,
 	animate_in,
+	destroyed
+}
+
+enum item_from_block_state
+{
+	appear,
+	idle,
+	roam,
+	jump,
+	fall,
 	destroyed
 }
 
@@ -66,7 +77,8 @@ enum gravity_type
 {
 	air,
 	water,
-	low
+	low,
+	coin
 }
 
 enum pause_types

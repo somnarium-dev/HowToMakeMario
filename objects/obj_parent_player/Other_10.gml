@@ -41,9 +41,9 @@ handlePlayerMovementAndCollision = function()
 	
 	handleGravity();
 	
-	handleHorizontalAcceleration(input_lr, global.player_1.accel_rate, global.player_1.decel_rate);
-	handleVerticalAcceleration(input_jump_released, global.player_1.decel_rate);
-	handleInflictedAcceleration(global.player_1.decel_rate);
+	handleHorizontalAcceleration(input_lr, accel_rate, decel_rate);
+	handleVerticalAcceleration(input_jump_released, decel_rate);
+	handleInflictedAcceleration(decel_rate);
 	
 	handlePixelAccumulation();
 	updateObjectPosition();
@@ -55,14 +55,14 @@ handlePlayerMovementAndCollision = function()
 determineTopHSpeed = function()
 {	
 	if (can_reach_max_speed)
-	{ current_top_speed = global.player_1.max_speed; }
+	{ current_top_speed = max_speed; }
 	
 	else if (input_run_held)
 	&& (can_reach_run_speed)
-	{ current_top_speed = global.player_1.run_speed; }
+	{ current_top_speed = run_speed; }
 	
 	else
-	{ current_top_speed = global.player_1.walk_speed; }
+	{ current_top_speed = walk_speed; }
 }
 
 ///@func updatePLevel()

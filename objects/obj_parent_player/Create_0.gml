@@ -4,6 +4,9 @@ event_inherited();
 event_user(0);
 event_user(1);
 
+//Attach to stats.
+stat_block = global.player_1;
+
 //Controls.
 generate_standard_inputs();
 
@@ -22,9 +25,16 @@ input_direction = 0;
 previous_input_direction = input_direction;
 
 //Stats
-h_startup_boost = global.player_1.h_startup_boost;
+h_startup_boost = stat_block.h_startup_boost;
 
-current_top_speed = global.player_1.walk_speed;
+accel_rate = stat_block.accel_rate;
+decel_rate = stat_block.decel_rate;
+
+walk_speed = stat_block.walk_speed;
+run_speed = stat_block.run_speed;
+max_speed = stat_block.max_speed;
+
+current_top_speed = walk_speed;
 
 plevel_charge = 0;
 plevel_charge_rate = 3;

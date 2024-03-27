@@ -75,3 +75,28 @@ function setImageSpeedPerHSpeed(_reference_point)
 {
 	image_speed = (h_speed / _reference_point);
 }
+
+//=====================================================
+// COLLECTIBLE FUNCTIONS
+//=====================================================
+
+function collectCoin(_collector, _amount)
+{
+	_collector.coins += _amount;
+	
+	if (_collector.coins > 99)
+	{
+		_collector.coins -= 100;
+		collect1UP(_collector, 1);
+	}
+}
+
+function collect1UP(_collector, _amount)
+{
+	playSFX(sfx_1up);
+	
+	if (_collector.coins < 99)
+	{
+		_collector.lives_remaining += _amount;
+	}
+}

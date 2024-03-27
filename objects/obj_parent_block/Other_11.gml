@@ -1,7 +1,7 @@
 ///@desc State Machine
 state_machine = [];
 
-//Awaiting a hit.
+//Awaiting a hit while filled.
 state_machine[block_state.idle] = function()
 {
 	blockDetectStrikes();
@@ -13,6 +13,23 @@ state_machine[block_state.idle] = function()
 		playSFX(sfx_bump);
 		
 		generateContents();
+		
+		animate_toward = strike_data.animation_direction;
+		
+		state = block_state.animate_out;
+	}
+}
+
+//Awaiting a hit.
+state_machine[block_state.empty] = function()
+{
+	blockDetectStrikes();
+	
+	if (strike_data.striker != noone)
+	{
+		sprite_index = hit_sprite;
+		
+		playSFX(sfx_bump);
 		
 		animate_toward = strike_data.animation_direction;
 		
@@ -48,9 +65,15 @@ state_machine[block_state.animate_in] = function()
 		sprite_index = idle_sprite;
 		
 		state = block_state.idle;
-		state_timer = 0;
 		
-		process_hit = false;
+		if (contents == noone)
+		{ 
+			state = block_state.empty;
+			idle_sprite = hit_sprite;
+			sprite_index = idle_sprite;
+		}
+		
+		state_timer = 0;
 	}
 }
 
