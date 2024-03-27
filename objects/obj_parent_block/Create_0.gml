@@ -5,6 +5,9 @@ event_inherited();
 event_user(0);
 event_user(1);
 
+//Configuration.
+can_strike_objects = {above: false, below: false, left: false, right: false};
+
 //Internal functionality.
 sprite_index = idle_sprite;
 

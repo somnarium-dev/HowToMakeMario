@@ -184,7 +184,7 @@ checkTransitionToStand = function()
 	var on_the_ground = checkForImpassable(x, y+1);
 	
 	if (on_the_ground)
-	&& (h_speed == 0)
+	&& (actual_movement_this_frame_x == 0)
 	{ 
 		updateState(player_state.stand);
 		image_speed = 0;
@@ -197,7 +197,7 @@ checkTransitionToWalk = function()
 	var on_the_ground = checkForImpassable(x, y+1);
 	
 	if (on_the_ground)
-	&& (h_speed != 0)
+	&& (actual_movement_this_frame_x != 0)
 	&& (!atMaxPLevel())
 	{ updateState(player_state.walk); }
 }

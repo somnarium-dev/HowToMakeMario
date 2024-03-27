@@ -47,7 +47,14 @@ blockStrikeDetection = function(_x, _y)
 		
 		if (v_sign == 1 && this_object.can_strike_objects.above)
 		|| (v_sign == -1 && this_object.can_strike_objects.below)
-		{ valid_striker_direction_v = true; }
+		{ 
+			//We should also make sure the striker's literal x position is within
+			//the left and right boundaries of this object.
+			
+			if (this_object.x > bbox_left) //Makes it so there's not a "gap" between blocks that does nothing.
+			&& (this_object.x <= bbox_right)
+			{valid_striker_direction_v = true;}
+		}
 		
 		//If it attempted to move toward this object, from a position directly next to it,
 		//Then we register a strike.

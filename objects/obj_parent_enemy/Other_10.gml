@@ -63,6 +63,28 @@ updateBehavior = function(_new_behavior)
 // MISC
 //=================================================================================================
 
+///@func failedToMoveHorizontally()
+failedToMoveHorizontally = function()
+{	
+	show_debug_message($"attempted: {attempted_movement_this_frame_x}, actual: {actual_movement_this_frame_x}");
+	
+	if (attempted_movement_this_frame_x != 0)
+	&& (actual_movement_this_frame_x == 0)
+	{ return true; }
+	
+	return false;
+}
+
+///@func failedToMoveVertically()
+failedToMoveVertically = function()
+{
+	if (attempted_movement_this_frame_y > 0)
+	&& (actual_movement_this_frame_y == 0)
+	{ return true; }
+	
+	return false;
+}
+
 ///@func getProximityToNearestPlayer()
 getProximityToNearestPlayer = function()
 {
