@@ -86,6 +86,7 @@ current_top_speed = 1;
 
 marked_for_death = false;
 death_sequence_phase = 0;
+death_sequence_timing = 0;
 
 can_reach_max_speed = false;
 can_reach_run_speed = false;

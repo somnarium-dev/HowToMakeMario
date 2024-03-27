@@ -145,6 +145,7 @@ function Initialize()
 		max_speed: 3.5,
 		jump_strength: 6.25,
 		moving_jump_strength: 7,
+		flat_bounce_strength: 2,
 		lives_remaining: 0,
 		point_total: 0,
 		coins: 0,

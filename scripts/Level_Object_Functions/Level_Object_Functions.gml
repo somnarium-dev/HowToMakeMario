@@ -77,6 +77,30 @@ function setImageSpeedPerHSpeed(_reference_point)
 }
 
 //=====================================================
+// INTERACTIVITY FUNCTIONS
+//=====================================================
+
+function jumpAttackDetection(_minimum_height_difference = 0)
+{	
+	//Look for a player above this object.
+	//This might need to use a ds_list in the event of like, two players
+	//trying to attack at once from different heights.
+	//But let's not pre-emptively solve a problem that may not exist.
+	var this_object = instance_place(x, y-1, obj_parent_player);
+	
+	//If there is none, return.
+	if (this_object == noone) { return false; }
+	
+	//If there is a minimum height difference, account for it.
+	if (_minimum_height_difference > 0)
+	&& ((y - this_object.y) < _minimum_height_difference)
+	{ return false; }
+		
+	//Otherwise, see if that player is attempting to move downward into this object.
+	return sign(this_object.attempted_movement_this_frame_y) > 0;
+}
+
+//=====================================================
 // COLLECTIBLE FUNCTIONS
 //=====================================================
 

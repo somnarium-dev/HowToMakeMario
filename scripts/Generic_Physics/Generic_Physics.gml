@@ -110,10 +110,6 @@ function handleHorizontalAcceleration(_input)
 	//Update tracking.
 	h_sign = sign(h_speed);
 	absolute_speed = abs(h_speed);
-	
-	//Zero out h_speed if it's not possible to move in the indicated direction.
-	//if (checkForImpassable(x + h_sign, y))
-	//{ h_speed = 0; }
 }
 
 function handleVerticalAcceleration(_short_jump_triggered)
@@ -172,10 +168,6 @@ function handleVerticalAcceleration(_short_jump_triggered)
 	//Update tracking.
 	v_sign = sign(v_speed);
 	absolute_speed = abs(v_speed);
-	
-	//Zero out v_speed if it's not possible to move in the indicated direction.
-	//if (checkForImpassable(x, y + v_sign))
-	//{ v_speed = 0; }
 }
 
 function handleInflictedAcceleration()
