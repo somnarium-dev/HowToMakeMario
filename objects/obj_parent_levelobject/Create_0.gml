@@ -74,6 +74,8 @@ strike_data = {striker: noone, animation_direction: -1};
 impassable_list = ds_list_create();
 strike_detection_list = ds_list_create();
 
+bounce_when_jump_attacked = false;
+
 //Stats
 accel_rate = 0.05;
 decel_rate = 0.01;

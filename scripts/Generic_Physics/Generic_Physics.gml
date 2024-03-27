@@ -355,3 +355,25 @@ function checkForImpassable(_x, _y)
     
 	return false;
 }
+
+function checkForCollisionWithAnotherEnemy(_x, _y)
+{
+	if (!process_collision_detection) { return false; }
+	
+	ds_list_clear(impassable_list);
+        
+	var _num = instance_place_list(_x, _y, obj_parent_enemy, impassable_list, true);
+	
+	for (var i = 0;  i < _num; i++)
+	{
+		var this_object = impassable_list[|i];
+		
+		//This is to make sure we can't get stuck inside of other enemies.
+		if (instance_place(x,y,this_object))
+		{ continue; }
+			
+		return true;
+	}
+    
+	return false;
+}

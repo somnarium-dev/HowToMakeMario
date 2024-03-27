@@ -46,7 +46,7 @@ handlePlayerMovementAndCollision = function()
 	handleInflictedAcceleration();
 	
 	handlePixelAccumulation();
-	updateObjectPosition();
+	updatePlayerPosition();
 	
 	updatePLevel();
 }
@@ -63,6 +63,169 @@ determineTopHSpeed = function()
 	
 	else
 	{ current_top_speed = walk_speed; }
+}
+
+///@func updatePlayerPosition()
+updatePlayerPosition = function()
+{
+	if (!process_movement) { return; }
+	
+	starting_x = x;
+	starting_y = y;
+	
+	attempted_movement_this_frame_x = horizontal_pixels_queued;
+	attempted_movement_this_frame_y = vertical_pixels_queued;
+	
+	actual_movement_this_frame_x = 0;
+	actual_movement_this_frame_y = 0;
+	
+	var h_sign = sign(h_speed);
+	var v_sign = sign(v_speed);
+	
+	var h_adjustment = sign(horizontal_pixels_queued);
+	var v_adjustment = sign(vertical_pixels_queued);
+	
+	var h_pixels = abs(horizontal_pixels_queued);
+	var v_pixels = abs(vertical_pixels_queued);
+	
+	var repetitions = max(h_pixels, v_pixels);
+	
+	repeat (repetitions)
+	{
+		//If both queues have zeroed out, break.
+		if (vertical_pixels_queued == 0)
+		&& (horizontal_pixels_queued == 0)
+		{ break; }
+		
+		//============
+		// HORIZONTAL
+		//============
+		if (horizontal_pixels_queued != 0)
+		{
+			//If it's not possible to move in the direction queued*
+			//AND that is the direction the player is intending to move
+			//Zero out speed and queued pixels.
+			if (checkForImpassable(x + h_adjustment, y))
+			&& (h_sign == h_adjustment)
+			{ 
+				h_speed = 0;
+				horizontal_pixels_queued = 0;
+			}
+			
+			else
+			{
+				x += h_adjustment;
+				actual_movement_this_frame_x += h_adjustment;
+				horizontal_pixels_queued -= h_adjustment;
+			}
+		}
+		
+		//============
+		// VERTICAL
+		//============
+		if (vertical_pixels_queued != 0)
+		{	
+			//If it's not possible to move in the direction queued*
+			//AND that is the direction the player is intending to move
+			//Zero out speed and queued pixels.
+			if (checkForImpassable(x, y + v_adjustment))
+			&& (v_sign == v_adjustment)
+			{ 
+				v_speed = 0;
+				vertical_pixels_queued = 0;
+			}
+			
+			//If bouncing on an enemy, handle that next.
+			else if (shouldBounceOffOfEnemy(v_adjustment))
+			{ bounceOffOfEnemy(v_adjustment); }
+		
+			else
+			{ 
+				y += v_adjustment;
+				actual_movement_this_frame_y += v_adjustment;
+				vertical_pixels_queued -= v_adjustment;
+			}
+		}
+	}
+}
+
+///@func checkForHarmfulEnemyCollision()
+checkForHarmfulEnemyCollision = function()
+{
+	if (other.state != enemy_state.die)
+	&& ((other.y - y) < other.safe_stomp_height)
+	{ marked_for_death = true; }
+}
+
+///@func shouldBounceOffOfEnemy(_v_adjustment)
+shouldBounceOffOfEnemy = function(_v_adjustment)
+{	
+	var enemy = instance_place(x, y + 1, obj_parent_enemy);
+	
+	//Reasons *not* to bounce:
+	
+	//There's not an enemy underneath you.
+	if (enemy == noone)
+	{ return false; }
+	
+	//You're moving the wrong way.
+	if (_v_adjustment < 1)
+	{ return false; }
+	
+	//Too low compared to enemy. You're taking damage from this.
+	if ((enemy.y - y) < enemy.safe_stomp_height)
+	{ return false; }
+	
+	//Enemy does not bounce you when jumped on.
+	if (!enemy.bounce_when_jump_attacked)
+	{ return false; }
+	
+	//The enemy is already dead.
+	if (enemy.state == enemy_state.die)
+	{ return false; }
+	
+	//*YOU* are already dead.
+	if (marked_for_death)
+	{ return false; }
+	
+	//Alright, looks like we're bouncing.
+	return true;
+}
+	
+///@func bounceOffOfEnemy()
+bounceOffOfEnemy = function()
+{
+	var enemy = instance_place(x, y + 1, obj_parent_enemy);
+	
+	var new_v_speed;
+	
+	//Clear the vertical pixel queue.
+	vertical_pixels_queued = 0;
+	
+	//Handle the bounce height.
+	if (input_jump_held)
+	{ new_v_speed = -stat_block.jump_strength; }
+	
+	else
+	{ new_v_speed = -stat_block.flat_bounce_strength; }
+	
+	//Handle HP reduction and SFX.		
+	if (enemy.lose_hp_when_jumped_on)
+	{
+		enemy.hp--;
+				
+		if (enemy.hp > 0)
+		{ playSFX(sfx_kick); }
+				
+		if (enemy.hp < 1)
+		{ playSFX(sfx_stomp); }
+	}
+				
+	else
+	{ playSFX(sfx_kick); }
+	
+	//Update v speed.
+	v_speed = new_v_speed;
 }
 
 ///@func updatePLevel()
@@ -107,8 +270,8 @@ atMaxPLevel = function()
 	return false;
 }
 
-///@func updateState(_new_state)
-updateState = function(_new_state, _change_sprite = true)
+///@func updatePlayerState(_new_state)
+updatePlayerState = function(_new_state, _change_sprite = true)
 {	
 	state = _new_state;
 	

@@ -16,7 +16,7 @@ state_machine[block_state.idle] = function()
 		
 		animate_toward = strike_data.animation_direction;
 		
-		state = block_state.animate_out;
+		updateObjectState(block_state.animate_out);
 	}
 }
 
@@ -33,7 +33,7 @@ state_machine[block_state.empty] = function()
 		
 		animate_toward = strike_data.animation_direction;
 		
-		state = block_state.animate_out;
+		updateObjectState(block_state.animate_out);
 	}
 }
 
@@ -46,10 +46,7 @@ state_machine[block_state.animate_out] = function()
 	display_offset_y += lengthdir_y(1, animate_toward);
 	
 	if (state_timer == animation_timing)
-	{
-		state = block_state.animate_in;
-		state_timer = 0;
-	}
+	{ updateObjectState(block_state.animate_in); }
 }
 
 //Animate toward original position.
@@ -64,16 +61,16 @@ state_machine[block_state.animate_in] = function()
 	{
 		sprite_index = idle_sprite;
 		
-		state = block_state.idle;
+		var new_state = block_state.idle;
 		
 		if (contents == noone)
 		{ 
-			state = block_state.empty;
+			new_state = block_state.empty;
 			idle_sprite = hit_sprite;
 			sprite_index = idle_sprite;
 		}
 		
-		state_timer = 0;
+		updateObjectState(new_state);
 	}
 }
 

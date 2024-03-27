@@ -1,3 +1,5 @@
+///@desc State Machine
+
 // Inherit the parent event
 event_inherited();
 
@@ -5,15 +7,10 @@ state_machine[enemy_state.walk] = function()
 {
 	handleEnemyMovementAndCollision();
 	
-	var jump_attacked = jumpAttackDetection(sprite_height - 2);
-	
-	if (jump_attacked)
-	{ 
-		playSFX(sfx_stomp);
-		
-		state = enemy_state.die;
-		ai_input_lr = 0;
+	if (hp < 1)
+	{ 	
 		sprite_index = spr_goomba_brown_stomped;
+		updateObjectState(enemy_state.die);
 	}
 }
 

@@ -186,7 +186,7 @@ checkTransitionToStand = function()
 	if (on_the_ground)
 	&& (actual_movement_this_frame_x == 0)
 	{ 
-		updateState(player_state.stand);
+		updatePlayerState(player_state.stand);
 		image_speed = 0;
 	}
 }
@@ -199,7 +199,7 @@ checkTransitionToWalk = function()
 	if (on_the_ground)
 	&& (actual_movement_this_frame_x != 0)
 	&& (!atMaxPLevel())
-	{ updateState(player_state.walk); }
+	{ updatePlayerState(player_state.walk); }
 }
 
 ///@func checkTransitionToRun()
@@ -209,7 +209,7 @@ checkTransitionToRun = function()
 	
 	if (on_the_ground)
 	&& (atMaxPLevel())
-	{ updateState(player_state.run); }
+	{ updatePlayerState(player_state.run); }
 }
 
 ///@func checkTransitionToSkid();
@@ -218,7 +218,7 @@ checkTransitionToSkid = function()
 	if (input_lr != 0)
 	&& (input_lr != sign(h_speed))
 	&& (abs(h_speed) > global.player_1.walk_speed)
-	{ updateState(player_state.skid); }
+	{ updatePlayerState(player_state.skid); }
 }
 
 ///@func checkTransitionSkidToWalk();
@@ -226,7 +226,7 @@ checkTransitionSkidToWalk = function()
 {
 	if (input_lr == sign(h_speed))
 	|| (abs(h_speed) <= global.player_1.walk_speed)
-	{ updateState(player_state.walk); }
+	{ updatePlayerState(player_state.walk); }
 }
 
 ///@func checkTransitionToJump()
@@ -261,7 +261,7 @@ checkTransitionToJump = function()
 	{ new_state = player_state.run_jump; }
 		
 	//Update state.
-	updateState(new_state);
+	updatePlayerState(new_state);
 }
 
 ///@func checkTransitionToFall()
@@ -286,7 +286,7 @@ checkTransitionToFall = function()
 	{ new_state = player_state.run_fall; }
 	
 	//Update state.
-	updateState(new_state);
+	updatePlayerState(new_state);
 	image_speed = 0;
 }
 
@@ -305,7 +305,7 @@ transitionToDeathState = function()
 	timer = global.death_pause_timing.pause_length;
 	death_sequence_phase = 1;
 	
-	updateState(player_state.die);
+	updatePlayerState(player_state.die);
 	
 	playBGM(global.music_playerdown);
 }

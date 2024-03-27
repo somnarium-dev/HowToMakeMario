@@ -2,6 +2,8 @@
 event_inherited();
 
 //Stats
+hp = 1;
+
 accel_rate = 0.5;
 decel_rate = 0.1;
 

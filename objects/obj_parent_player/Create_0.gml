@@ -106,4 +106,4 @@ hud = instance_create_layer(0, 0, "HUD", obj_hud_level);
 current_power = player_power.small;
 
 updateSprites();
-updateState(player_state.stand);
+updatePlayerState(player_state.stand);
