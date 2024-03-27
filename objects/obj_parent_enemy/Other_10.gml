@@ -112,6 +112,13 @@ determineTopHSpeed = function()
 // MISC
 //=================================================================================================
 
+///@func clearRegisteredJumpAttack()
+clearRegisteredJumpAttack = function()
+{
+	jump_attack.registered = false;
+	jump_attack.attacker = noone;
+}
+
 ///@func failedToMoveHorizontally()
 failedToMoveHorizontally = function()
 {	

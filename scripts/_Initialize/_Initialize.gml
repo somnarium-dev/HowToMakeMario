@@ -74,6 +74,8 @@ function Initialize()
 	[
 		"stand",
 		"walk",
+		"shell",
+		"burnt",
 		"die"
 	]
 	

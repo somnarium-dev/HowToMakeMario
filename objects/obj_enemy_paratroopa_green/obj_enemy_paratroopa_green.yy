@@ -34,6 +34,9 @@
     "name":"spr_koopa_green_walk",
     "path":"sprites/spr_koopa_green_walk/spr_koopa_green_walk.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"spr_mask_enemy_standard",
+    "path":"sprites/spr_mask_enemy_standard/spr_mask_enemy_standard.yy",
+  },
   "visible":true,
 }

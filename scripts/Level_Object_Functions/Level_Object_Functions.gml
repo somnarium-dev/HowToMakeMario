@@ -92,16 +92,14 @@ function setImageSpeedPerHSpeed(_reference_point)
 // STATE AND BEHAVIOR CONTROL
 //=================================================================================================
 
-///@func updateObjectState(_new_state)
-updateObjectState = function(_new_state)
+function updateObjectState(_new_state)
 {
 	state = _new_state;
 	
 	state_timer = 0;
 }
 
-///@func updateObjectBehavior(_new_behavior)
-updateObjectBehavior = function(_new_behavior)
+function updateObjectBehavior(_new_behavior)
 {
 	behavior = _new_behavior;
 	

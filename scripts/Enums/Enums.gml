@@ -39,6 +39,8 @@ enum enemy_state
 {
 	stand,
 	walk,
+	shell,
+	burnt,
 	die
 }
 

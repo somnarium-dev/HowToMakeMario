@@ -11,8 +11,8 @@
     {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_parent_spawner_enemy","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"propertyId":{"name":"y_offset","path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"16",},
   ],
   "parent":{
-    "name":"- Parents",
-    "path":"folders/Objects/- Parents.yy",
+    "name":"Enemies",
+    "path":"folders/Objects/- Parents/Enemies.yy",
   },
   "parentObjectId":{
     "name":"obj_parent_spawner_enemy",

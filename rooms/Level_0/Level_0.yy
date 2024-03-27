@@ -14,8 +14,7 @@
     {"name":"inst_511D2E13","path":"rooms/Level_0/Level_0.yy",},
     {"name":"inst_472138F8","path":"rooms/Level_0/Level_0.yy",},
     {"name":"inst_41134CFD","path":"rooms/Level_0/Level_0.yy",},
-    {"name":"inst_2B2004A8","path":"rooms/Level_0/Level_0.yy",},
-    {"name":"inst_12D57A6D","path":"rooms/Level_0/Level_0.yy",},
+    {"name":"inst_1CD2A3A2","path":"rooms/Level_0/Level_0.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -27,8 +26,7 @@
         {"$GMRInstance":"","%Name":"inst_507DA0BB_1","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_507DA0BB_1","objectId":{"name":"obj_editor_p1","path":"objects/obj_editor_p1/obj_editor_p1.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":128.0,"y":192.0,},
       ],"layers":[],"name":"Players","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":true,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Enemies","depth":0,"effectEnabled":true,"effectType":null,"gridX":16,"gridY":16,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
-        {"$GMRInstance":"","%Name":"inst_2B2004A8","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_2B2004A8","objectId":{"name":"obj_editor_spawner_goomba_brown","path":"objects/obj_editor_spawner_goomba_brown/obj_editor_spawner_goomba_brown.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":240.0,"y":176.0,},
-        {"$GMRInstance":"","%Name":"inst_12D57A6D","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_12D57A6D","objectId":{"name":"obj_editor_spawner_goomba_brown","path":"objects/obj_editor_spawner_goomba_brown/obj_editor_spawner_goomba_brown.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":192.0,"y":192.0,},
+        {"$GMRInstance":"","%Name":"inst_1CD2A3A2","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_1CD2A3A2","objectId":{"name":"obj_editor_spawner_koopa_green","path":"objects/obj_editor_spawner_koopa_green/obj_editor_spawner_koopa_green.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":240.0,"y":176.0,},
       ],"layers":[],"name":"Enemies","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":true,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"World_Objects","depth":100,"effectEnabled":true,"effectType":null,"gridX":16,"gridY":16,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"","%Name":"inst_1D27BC99","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_1D27BC99","objectId":{"name":"obj_editor_block_coin","path":"objects/obj_editor_block_coin/obj_editor_block_coin.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":128.0,"y":160.0,},

@@ -7,7 +7,7 @@ state_machine[enemy_state.walk] = function()
 {
 	handleEnemyMovementAndCollision();
 	
-	if (hp < 1)
+	if (jump_attack.registered)
 	{ 	
 		sprite_index = spr_goomba_brown_stomped;
 		updateObjectState(enemy_state.die);
