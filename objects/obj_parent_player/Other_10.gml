@@ -170,6 +170,7 @@ checkForHarmfulEnemyCollision = function()
 	
 	//Basic bump damage.
 	else if (other.state != enemy_state.die)
+	&& (other.state != enemy_state.stomped)
 	&& ((other.y - y) < other.safe_stomp_height)
 	{ do_get_hurt = true; }
 	
@@ -200,11 +201,7 @@ shouldBounceOffOfEnemy = function(_v_adjustment)
 	if (!enemy.bounce_when_jump_attacked)
 	{ return false; }
 	
-	//The enemy is already dead.
-	if (enemy.state == enemy_state.die)
-	{ return false; }
-	
-	//*YOU* are already dead.
+	//You are dead.
 	if (marked_for_death)
 	{ return false; }
 	
@@ -230,8 +227,8 @@ bounceOffOfEnemy = function()
 	{ new_v_speed = -stat_block.flat_bounce_strength; }
 	
 	//Inform the victim.		
-	enemy.jump_attack.registered = true;
-	enemy.jump_attack.attacker = id;
+	enemy.damage_data.inflicted_type = damage_type.jump;
+	enemy.damage_data.attacker = id;
 	
 	//Update v speed.
 	v_speed = new_v_speed;

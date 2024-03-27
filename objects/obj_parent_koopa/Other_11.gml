@@ -14,17 +14,16 @@ state_machine[enemy_state.walk] = function()
 
 state_machine[enemy_state.shell] = function()
 {
-	if (shell_direction != 0)
-	{ sprite_horizontal_direction = shell_direction;}
-	
 	image_speed = abs(shell_direction);
 	
-	checkIfJumpedOn();
+	setSpriteDirectionPerLRInput(shell_direction);
 	
 	handleEnemyMovementAndCollision();
 	
 	if (failedToMoveHorizontally())
 	{ playSFX(sfx_bump); } 
+	
+	checkIfJumpedOn();
 }
 
 state_machine[enemy_state.die] = function()
@@ -42,12 +41,15 @@ state_machine[enemy_state.die] = function()
 ///@func checkIfJumpedOn()
 checkIfJumpedOn = function()
 {	
-	if (jump_attack.registered)
-	{
+	if (damage_data.inflicted_type == damage_type.jump)
+	{	
 		handleShellBounce();
 		
 		//If not shelled:
 		if (state == enemy_state.walk)
-		{ updateObjectState(enemy_state.shell); }
+		{
+			can_strike_objects = {above: true, below: false, left: true, right: true};
+			updateObjectState(enemy_state.shell);
+		}
 	}
 }

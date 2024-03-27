@@ -35,12 +35,22 @@ enum player_state
 	walk
 }
 
+enum damage_type
+{
+	none,
+	jump,
+	shell,
+	fire,
+	tail,
+	star
+}
+
 enum enemy_state
 {
 	stand,
 	walk,
 	shell,
-	burnt,
+	stomped,
 	die
 }
 

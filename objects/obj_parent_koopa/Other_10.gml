@@ -5,7 +5,7 @@ event_inherited();
 
 ///@func handleShellBounce()
 handleShellBounce = function()
-{
+{	
 	playSFX(sfx_kick);
 	
 	move_through_enemies = true;
@@ -18,10 +18,10 @@ handleShellBounce = function()
 	
 	if (state == enemy_state.shell)
 	{
-		var new_direction = -1 * sign(jump_attack.attacker.x - x);
+		var new_direction = -1 * sign(damage_data.attacker.x - x);
 			
 		if (new_direction == 0)
-		{ new_direction = jump_attack.attacker.sprite_horizontal_direction; }
+		{ new_direction = damage_data.attacker.sprite_horizontal_direction; }
 			
 		if (shell_direction == 0)
 		{ shell_direction = new_direction}
@@ -30,5 +30,5 @@ handleShellBounce = function()
 		{ shell_direction = 0; } 
 	}
 		
-	clearRegisteredJumpAttack();
+	clearDamageData();
 }

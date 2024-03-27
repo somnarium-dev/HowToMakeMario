@@ -74,7 +74,7 @@ strike_data = {striker: noone, animation_direction: -1};
 impassable_list = ds_list_create();
 strike_detection_list = ds_list_create();
 
-jump_attack = { registered: false, attacker: noone };
+damage_data = { inflicted_type: damage_type.none , attacker: noone };
 
 bounce_when_jump_attacked = false;
 
@@ -97,9 +97,13 @@ can_reach_run_speed = false;
 
 cap_to_top_speed = true;
 
+death_pop_strength = 4;
+
 //Display
 sprite_horizontal_direction = 1;
 sprite_vertical_direction = 1;
+
+sprite_vertical_flip_adjust = 16;
 
 //Internal functionality
 timer = 0;

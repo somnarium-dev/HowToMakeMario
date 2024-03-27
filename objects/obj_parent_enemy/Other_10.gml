@@ -116,8 +116,6 @@ determineTopHSpeed = function()
 ///@func failedToMoveHorizontally()
 failedToMoveHorizontally = function()
 {	
-	show_debug_message($"attempted: {attempted_movement_this_frame_x}, actual: {actual_movement_this_frame_x}");
-	
 	if (attempted_movement_this_frame_x != 0)
 	&& (actual_movement_this_frame_x == 0)
 	{ return true; }
@@ -139,39 +137,51 @@ failedToMoveVertically = function()
 // MISC
 //=================================================================================================
 
-///@func clearRegisteredJumpAttack()
-clearRegisteredJumpAttack = function()
+///@func clearDamageData()
+clearDamageData = function()
 {
-	jump_attack.registered = false;
-	jump_attack.attacker = noone;
+	damage_data.inflicted_type = damage_type.none;
+	damage_data.attacker = noone;
 }
 
 ///@func checkForHarmfulEnemyCollision()
 checkForHarmfulEnemyCollision = function()
 {
-	var do_get_hurt = false;
+	var this_damage_type = damage_type.none;
+	var this_attacker = noone;
 	
+	//Take damage from shells.
 	if (other.state == enemy_state.shell)
 	{
+		//Analyze the shell's movement.
 		var h_sign = sign(other.x - x);
 		var speed_sign = sign(other.h_speed);
 		
 		//An unmoving shell does not inflict damage.
 		if (speed_sign == 0) { return; }
 		
-		//If the shell is moving toward the player,
+		//If the shell is moving toward this enemy,
 		//Then take damage.
 		if (speed_sign == (-1 * h_sign))
-		{ do_get_hurt = true; }
+		{ this_damage_type = damage_type.shell; }
 	}
 	
-	//Basic bump damage.
-	else if (other.state != enemy_state.die)
-	&& ((other.y - y) < other.safe_stomp_height)
-	{ do_get_hurt = true; }
+	if (this_damage_type != damage_type.none)
+	{ this_attacker = other.id; }
 	
-	if (do_get_hurt)
+	damage_data = { inflicted_type: this_damage_type, attacker: this_attacker };
+}
+
+///@func processDamage()
+processDamage = function()
+{
+	if (damage_data.inflicted_type == damage_type.none)
+	{ return; }
+	
+	else
 	{ hp--; }
+	
+	checkIfDead();
 }
 
 ///@func getProximityToNearestPlayer()

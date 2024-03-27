@@ -4,8 +4,7 @@ event_inherited();
 behavior_machine[enemy_behavior.patrol] = function()
 {
 	//Stop trying to move if dead.
-	if (jump_attack.registered)
-	|| (hp < 1)
+	if (hp < 1)
 	{ ai_input_lr = 0; }
 	
 	//Otherwise, turn around when bumping walls.

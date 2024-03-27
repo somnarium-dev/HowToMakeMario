@@ -13,7 +13,7 @@ behavior_machine[enemy_behavior.attack] = function()
 behavior_machine[enemy_behavior.patrol] = function()
 {
 	//Stop trying to move if shelled.
-	if (jump_attack.registered)
+	if (damage_data.inflicted_type = damage_type.jump)
 	{ updateObjectBehavior(enemy_behavior.attack); }
 	
 	//Otherwise, turn around when bumping walls.
