@@ -7,6 +7,8 @@ event_inherited();
 handleShellBounce = function()
 {
 	playSFX(sfx_kick);
+	
+	move_through_enemies = true;
 		
 	current_top_speed = shell_speed;
 		
@@ -19,7 +21,7 @@ handleShellBounce = function()
 		var new_direction = -1 * sign(jump_attack.attacker.x - x);
 			
 		if (new_direction == 0)
-		{ new_direction = jump_attack.attacker.sprite_direction; }
+		{ new_direction = jump_attack.attacker.sprite_horizontal_direction; }
 			
 		if (shell_direction == 0)
 		{ shell_direction = new_direction}

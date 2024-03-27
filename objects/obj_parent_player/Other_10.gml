@@ -253,9 +253,7 @@ updatePLevel = function()
 		
 		if (plevel_charge != plevel_charge_max)
 		|| (checkForImpassable(x, y + 1))
-		{
-			should_reduce_charge = true;
-		}
+		{ should_reduce_charge = true; }
 		
 		if (should_reduce_charge)
 		{ plevel_charge--; }

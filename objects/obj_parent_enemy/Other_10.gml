@@ -56,11 +56,16 @@ updateEnemyPosition = function ()
 		//============
 		if (horizontal_pixels_queued != 0)
 		{
+			var collision_with_enemy = false;
+			
+			if (!move_through_enemies)
+			{ collision_with_enemy = checkForCollisionWithAnotherEnemy(x + h_adjustment, y); }
+			
 			//If it's not possible to move in the direction queued*
 			//AND that is the direction this object is intending to move
 			//Zero out speed and queued pixels.
 			if (checkForImpassable(x + h_adjustment, y))
-			|| (checkForCollisionWithAnotherEnemy(x + h_adjustment, y))
+			|| (collision_with_enemy)
 			{
 				if (h_sign == h_adjustment)
 				{ 
@@ -108,17 +113,6 @@ determineTopHSpeed = function()
 	//This space left empty by design.
 }
 
-//=================================================================================================
-// MISC
-//=================================================================================================
-
-///@func clearRegisteredJumpAttack()
-clearRegisteredJumpAttack = function()
-{
-	jump_attack.registered = false;
-	jump_attack.attacker = noone;
-}
-
 ///@func failedToMoveHorizontally()
 failedToMoveHorizontally = function()
 {	
@@ -139,6 +133,45 @@ failedToMoveVertically = function()
 	{ return true; }
 	
 	return false;
+}
+
+//=================================================================================================
+// MISC
+//=================================================================================================
+
+///@func clearRegisteredJumpAttack()
+clearRegisteredJumpAttack = function()
+{
+	jump_attack.registered = false;
+	jump_attack.attacker = noone;
+}
+
+///@func checkForHarmfulEnemyCollision()
+checkForHarmfulEnemyCollision = function()
+{
+	var do_get_hurt = false;
+	
+	if (other.state == enemy_state.shell)
+	{
+		var h_sign = sign(other.x - x);
+		var speed_sign = sign(other.h_speed);
+		
+		//An unmoving shell does not inflict damage.
+		if (speed_sign == 0) { return; }
+		
+		//If the shell is moving toward the player,
+		//Then take damage.
+		if (speed_sign == (-1 * h_sign))
+		{ do_get_hurt = true; }
+	}
+	
+	//Basic bump damage.
+	else if (other.state != enemy_state.die)
+	&& ((other.y - y) < other.safe_stomp_height)
+	{ do_get_hurt = true; }
+	
+	if (do_get_hurt)
+	{ hp--; }
 }
 
 ///@func getProximityToNearestPlayer()

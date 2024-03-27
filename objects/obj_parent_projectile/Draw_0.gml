@@ -6,7 +6,7 @@ draw_sprite_ext
 	image_index,
 	x,
 	y,
-	sprite_direction,
+	sprite_horizontal_direction,
 	image_yscale,
 	image_angle,
 	image_blend,

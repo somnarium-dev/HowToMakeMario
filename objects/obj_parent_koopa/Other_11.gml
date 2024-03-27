@@ -15,7 +15,7 @@ state_machine[enemy_state.walk] = function()
 state_machine[enemy_state.shell] = function()
 {
 	if (shell_direction != 0)
-	{ sprite_direction = shell_direction;}
+	{ sprite_horizontal_direction = shell_direction;}
 	
 	image_speed = abs(shell_direction);
 	
@@ -41,7 +41,7 @@ state_machine[enemy_state.die] = function()
 
 ///@func checkIfJumpedOn()
 checkIfJumpedOn = function()
-{
+{	
 	if (jump_attack.registered)
 	{
 		handleShellBounce();

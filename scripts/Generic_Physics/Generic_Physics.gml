@@ -368,6 +368,10 @@ function checkForCollisionWithAnotherEnemy(_x, _y)
 	{
 		var this_object = impassable_list[|i];
 		
+		//If the other enemy doesn't collide with enemies, skip it.
+		if (this_object.move_through_enemies)
+		{ continue; }
+		
 		//This is to make sure we can't get stuck inside of other enemies.
 		if (instance_place(x,y,this_object))
 		{ continue; }

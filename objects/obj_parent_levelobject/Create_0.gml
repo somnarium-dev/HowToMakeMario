@@ -98,7 +98,8 @@ can_reach_run_speed = false;
 cap_to_top_speed = true;
 
 //Display
-sprite_direction = 1;
+sprite_horizontal_direction = 1;
+sprite_vertical_direction = 1;
 
 //Internal functionality
 timer = 0;

@@ -7,6 +7,7 @@ event_user(1);
 event_user(2);
 
 //Configuration
+move_through_enemies = false;
 bounce_when_jump_attacked = true;
 
 //Internal functionality.

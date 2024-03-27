@@ -82,7 +82,7 @@ function clearAIFrameInputs()
 function setSpriteDirectionPerLRInput(_input_horizontal)
 {
 	if (_input_horizontal != 0)
-	{ sprite_direction = _input_horizontal; }
+	{ sprite_horizontal_direction = _input_horizontal; }
 }
 
 function setImageSpeedPerHSpeed(_reference_point)
