@@ -110,13 +110,17 @@ function updateObjectBehavior(_new_behavior)
 // COLLECTIBLE FUNCTIONS
 //=====================================================
 
+/// @function		collectCoin
+/// @description	Increase the number of coins recorded in _collector's statblock by _amount. If the statblock indicates more than global.max_coins have been collected, grants a 1up.
+/// @param			_collector The instance that collected the coin(s).
+/// @param			_amount The number of coins collected.
 function collectCoin(_collector, _amount)
 {
 	_collector.stat_block.coins += _amount;
 	
-	if (_collector.stat_block.coins > 99)
+	if (_collector.stat_block.coins >= global.max_coins)
 	{
-		_collector.stat_block.coins -= 100;
+		_collector.stat_block.coins -= global.max_coins;
 		
 		playSFX(sfx_1up);
 		
@@ -124,10 +128,14 @@ function collectCoin(_collector, _amount)
 	}
 }
 
+/// @function		collect1UP
+/// @description	Increase the number of lives recorded in _collector's statblock by _amount. Will not exceed global.max_lives.
+/// @param			_collector The instance that collected the 1up(s).
+/// @param			_amount The number of 1ups collected.
 function collect1UP(_collector, _amount)
 {	
-	if (_collector.stat_block.coins < 99)
-	{
-		_collector.stat_block.lives_remaining += _amount;
-	}
+	_collector.stat_block.lives += _amount;
+	
+	if (_collector.stat_block.lives > global.max_lives)
+	{ _collector.stat_block.lives_remaining = global.max_lives; }
 }

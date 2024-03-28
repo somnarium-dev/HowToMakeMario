@@ -8,17 +8,6 @@ function Initialize()
 	global.single_room_width = 256;
 	global.single_room_height = 224;
 	
-	//=============================
-	// PREFERENCES
-	//=============================
-	
-	global.preferences =
-	{
-		master_volume: 100,
-		music_volume: 100,
-		sfx_volume: 100
-	};
-	
 	//===================================================================================
 	// STATE STRINGS
 	//===================================================================================
@@ -95,6 +84,17 @@ function Initialize()
 
 	draw_set_font(global.font_default);
 	
+	//=============================
+	// USER PREFERENCES
+	//=============================
+	
+	global.preferences =
+	{
+		master_volume: 100,
+		music_volume: 100,
+		sfx_volume: 100
+	};
+	
 	//===================================================================================
 	// SYSTEM CONTROLS
 	//===================================================================================
@@ -151,6 +151,9 @@ function Initialize()
 		play_off_length: convertSamplesToFrames(122419, 44100)
 	}
 	
+	global.max_coins = 100;
+	global.max_lives = 99;
+	
 	//===================================================================================
 	// PLAYER PROPERTIES
 	//===================================================================================
@@ -179,11 +182,9 @@ function Initialize()
 	}
 	
 	//===================================================================================
-	// MISC
+	// ESSENTIAL OBJECTS
 	//===================================================================================
-	
-	//Create other essential objects.
-	global.debug_manager = instance_create_layer(0,0, "System", obj_debug_manager);
+
 	global.music_manager = instance_create_layer(0,0, "System", obj_music_manager);
 	
 	//===================================================================================
@@ -191,6 +192,8 @@ function Initialize()
 	//===================================================================================
 	
 	//Debug.
+	global.debug_manager = instance_create_layer(0,0, "System", obj_debug_manager);
+	
 	global.show_debug_data = false;
 	
 	//===================================================================================
