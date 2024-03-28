@@ -165,6 +165,7 @@ checkForHarmfulEnemyCollision = function()
 		//If the shell is moving toward the player,
 		//Then take damage.
 		if (speed_sign == (-1 * h_sign))
+		&& ((other.y - y) < other.safe_stomp_height)
 		{ do_get_hurt = true; }
 	}
 	
