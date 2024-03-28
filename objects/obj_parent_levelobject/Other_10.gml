@@ -11,22 +11,13 @@ clearDamageData = function()
 ///@func checkIfAboutToMoveOffCliff()
 checkIfAboutToMoveOffCliff = function(_movement_indicator_value)
 {
-	//Can't walk off of a cliff while in midair.
-	if (!checkForImpassable(x, y+1))
-	{ 
-		cliff_detected = false;
-		return;
-	}
+	//Reset.
+	cliff_detected = false;
 	
-	//Otherwise, check ahead.
+	//Check ahead.
 	var h_sign = sign(_movement_indicator_value);
 	
-	if (!checkForImpassable(x + h_sign, y + 8))
-	{ 
-		cliff_detected = true;
-		return;
-	}
-	
-	cliff_detected =  false;
-	return;
+	if (checkForImpassable(x, y+1))
+	&& (!checkForImpassable(x + h_sign, y + 8))
+	{ cliff_detected = true; }
 }
