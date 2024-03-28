@@ -76,6 +76,7 @@ strike_detection_list = ds_list_create();
 
 touch_damage_power = 1;
 damage_data = { inflicted_type: damage_type.none , inflicted_power: 0 , attacker: noone};
+damaged_this_frame = false;
 
 bounce_when_jump_attacked = false;
 

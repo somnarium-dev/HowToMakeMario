@@ -315,8 +315,11 @@ processDamage = function()
 	if (damage_data.inflicted_type == damage_type.none)
 	{ return; }
 	
-	else
-	{ hp -= damage_data.inflicted_power; }
+	hp -= damage_data.inflicted_power;
+	
+	clearDamageData();
+	
+	damaged_this_frame = true;
 	
 	checkIfDead();
 }
