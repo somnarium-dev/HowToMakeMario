@@ -38,6 +38,7 @@ enum player_state
 enum damage_type
 {
 	none,
+	touch,
 	jump,
 	shell,
 	fire,

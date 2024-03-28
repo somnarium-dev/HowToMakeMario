@@ -1,5 +1,8 @@
 ///@desc Custom Methods
 
+// Inherit the parent event
+event_inherited();
+
 //=================================================================================================
 // INPUT HANDLING
 //=================================================================================================
@@ -152,7 +155,9 @@ updatePlayerPosition = function()
 ///@func checkForHarmfulEnemyCollision()
 checkForHarmfulEnemyCollision = function()
 {
-	var do_get_hurt = false;
+	var this_damage_type = damage_type.none;
+	var this_damage = 0;
+	var this_attacker = noone;
 	
 	if (other.state == enemy_state.shell)
 	{
@@ -166,17 +171,54 @@ checkForHarmfulEnemyCollision = function()
 		//Then take damage.
 		if (speed_sign == (-1 * h_sign))
 		&& ((other.y - y) < other.safe_stomp_height)
-		{ do_get_hurt = true; }
+		{ 
+			this_damage_type = damage_type.shell;
+			this_damage = other.touch_damage_power;
+			this_attacker = other.id;
+		}
 	}
 	
 	//Basic bump damage.
 	else if (other.state != enemy_state.die)
 	&& (other.state != enemy_state.stomped)
 	&& ((other.y - y) < other.safe_stomp_height)
-	{ do_get_hurt = true; }
+	{ 
+		this_damage_type = damage_type.touch;
+		this_damage = other.touch_damage_power;
+		this_attacker = other.id;
+	}
 	
-	if (do_get_hurt)
-	{ marked_for_death = true; }
+	damage_data = { inflicted_type: this_damage_type, inflicted_power: this_damage, attacker: this_attacker };
+}
+
+///@func checkForShellKicks()
+checkForShellKicks = function()
+{
+	if (other.state == enemy_state.shell)
+	&& ((other.y - y) < other.safe_stomp_height)
+	&& (other.shell_direction == 0)
+	{
+		kicking = true;
+		kick_timer = 0;
+		sprite_index = sprites[player_state.kick]
+		
+		//Inform the victim.		
+		other.damage_data.inflicted_type = damage_type.touch;
+		other.damage_data.inflicted_power = 1;
+		other.damage_data.attacker = id;
+	}
+}
+
+///@func manageKickSprite()
+manageKickSprite = function()
+{
+	if (kicking)
+	&& (sprite_index != sprites[state])
+	{ 
+		kick_timer++; 
+		if (kick_timer >= kick_timer_max)
+		{ sprite_index = sprites[state]; }
+	}
 }
 
 ///@func shouldBounceOffOfEnemy(_v_adjustment)
@@ -229,6 +271,7 @@ bounceOffOfEnemy = function()
 	
 	//Inform the victim.		
 	enemy.damage_data.inflicted_type = damage_type.jump;
+	enemy.damage_data.inflicted_power = 1;
 	enemy.damage_data.attacker = id;
 	
 	//Update v speed.
@@ -266,6 +309,34 @@ updatePLevel = function()
 // STATE TRANSITION
 //=================================================================================================
 
+///@func processDamage()
+processDamage = function()
+{
+	if (damage_data.inflicted_type == damage_type.none)
+	{ return; }
+	
+	else
+	{ hp -= damage_data.inflicted_power; }
+	
+	checkIfDead();
+}
+
+///@func checkIfDead()
+checkIfDead = function()
+{
+	if (y > room_height + 32)
+	{ hp = 0; }
+
+	if (hp < 1)
+	{ marked_for_death = true; }
+
+	if (marked_for_death)
+	{
+		if (state != player_state.die)
+		{ transitionToDeathState(); }
+	}
+}
+
 ///@func atMaxPLevel()
 atMaxPLevel = function()
 {
@@ -281,7 +352,10 @@ updatePlayerState = function(_new_state, _change_sprite = true)
 	state = _new_state;
 	
 	if (_change_sprite)
-	{ sprite_index = sprites[state]; }
+	{ 
+		if (kicking) { held_sprite = -1; }
+		sprite_index = sprites[state];
+	}
 	
 	can_reach_max_speed = array_contains(states_that_can_accelerate_to_max_speed, state);
 	can_reach_run_speed = array_contains(states_that_can_accelerate_to_run_speed, state);

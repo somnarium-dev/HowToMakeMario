@@ -1,3 +1,4 @@
+// Inherit the parent event
 event_inherited();
 
 ///@func handleItemBoxContentsMovementAndCollision()

@@ -74,7 +74,8 @@ strike_data = {striker: noone, animation_direction: -1};
 impassable_list = ds_list_create();
 strike_detection_list = ds_list_create();
 
-damage_data = { inflicted_type: damage_type.none , attacker: noone };
+touch_damage_power = 1;
+damage_data = { inflicted_type: damage_type.none , inflicted_power: 0 , attacker: noone};
 
 bounce_when_jump_attacked = false;
 

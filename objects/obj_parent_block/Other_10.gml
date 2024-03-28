@@ -1,5 +1,8 @@
 ///@desc Custom Methods
 
+// Inherit the parent event
+event_inherited();
+
 ///@func blockDetectStrikes()
 blockDetectStrikes = function()
 {	

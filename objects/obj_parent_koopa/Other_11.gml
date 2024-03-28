@@ -42,8 +42,9 @@ state_machine[enemy_state.die] = function()
 checkIfJumpedOn = function()
 {	
 	if (damage_data.inflicted_type == damage_type.jump)
+	|| (damage_data.inflicted_type == damage_type.touch)
 	{	
-		handleShellBounce();
+		handleShellKick();
 		
 		//If not shelled:
 		if (state == enemy_state.walk)

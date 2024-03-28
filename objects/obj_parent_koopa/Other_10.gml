@@ -3,8 +3,8 @@
 // Inherit the parent event
 event_inherited();
 
-///@func handleShellBounce()
-handleShellBounce = function()
+///@func handleShellKick()
+handleShellKick = function()
 {	
 	playSFX(sfx_kick);
 	

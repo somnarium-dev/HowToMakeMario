@@ -1,5 +1,8 @@
 ///@desc Custom Functions
 
+// Inherit the parent event
+event_inherited();
+
 //=================================================================================================
 // MOVEMENT AND COLLISION
 //=================================================================================================
@@ -137,17 +140,11 @@ failedToMoveVertically = function()
 // MISC
 //=================================================================================================
 
-///@func clearDamageData()
-clearDamageData = function()
-{
-	damage_data.inflicted_type = damage_type.none;
-	damage_data.attacker = noone;
-}
-
 ///@func checkForHarmfulEnemyCollision()
 checkForHarmfulEnemyCollision = function()
 {
 	var this_damage_type = damage_type.none;
+	var this_damage = 0;
 	var this_attacker = noone;
 	
 	//Take damage from shells.
@@ -163,13 +160,14 @@ checkForHarmfulEnemyCollision = function()
 		//If the shell is moving toward this enemy,
 		//Then take damage.
 		if (speed_sign == (-1 * h_sign))
-		{ this_damage_type = damage_type.shell; }
+		{ 
+			this_damage_type = damage_type.shell;
+			this_damage = other.touch_damage_power;
+			this_attacker = other.id;
+		}
 	}
 	
-	if (this_damage_type != damage_type.none)
-	{ this_attacker = other.id; }
-	
-	damage_data = { inflicted_type: this_damage_type, attacker: this_attacker };
+	damage_data = { inflicted_type: this_damage_type, inflicted_power: this_damage, attacker: this_attacker };
 }
 
 ///@func processDamage()
@@ -179,7 +177,7 @@ processDamage = function()
 	{ return; }
 	
 	else
-	{ hp--; }
+	{ hp -= damage_data.inflicted_power; }
 	
 	checkIfDead();
 }

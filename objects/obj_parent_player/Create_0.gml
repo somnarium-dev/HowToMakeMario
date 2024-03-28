@@ -25,6 +25,8 @@ input_direction = 0;
 previous_input_direction = input_direction;
 
 //Stats
+hp = 1;
+
 h_startup_boost = stat_block.h_startup_boost;
 
 accel_rate = stat_block.accel_rate;
@@ -43,6 +45,8 @@ plevel_charge_max = plevel_pip_value * global.plevel_max;
 
 //Internal functionality.
 timer = 0;
+kick_timer = 0;
+kick_timer_max = 12;
 
 marked_for_death = false;
 death_sequence_phase = 0;
@@ -83,6 +87,8 @@ states_that_cap_to_top_speed =
 	player_state.swim,
 	player_state.walk
 ];
+
+kicking = false;
 
 //Other configuration
 can_strike_objects = {above: true, below: false, left: false, right: false};
