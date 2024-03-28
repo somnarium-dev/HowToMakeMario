@@ -311,7 +311,7 @@ checkTransitionToFall = function()
 
 ///@func transitionToDeathState()
 transitionToDeathState = function()
-{
+{	
 	applyPauseForDeathSequence();
 	
 	global.accept_player_input = false;

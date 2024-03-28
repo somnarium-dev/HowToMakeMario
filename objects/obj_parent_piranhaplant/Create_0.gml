@@ -9,7 +9,8 @@ event_user(2);
 //Load create data.
 direction = create_direction;
 
-//Settings
+//Configuration
+bounce_when_jump_attacked = false;
 process_collision_detection = false;
 
 //Unique Attributes

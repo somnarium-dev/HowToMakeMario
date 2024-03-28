@@ -245,7 +245,7 @@ shouldBounceOffOfEnemy = function(_v_adjustment)
 	{ return false; }
 	
 	//You are dead.
-	if (marked_for_death)
+	if (state == player_state.die)
 	{ return false; }
 	
 	//Alright, looks like we're bouncing.
@@ -312,6 +312,13 @@ updatePLevel = function()
 ///@func processDamage()
 processDamage = function()
 {
+	checkIfDamaged();
+	checkIfDead();
+}
+
+///@func checkIfDamaged()
+checkIfDamaged = function()
+{
 	if (damage_data.inflicted_type == damage_type.none)
 	{ return; }
 	
@@ -320,8 +327,6 @@ processDamage = function()
 	clearDamageData();
 	
 	damaged_this_frame = true;
-	
-	checkIfDead();
 }
 
 ///@func checkIfDead()
@@ -331,9 +336,7 @@ checkIfDead = function()
 	{ hp = 0; }
 
 	if (hp < 1)
-	{ marked_for_death = true; }
-
-	if (marked_for_death)
+	|| (marked_for_death)
 	{
 		if (state != player_state.die)
 		{ transitionToDeathState(); }
@@ -355,10 +358,7 @@ updatePlayerState = function(_new_state, _change_sprite = true)
 	state = _new_state;
 	
 	if (_change_sprite)
-	{ 
-		if (kicking) { held_sprite = -1; }
-		sprite_index = sprites[state];
-	}
+	{ sprite_index = sprites[state]; }
 	
 	can_reach_max_speed = array_contains(states_that_can_accelerate_to_max_speed, state);
 	can_reach_run_speed = array_contains(states_that_can_accelerate_to_run_speed, state);
