@@ -1,6 +1,7 @@
 ///@desc State Management
 
-state_machine = [];
+// Inherit the parent event
+event_inherited();
 
 state_machine[player_state.climb] = function()
 {

@@ -1,5 +1,7 @@
 ///@desc State Machine
-state_machine = [];
+
+// Inherit the parent event
+event_inherited();
 
 //Awaiting a hit while filled.
 state_machine[block_state.idle] = function()

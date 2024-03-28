@@ -80,6 +80,9 @@ damaged_this_frame = false;
 
 bounce_when_jump_attacked = false;
 
+turn_around_at_cliffs = false;
+cliff_detected = false;
+
 //Stats
 accel_rate = 0.05;
 decel_rate = 0.01;

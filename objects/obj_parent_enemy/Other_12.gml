@@ -1,5 +1,7 @@
 ///@desc Behavior Management
-behavior_machine = [];
+
+// Inherit the parent event
+event_inherited();
 
 behavior_machine[enemy_behavior.idle] = function()
 {

@@ -1,4 +1,6 @@
 ///@desc Behavior Management
+
+// Inherit the parent event
 event_inherited();
 
 behavior_machine[enemy_behavior.attack] = function()
