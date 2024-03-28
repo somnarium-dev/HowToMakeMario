@@ -74,7 +74,14 @@ strike_data = {striker: noone, animation_direction: -1};
 impassable_list = ds_list_create();
 strike_detection_list = ds_list_create();
 
+touch_damage_power = 1;
+damage_data = { inflicted_type: damage_type.none , inflicted_power: 0 , attacker: noone};
+damaged_this_frame = false;
+
 bounce_when_jump_attacked = false;
+
+turn_around_at_cliffs = false;
+cliff_detected = false;
 
 //Stats
 accel_rate = 0.05;
@@ -95,8 +102,13 @@ can_reach_run_speed = false;
 
 cap_to_top_speed = true;
 
+death_pop_strength = 4;
+
 //Display
-sprite_direction = 1;
+sprite_horizontal_direction = 1;
+sprite_vertical_direction = 1;
+
+sprite_vertical_flip_adjust = 16;
 
 //Internal functionality
 timer = 0;

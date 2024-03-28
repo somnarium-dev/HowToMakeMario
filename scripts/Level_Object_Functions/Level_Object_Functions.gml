@@ -82,7 +82,7 @@ function clearAIFrameInputs()
 function setSpriteDirectionPerLRInput(_input_horizontal)
 {
 	if (_input_horizontal != 0)
-	{ sprite_direction = _input_horizontal; }
+	{ sprite_horizontal_direction = _input_horizontal; }
 }
 
 function setImageSpeedPerHSpeed(_reference_point)
@@ -92,16 +92,14 @@ function setImageSpeedPerHSpeed(_reference_point)
 // STATE AND BEHAVIOR CONTROL
 //=================================================================================================
 
-///@func updateObjectState(_new_state)
-updateObjectState = function(_new_state)
+function updateObjectState(_new_state)
 {
 	state = _new_state;
 	
 	state_timer = 0;
 }
 
-///@func updateObjectBehavior(_new_behavior)
-updateObjectBehavior = function(_new_behavior)
+function updateObjectBehavior(_new_behavior)
 {
 	behavior = _new_behavior;
 	

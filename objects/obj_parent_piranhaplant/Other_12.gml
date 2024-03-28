@@ -22,7 +22,7 @@ behavior_machine[enemy_behavior.hide] = function()
 	{ behavior_timer = 0; }
 	
 	if (behavior_timer >= hide_timing)
-	{ updateBehavior(enemy_behavior.search); }
+	{ updateObjectBehavior(enemy_behavior.search); }
 }
 
 //----------
@@ -39,10 +39,10 @@ behavior_machine[enemy_behavior.search] = function()
 		ai_input_ud = 0;
 		
 		if (is_spitter) //Spitter Next Behavior
-		{ updateBehavior(enemy_behavior.pre_attack); }
+		{ updateObjectBehavior(enemy_behavior.pre_attack); }
 		
 		else //Biter Next Behavior
-		{ updateBehavior(enemy_behavior.attack); }
+		{ updateObjectBehavior(enemy_behavior.attack); }
 	}
 }
 
@@ -58,7 +58,7 @@ behavior_machine[enemy_behavior.pre_attack] = function()
 	if (behavior_timer >= pre_attack_timing)
 	{
 		ai_input_run_pressed = true;
-		updateBehavior(enemy_behavior.attack);
+		updateObjectBehavior(enemy_behavior.attack);
 	}
 }
 
@@ -74,10 +74,10 @@ behavior_machine[enemy_behavior.attack] = function()
 	if (behavior_timer >= attack_timing)
 	{
 		if (is_spitter) //Spitter Next Behavior
-		{ updateBehavior(enemy_behavior.post_attack); }
+		{ updateObjectBehavior(enemy_behavior.post_attack); }
 	
 		else //Biter Next Behavior
-		{ updateBehavior(enemy_behavior.escape); }
+		{ updateObjectBehavior(enemy_behavior.escape); }
 	}
 }
 
@@ -89,7 +89,7 @@ behavior_machine[enemy_behavior.post_attack] = function()
 	behavior_timer++;
 	
 	if (behavior_timer >= post_attack_timing)
-	{ updateBehavior(enemy_behavior.escape); }
+	{ updateObjectBehavior(enemy_behavior.escape); }
 }
 
 //----------
@@ -104,6 +104,6 @@ behavior_machine[enemy_behavior.escape] = function()
 	if (extension == 0)
 	{ 
 		ai_input_ud = 0;
-		updateBehavior(enemy_behavior.hide);
+		updateObjectBehavior(enemy_behavior.hide);
 	}
 }

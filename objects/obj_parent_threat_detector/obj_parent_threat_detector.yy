@@ -9,8 +9,8 @@
   "name":"obj_parent_threat_detector",
   "overriddenProperties":[],
   "parent":{
-    "name":"- Parents",
-    "path":"folders/Objects/- Parents.yy",
+    "name":"Functional",
+    "path":"folders/Objects/- Parents/Functional.yy",
   },
   "parentObjectId":null,
   "persistent":false,

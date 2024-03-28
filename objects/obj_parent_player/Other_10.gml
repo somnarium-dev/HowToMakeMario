@@ -1,5 +1,8 @@
 ///@desc Custom Methods
 
+// Inherit the parent event
+event_inherited();
+
 //=================================================================================================
 // INPUT HANDLING
 //=================================================================================================
@@ -152,9 +155,70 @@ updatePlayerPosition = function()
 ///@func checkForHarmfulEnemyCollision()
 checkForHarmfulEnemyCollision = function()
 {
-	if (other.state != enemy_state.die)
+	var this_damage_type = damage_type.none;
+	var this_damage = 0;
+	var this_attacker = noone;
+	
+	if (other.state == enemy_state.shell)
+	{
+		var h_sign = sign(other.x - x);
+		var speed_sign = sign(other.h_speed);
+		
+		//An unmoving shell does not inflict damage.
+		if (speed_sign == 0) { return; }
+		
+		//If the shell is moving toward the player,
+		//Then take damage.
+		if (speed_sign == (-1 * h_sign))
+		&& ((other.y - y) < other.safe_stomp_height)
+		{ 
+			this_damage_type = damage_type.shell;
+			this_damage = other.touch_damage_power;
+			this_attacker = other.id;
+		}
+	}
+	
+	//Basic bump damage.
+	else if (other.state != enemy_state.die)
+	&& (other.state != enemy_state.stomped)
 	&& ((other.y - y) < other.safe_stomp_height)
-	{ marked_for_death = true; }
+	{ 
+		this_damage_type = damage_type.touch;
+		this_damage = other.touch_damage_power;
+		this_attacker = other.id;
+	}
+	
+	damage_data = { inflicted_type: this_damage_type, inflicted_power: this_damage, attacker: this_attacker };
+}
+
+///@func checkForShellKicks()
+checkForShellKicks = function()
+{
+	if (other.state == enemy_state.shell)
+	&& ((other.y - y) < other.safe_stomp_height)
+	&& (other.shell_direction == 0)
+	{
+		kicking = true;
+		kick_timer = 0;
+		sprite_index = sprites[player_state.kick]
+		
+		//Inform the victim.		
+		other.damage_data.inflicted_type = damage_type.touch;
+		other.damage_data.inflicted_power = 1;
+		other.damage_data.attacker = id;
+	}
+}
+
+///@func manageKickSprite()
+manageKickSprite = function()
+{
+	if (kicking)
+	&& (sprite_index != sprites[state])
+	{ 
+		kick_timer++; 
+		if (kick_timer >= kick_timer_max)
+		{ sprite_index = sprites[state]; }
+	}
 }
 
 ///@func shouldBounceOffOfEnemy(_v_adjustment)
@@ -180,12 +244,8 @@ shouldBounceOffOfEnemy = function(_v_adjustment)
 	if (!enemy.bounce_when_jump_attacked)
 	{ return false; }
 	
-	//The enemy is already dead.
-	if (enemy.state == enemy_state.die)
-	{ return false; }
-	
-	//*YOU* are already dead.
-	if (marked_for_death)
+	//You are dead.
+	if (state == player_state.die)
 	{ return false; }
 	
 	//Alright, looks like we're bouncing.
@@ -209,20 +269,10 @@ bounceOffOfEnemy = function()
 	else
 	{ new_v_speed = -stat_block.flat_bounce_strength; }
 	
-	//Handle HP reduction and SFX.		
-	if (enemy.lose_hp_when_jumped_on)
-	{
-		enemy.hp--;
-				
-		if (enemy.hp > 0)
-		{ playSFX(sfx_kick); }
-				
-		if (enemy.hp < 1)
-		{ playSFX(sfx_stomp); }
-	}
-				
-	else
-	{ playSFX(sfx_kick); }
+	//Inform the victim.		
+	enemy.damage_data.inflicted_type = damage_type.jump;
+	enemy.damage_data.inflicted_power = 1;
+	enemy.damage_data.attacker = id;
 	
 	//Update v speed.
 	v_speed = new_v_speed;
@@ -244,9 +294,7 @@ updatePLevel = function()
 		
 		if (plevel_charge != plevel_charge_max)
 		|| (checkForImpassable(x, y + 1))
-		{
-			should_reduce_charge = true;
-		}
+		{ should_reduce_charge = true; }
 		
 		if (should_reduce_charge)
 		{ plevel_charge--; }
@@ -260,6 +308,40 @@ updatePLevel = function()
 //=================================================================================================
 // STATE TRANSITION
 //=================================================================================================
+
+///@func processDamage()
+processDamage = function()
+{
+	checkIfDamaged();
+	checkIfDead();
+}
+
+///@func checkIfDamaged()
+checkIfDamaged = function()
+{
+	if (damage_data.inflicted_type == damage_type.none)
+	{ return; }
+	
+	hp -= damage_data.inflicted_power;
+	
+	clearDamageData();
+	
+	damaged_this_frame = true;
+}
+
+///@func checkIfDead()
+checkIfDead = function()
+{
+	if (y > room_height + 32)
+	{ hp = 0; }
+
+	if (hp < 1)
+	|| (marked_for_death)
+	{
+		if (state != player_state.die)
+		{ transitionToDeathState(); }
+	}
+}
 
 ///@func atMaxPLevel()
 atMaxPLevel = function()

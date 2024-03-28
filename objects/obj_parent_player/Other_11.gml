@@ -1,6 +1,7 @@
 ///@desc State Management
 
-state_machine = [];
+// Inherit the parent event
+event_inherited();
 
 state_machine[player_state.climb] = function()
 {
@@ -39,6 +40,9 @@ state_machine[player_state.exit_pipe] = function()
 
 state_machine[player_state.fall] = function()
 {
+	processDamage();
+	manageKickSprite();
+	
 	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
@@ -74,6 +78,9 @@ state_machine[player_state.grab_walk] = function()
 
 state_machine[player_state.jump] = function()
 {
+	processDamage();
+	manageKickSprite();
+	
 	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
@@ -83,13 +90,11 @@ state_machine[player_state.jump] = function()
 	checkTransitionToStand();
 }
 
-state_machine[player_state.kick] = function()
-{
-	
-}
-
 state_machine[player_state.run] = function()
 {
+	processDamage();
+	manageKickSprite();
+	
 	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
@@ -105,6 +110,9 @@ state_machine[player_state.run] = function()
 
 state_machine[player_state.run_fall] = function()
 {	
+	processDamage();
+	manageKickSprite();
+	
 	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
@@ -116,6 +124,9 @@ state_machine[player_state.run_fall] = function()
 
 state_machine[player_state.run_jump] = function()
 {
+	processDamage();
+	manageKickSprite();
+	
 	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
@@ -127,6 +138,9 @@ state_machine[player_state.run_jump] = function()
 
 state_machine[player_state.skid] = function()
 {
+	processDamage();
+	manageKickSprite();
+	
 	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
@@ -143,6 +157,9 @@ state_machine[player_state.slide] = function()
 
 state_machine[player_state.stand] = function()
 {
+	processDamage();
+	manageKickSprite();
+	
 	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
@@ -161,6 +178,9 @@ state_machine[player_state.swim] = function()
 
 state_machine[player_state.walk] = function()
 {	
+	processDamage();
+	manageKickSprite();
+	
 	setSpriteDirectionPerLRInput(input_lr);
 	
 	handlePlayerMovementAndCollision();
@@ -186,7 +206,7 @@ checkTransitionToStand = function()
 	if (on_the_ground)
 	&& (actual_movement_this_frame_x == 0)
 	{ 
-		updatePlayerState(player_state.stand);
+		updatePlayerState(player_state.stand, !kicking);
 		image_speed = 0;
 	}
 }
@@ -199,7 +219,7 @@ checkTransitionToWalk = function()
 	if (on_the_ground)
 	&& (actual_movement_this_frame_x != 0)
 	&& (!atMaxPLevel())
-	{ updatePlayerState(player_state.walk); }
+	{ updatePlayerState(player_state.walk, !kicking); }
 }
 
 ///@func checkTransitionToRun()
@@ -286,13 +306,13 @@ checkTransitionToFall = function()
 	{ new_state = player_state.run_fall; }
 	
 	//Update state.
-	updatePlayerState(new_state);
+	updatePlayerState(new_state, !kicking);
 	image_speed = 0;
 }
 
 ///@func transitionToDeathState()
 transitionToDeathState = function()
-{
+{	
 	applyPauseForDeathSequence();
 	
 	global.accept_player_input = false;

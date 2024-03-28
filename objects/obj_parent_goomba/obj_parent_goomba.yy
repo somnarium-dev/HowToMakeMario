@@ -10,8 +10,8 @@
   "name":"obj_parent_goomba",
   "overriddenProperties":[],
   "parent":{
-    "name":"- Parents",
-    "path":"folders/Objects/- Parents.yy",
+    "name":"Enemies",
+    "path":"folders/Objects/- Parents/Enemies.yy",
   },
   "parentObjectId":{
     "name":"obj_parent_enemy",

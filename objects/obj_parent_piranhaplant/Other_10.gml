@@ -244,4 +244,8 @@ createFireball = function()
 	
 	//Point the new fireball so that it travels along the shooting angle.
 	new_fireball.direction = shooting_angle;
+	
+	//Then snap its starting position to an integer.
+	new_fireball.x = round(x);
+	new_fireball.y = round(y);
 }

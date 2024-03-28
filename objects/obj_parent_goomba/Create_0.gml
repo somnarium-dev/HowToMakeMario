@@ -9,6 +9,12 @@ decel_rate = 0.1;
 
 current_top_speed = 0.5;
 
+sprites =
+{
+	walk: sprite_index,
+	stomped: spr_goomba_brown_stomped
+}
+
 //Initialize
 ai_input_lr = initial_lr_input;
 

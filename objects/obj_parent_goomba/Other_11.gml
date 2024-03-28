@@ -5,19 +5,37 @@ event_inherited();
 
 state_machine[enemy_state.walk] = function()
 {
-	handleEnemyMovementAndCollision();
+	processDamage();
 	
-	if (hp < 1)
-	{ 	
-		sprite_index = spr_goomba_brown_stomped;
-		updateObjectState(enemy_state.die);
-	}
+	handleEnemyMovementAndCollision();
 }
 
 state_machine[enemy_state.die] = function()
+{	
+	handleEnemyMovementAndCollision();
+}
+
+state_machine[enemy_state.stomped] = function()
 {
 	state_timer++;
 	
 	if (state_timer == death_sequence_timing)
 	{ instance_destroy(); }
+}
+
+//=======================================================================================
+// STATE TRANSITIONS
+//=======================================================================================
+
+///@func checkIfDead()
+checkIfDead = function()
+{
+	if (hp < 0)
+	{
+		if (damage_data.inflicted_type = damage_type.jump)
+		{ standardStompTransition(); }
+		
+		else
+		{ standardDeathTransition(); }
+	}
 }

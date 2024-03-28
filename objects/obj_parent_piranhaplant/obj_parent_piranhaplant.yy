@@ -12,8 +12,8 @@
   "name":"obj_parent_piranhaplant",
   "overriddenProperties":[],
   "parent":{
-    "name":"- Parents",
-    "path":"folders/Objects/- Parents.yy",
+    "name":"Enemies",
+    "path":"folders/Objects/- Parents/Enemies.yy",
   },
   "parentObjectId":{
     "name":"obj_parent_enemy",

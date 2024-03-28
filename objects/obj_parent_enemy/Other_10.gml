@@ -1,5 +1,8 @@
 ///@desc Custom Functions
 
+// Inherit the parent event
+event_inherited();
+
 //=================================================================================================
 // MOVEMENT AND COLLISION
 //=================================================================================================
@@ -56,11 +59,16 @@ updateEnemyPosition = function ()
 		//============
 		if (horizontal_pixels_queued != 0)
 		{
+			var collision_with_enemy = false;
+			
+			if (!move_through_enemies)
+			{ collision_with_enemy = checkForCollisionWithAnotherEnemy(x + h_adjustment, y); }
+			
 			//If it's not possible to move in the direction queued*
 			//AND that is the direction this object is intending to move
 			//Zero out speed and queued pixels.
 			if (checkForImpassable(x + h_adjustment, y))
-			|| (checkForCollisionWithAnotherEnemy(x + h_adjustment, y))
+			|| (collision_with_enemy)
 			{
 				if (h_sign == h_adjustment)
 				{ 
@@ -108,15 +116,9 @@ determineTopHSpeed = function()
 	//This space left empty by design.
 }
 
-//=================================================================================================
-// MISC
-//=================================================================================================
-
 ///@func failedToMoveHorizontally()
 failedToMoveHorizontally = function()
 {	
-	show_debug_message($"attempted: {attempted_movement_this_frame_x}, actual: {actual_movement_this_frame_x}");
-	
 	if (attempted_movement_this_frame_x != 0)
 	&& (actual_movement_this_frame_x == 0)
 	{ return true; }
@@ -132,6 +134,52 @@ failedToMoveVertically = function()
 	{ return true; }
 	
 	return false;
+}
+
+//=================================================================================================
+// MISC
+//=================================================================================================
+
+///@func checkForHarmfulEnemyCollision()
+checkForHarmfulEnemyCollision = function()
+{
+	var this_damage_type = damage_type.none;
+	var this_damage = 0;
+	var this_attacker = noone;
+	
+	//Take damage from shells.
+	if (other.state == enemy_state.shell)
+	{
+		//Analyze the shell's movement.
+		var h_sign = sign(other.x - x);
+		var speed_sign = sign(other.h_speed);
+		
+		//An unmoving shell does not inflict damage.
+		if (speed_sign == 0) { return; }
+		
+		//If the shell is moving toward this enemy,
+		//Then take damage.
+		if (speed_sign == (-1 * h_sign))
+		{ 
+			this_damage_type = damage_type.shell;
+			this_damage = other.touch_damage_power;
+			this_attacker = other.id;
+		}
+	}
+	
+	damage_data = { inflicted_type: this_damage_type, inflicted_power: this_damage, attacker: this_attacker };
+}
+
+///@func processDamage()
+processDamage = function()
+{
+	if (damage_data.inflicted_type == damage_type.none)
+	{ return; }
+	
+	hp -= damage_data.inflicted_power;
+	damaged_this_frame = true;
+	
+	checkIfDead();
 }
 
 ///@func getProximityToNearestPlayer()
