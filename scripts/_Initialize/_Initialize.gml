@@ -1,10 +1,16 @@
 function Initialize()
 {
-
-	//Define global values.
+	//=============================
+	// META
+	//=============================
+	
 	global.tile_size = 16;
 	global.single_room_width = 256;
 	global.single_room_height = 224;
+	
+	//=============================
+	// PREFERENCES
+	//=============================
 	
 	global.preferences =
 	{
@@ -13,34 +19,9 @@ function Initialize()
 		sfx_volume: 100
 	};
 	
-	global.show_debug_data = false;
-	
-	global.accept_player_input = true;
-	
-	global.pause_during_transition = false;
-	global.pause_all_execution = false;
-	
-	global.plevel_max = 7;
-	
-	global.death_pause_timing =
-	{
-		pause_length: convertSamplesToFrames(15334, 44100),
-		play_off_length: convertSamplesToFrames(122419, 44100)
-	}
-	
-	global.next_room = Level_1_1;
-	
-	global.world = 1;
-	
-	global.gravity_direction = 270;
-	
-	global.gravity_data = [];
-	global.gravity_data[gravity_type.air] = { strength: .2, terminal_velocity: 3 }; //was .2
-	global.gravity_data[gravity_type.water] = { strength: 0.05, terminal_velocity: 3 };
-	global.gravity_data[gravity_type.low] = { strength: 0.1, terminal_velocity: 2 };
-	global.gravity_data[gravity_type.coin] = { strength: 0.5, terminal_velocity: 5 }; // For coinblocks.
-	
-	global.level_timer = 300;
+	//===================================================================================
+	// STATE STRINGS
+	//===================================================================================
 	
 	global.player_state_string = 
 	[
@@ -99,8 +80,11 @@ function Initialize()
 		"animate_in",
 		"destroyed"
 	]
+	
+	//===================================================================================
+	// ASSETS
+	//===================================================================================
 
-	//Define assets.
 	initializeCharacters();
 	initializeMusic();
 	
@@ -110,6 +94,19 @@ function Initialize()
 	global.font_hudnumbers = font_add_sprite_ext(spr_font_hudnumbers, "0123456789", false, 0);
 
 	draw_set_font(global.font_default);
+	
+	//===================================================================================
+	// SYSTEM CONTROLS
+	//===================================================================================
+	
+	global.accept_player_input = true;
+	
+	global.pause_during_transition = false;
+	global.pause_all_execution = false;
+	
+	//===================================================================================
+	// CAMERA
+	//===================================================================================
 
 	//Define the camera and its attributes.
 	global.camera_target_0 = "p1";
@@ -128,9 +125,35 @@ function Initialize()
 	global.view_current_left_margin = 0;
 	global.view_current_top_margin = 0;
 	
-	//Create other essential objects.
-	global.debug_manager = instance_create_layer(0,0, "System", obj_debug_manager);
-	global.music_manager = instance_create_layer(0,0, "System", obj_music_manager);
+	//===================================================================================
+	// GENERAL GAME PROPERTIES
+	//===================================================================================
+	
+	global.next_room = Level_0;
+	
+	global.world = 1;
+	
+	global.gravity_direction = 270;
+	
+	global.gravity_data = [];
+	global.gravity_data[gravity_type.air] = { strength: .2, terminal_velocity: 3 }; //was .2
+	global.gravity_data[gravity_type.water] = { strength: 0.05, terminal_velocity: 3 };
+	global.gravity_data[gravity_type.low] = { strength: 0.1, terminal_velocity: 2 };
+	global.gravity_data[gravity_type.coin] = { strength: 0.5, terminal_velocity: 5 }; // For coinblocks.
+	
+	global.level_timer = 300;
+	
+	global.plevel_max = 7;
+	
+	global.death_pause_timing =
+	{
+		pause_length: convertSamplesToFrames(15334, 44100),
+		play_off_length: convertSamplesToFrames(122419, 44100)
+	}
+	
+	//===================================================================================
+	// PLAYER PROPERTIES
+	//===================================================================================
 	
 	//Define player 1 defaults.
 	global.player_1 = 
@@ -154,6 +177,25 @@ function Initialize()
 		plevel: 0,
 		cards: [0, 0, 0]
 	}
+	
+	//===================================================================================
+	// MISC
+	//===================================================================================
+	
+	//Create other essential objects.
+	global.debug_manager = instance_create_layer(0,0, "System", obj_debug_manager);
+	global.music_manager = instance_create_layer(0,0, "System", obj_music_manager);
+	
+	//===================================================================================
+	// DEBUG
+	//===================================================================================
+	
+	//Debug.
+	global.show_debug_data = false;
+	
+	//===================================================================================
+	// CONTINUE
+	//===================================================================================
 	
 	//playBGM(global.music_overworld, true);
 	

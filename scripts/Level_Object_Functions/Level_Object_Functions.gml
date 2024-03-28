@@ -112,21 +112,22 @@ function updateObjectBehavior(_new_behavior)
 
 function collectCoin(_collector, _amount)
 {
-	_collector.coins += _amount;
+	_collector.stat_block.coins += _amount;
 	
-	if (_collector.coins > 99)
+	if (_collector.stat_block.coins > 99)
 	{
-		_collector.coins -= 100;
+		_collector.stat_block.coins -= 100;
+		
+		playSFX(sfx_1up);
+		
 		collect1UP(_collector, 1);
 	}
 }
 
 function collect1UP(_collector, _amount)
-{
-	playSFX(sfx_1up);
-	
-	if (_collector.coins < 99)
+{	
+	if (_collector.stat_block.coins < 99)
 	{
-		_collector.lives_remaining += _amount;
+		_collector.stat_block.lives_remaining += _amount;
 	}
 }
