@@ -12,7 +12,7 @@ gpu_set_blendmode(bm_normal);
 //Draw the transition surface to the main application surface.
 surface_reset_target();
 
-var this_x = camera_get_view_x(view) + global.view_margin_width;
-var this_y = camera_get_view_y(view);
+var this_x = camera_get_view_x(view_camera[0]) + global.view_margin_width;
+var this_y = camera_get_view_y(view_camera[0]);
 
 draw_surface(transition_surface, this_x, this_y);

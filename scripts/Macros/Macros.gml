@@ -1,1 +1,0 @@
-#macro VIEW view_camera[0]

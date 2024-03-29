@@ -1,6 +1,6 @@
 //Update data.
-x = camera_get_view_x(view) + global.view_margin_width;
-y = camera_get_view_y(view) + global.view_height - sprite_height;
+x = camera_get_view_x(view_camera[0]) + global.view_margin_width;
+y = camera_get_view_y(view_camera[0]) + global.view_height - sprite_height;
 
 coins_string = string_repeat("0", coins_num_places - string_length(global.player_1.coins)) + string(global.player_1.coins);
 lives_string = string_repeat("0", lives_num_places - string_length(global.player_1.lives_remaining)) + string(global.player_1.lives_remaining);

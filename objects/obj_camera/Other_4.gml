@@ -20,4 +20,4 @@ global.view_travel_boundary_right = global.view_travel_boundary_left + cam_trave
 global.view_travel_boundary_down = global.view_travel_boundary_up + cam_travel_span_v;
 
 //Reset the camera's position
-camera_set_view_pos(view, global.view_travel_boundary_left, global.view_travel_boundary_up);
+camera_set_view_pos(view_camera[0], global.view_travel_boundary_left, global.view_travel_boundary_up);
