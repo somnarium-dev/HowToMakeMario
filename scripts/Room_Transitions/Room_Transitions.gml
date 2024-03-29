@@ -1,3 +1,8 @@
+/// @function		transitionIrisToNextRoom(_do_fade_out, _do_fade_pause, _do_fade_in)
+/// @description	Executes an iris transition from the current room to the room stored in global.next_room.
+/// @param {Bool}	_do_fade_out Whether or not to perform the iris out.
+/// @param {Bool}	_do_fade_pause Whether or not to pause before irising in.
+/// @param {Bool}	_do_fade_in Whether or not to iris in.
 function transitionIrisToNextRoom(_do_fade_out = true, _do_fade_pause = true, _do_fade_in = true)
 {
 	instance_create_layer
@@ -15,6 +20,12 @@ function transitionIrisToNextRoom(_do_fade_out = true, _do_fade_pause = true, _d
 	);
 }
 
+/// @function				transitionIrisToRoom(_room, _do_fade_out, _do_fade_pause, _do_fade_in)
+/// @description			Executes an iris transition from the current room to _room.
+/// @param {Asset.GMRoom}	_room A room asset to transition to.
+/// @param {Bool}			_do_fade_out Whether or not to perform the iris out.
+/// @param {Bool}			_do_fade_pause Whether or not to pause before irising in.
+/// @param {Bool}			_do_fade_in Whether or not to iris in.
 function transitionIrisToRoom(_room, _do_fade_out = true, _do_fade_pause = true, _do_fade_in = true)
 {
 	if (is_undefined(_room))
