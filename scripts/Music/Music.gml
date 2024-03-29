@@ -1,3 +1,5 @@
+/// @function		initializeMusic()
+/// @description	Used by initialize(). Applies loop points to all of the game's music as necessary.
 function initializeMusic()
 {
 	//Define songs and loop points.
@@ -55,7 +57,7 @@ function convertSamplesToSeconds(_samples, _sample_rate = 44100)
 
 /// @function		convertSamplesToFrames(_samples, _sample_rate, _frame_rate)
 /// @description	Convert samples by rate to seconds, then to frames by rate. Rounded.
-/// @param			_samples x Number to convert in samples.
+/// @param {real}	_samples x Number to convert in samples.
 /// @param {real}	_sample_rate Sample rate to use for conversion.
 /// @param {real}	_frame_rate Frame rate to use for conversion.
 function convertSamplesToFrames(_samples, _sample_rate = 44100, _frame_rate = 60)
@@ -71,17 +73,20 @@ function convertSamplesToFrames(_samples, _sample_rate = 44100, _frame_rate = 60
 
 //===============================================
 
+/// @function				playBGM(_new_song, _looping)
+/// @description			Instructs the Music Manager to begin playing a song, and whether or not that song should loop. Defaults to not looping.
+/// @param {Asset.GMSound}	_new_song The new song to play. This should be the name of a sound asset.
+/// @param {Bool}			_looping Whether or not the new song should loop. Defaults to false.
 function playBGM(_new_song, _looping = false)
-{
-	global.music_manager.play_music(_new_song, _looping);
-}
+{ global.music_manager.play_music(_new_song, _looping); }
 
+/// @function		stopBGM()
+/// @description	Instructs the Music Manager to stop playing the current song immediately.
 function stopBGM()
-{
-	global.music_manager.stop_music();
-}
+{ global.music_manager.stop_music(); }
 
+/// @function		fadeoutBGM(_frames = 180)
+/// @description	Instructs the Music Manager to fade out the currently playing song over _frames.
+/// @param {Real}	_frames The length of the fadeout in frames. Defaults to 180, or roughly three seconds.
 function fadeoutBGM(_frames = 180)
-{
-	global.music_manager.fade_out(_frames);
-}
+{ global.music_manager.fade_out(_frames); }

@@ -1,3 +1,5 @@
+/// @function		debugDrawState()
+/// @description	Draws a box for every object with a state machine to GUI, containing a text label describing its state.
 function debugDrawState()
 {	
 	//If we're not displaying this right now, then quit.

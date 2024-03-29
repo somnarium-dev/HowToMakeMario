@@ -1,3 +1,4 @@
+//Player Power - the current powerup held by a given player.
 enum player_power
 {
     small,
@@ -7,6 +8,7 @@ enum player_power
     raccoon,
 }
 
+//Player State - used for state machines, sprite settings, and some other checks.
 enum player_state
 {
 	mask, //This is used to set the collision mask.
@@ -35,6 +37,7 @@ enum player_state
 	walk
 }
 
+//Damage Type - used when processing potentially damaging attacks between objects.
 enum damage_type
 {
 	none,
@@ -46,6 +49,7 @@ enum damage_type
 	star
 }
 
+//Enemy State - Used for state machines inside of enemy objects.
 enum enemy_state
 {
 	stand,
@@ -55,6 +59,7 @@ enum enemy_state
 	die
 }
 
+//Enemy Behavior - Used for behavior machines (AI) inside of enemy objects.
 enum enemy_behavior
 {
 	idle,
@@ -67,6 +72,7 @@ enum enemy_behavior
 	post_attack
 }
 
+//Block State - Used for state machines inside of item blocks and bricks.
 enum block_state
 {
 	idle,
@@ -76,6 +82,7 @@ enum block_state
 	destroyed
 }
 
+//Item From Block State - Used for state machines inside of the contents of item blocks.
 enum item_from_block_state
 {
 	appear,
@@ -86,6 +93,7 @@ enum item_from_block_state
 	destroyed
 }
 
+//Gravity Type - Used to select a set of gravitational properties, including things like strength and terminal velocity.
 enum gravity_type
 {
 	air,
@@ -94,6 +102,7 @@ enum gravity_type
 	coin
 }
 
+//Pause Types - Used to pause for various reasons, while not overwriting existing pauses or destroying information in the process.
 enum pause_types
 {
 	transition,
