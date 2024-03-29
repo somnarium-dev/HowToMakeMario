@@ -113,6 +113,9 @@ function initialize()
 	
 	global.game_view_camera = view_camera[0];
 	
+	global.focal_width = global.single_room_width;
+	global.focal_height = global.single_room_height;
+	
 	global.game_camera = instance_create_layer(0,0,"System",obj_camera);
 	global.game_camera.setGameResolutionAndCenter(display_get_width(), display_get_height());
 	
