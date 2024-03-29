@@ -1,3 +1,7 @@
+//=======================================================================================
+// AUDIO
+//=======================================================================================
+
 /// @function		audioPlaySoundNoOverlap
 /// @description	Stop a sound if it is already playing, then start playing that sound. If an array of sounds is sent, it will silence all of the contents of that array, then play a random entry from it.
 /// @param			_soundid The ID of the sound to stop, then play.
@@ -36,21 +40,30 @@ function audioPlaySoundNoOverlap(_soundid, _priority = 1, _loops = false)
 	audio_sound_gain(this_sound, new_vol, 0)
 }
 
+/// @function		audioStopAllOfThese(_array)
+/// @description	Executes audio_stop_sound on each index of an array of sound resources.
+/// @param			_array An array of sound resources to stop.
 function audioStopAllOfThese(_array)
 {
 	for (var i = 0; i < array_length(_array); i++;)
 	{ audio_stop_sound(_array[i]); }
 }
 
+function playSFX(_soundid, _loops = false, _priority = 1)
+{
+	audioPlaySoundNoOverlap(_soundid, _priority, _loops);
+}
+
+//=======================================================================================
+
+/// @function		choseRandomEntry(_array)
+/// @description	Returns the value of a random index in the provided array.
+/// @param			_array An array of values to select from.
+/// @return {Any}
 function choseRandomEntry(_array)
 {
 	var index = irandom_range(1, array_length(_array)) - 1;
 	return _array[index];
-}
-
-function playSFX(_soundid, _loops = false, _priority = 1)
-{
-	audioPlaySoundNoOverlap(_soundid, _priority, _loops);
 }
 
 /// @function		alignedWithGrid(_x, _y)
@@ -75,6 +88,8 @@ function alignedWithGrid(_x = undefined, _y = undefined)
 /// @return {real}
 function pacmanClamp(_value, _lower_boundary, _upper_boundary)
 {
+	//TODO: This needs to pacman properly by accounting for remainders.
+	
 	var clamped_value = _value;
 	
 	if (clamped_value < _lower_boundary) { clamped_value = _upper_boundary; }
@@ -94,11 +109,11 @@ function roomXToGUIX(_x) {
     return _x * display_get_gui_width();
 }
 
-/// @function		room_y_to_gui_y(_y)
+/// @function		roomYToGUIY(_y)
 /// @description	Takes y relevant to the current room and converts it to y relative to the GUI.
 /// @param			_y Value to convert.
 /// @return {real}
-function room_y_to_gui_y(_y) {
+function roomYToGUIY(_y) {
     _y -= camera_get_view_y(global.game_view_camera);
     _y /= camera_get_view_height(global.game_view_camera);
 

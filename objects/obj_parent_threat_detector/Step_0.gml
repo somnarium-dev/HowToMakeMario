@@ -1,4 +1,4 @@
-if (source == undefined)
+if (source == noone)
 || (!instance_exists(source))
 {
 	instance_destroy(); 
@@ -11,7 +11,7 @@ if (follow_source)
 	y = source.y;
 }
 
-if (threat != undefined)
+if (threat != noone)
 {
 	threat_detected =	collision_rectangle
 						(
