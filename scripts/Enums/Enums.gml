@@ -5,7 +5,8 @@ enum player_power
 	mid,
     big,
     fire,
-    raccoon,
+    raccoon
+	//Surely more to come.
 }
 
 //Player State - used for state machines, sprite settings, and some other checks.
@@ -26,7 +27,7 @@ enum player_state
 	grab_stand,
 	grab_walk,
 	jump,
-	kick,
+	kick, //The player object never actually enters this state. It's just for sprite data.
 	run,
 	run_fall,
 	run_jump,
@@ -40,13 +41,13 @@ enum player_state
 //Damage Type - used when processing potentially damaging attacks between objects.
 enum damage_type
 {
-	none,
-	touch,
-	jump,
-	shell,
-	fire,
-	tail,
-	star
+	none,	//Used for reseting damage data structs, and indicates no hit is registered.
+	touch,	//Contact damage, touching spikes etc.
+	jump,	//Specifically for when a player jumps onto/into something to attack it.
+	shell,	//As you'd expect.
+	fire,	//Fireballs, firebars, etc.
+	tail,	//Raccoon / Tanuki suit tail flips.
+	star	//Invincibility effects in general.
 }
 
 //Enemy State - Used for state machines inside of enemy objects.
@@ -55,8 +56,8 @@ enum enemy_state
 	stand,
 	walk,
 	shell,
-	stomped,
-	die
+	stomped,	//Smashed by getting jumped on, likely has unique sprite or effect.
+	die			//Killed by HP reduction, flipping over and jumping offscreen. 
 }
 
 //Enemy Behavior - Used for behavior machines (AI) inside of enemy objects.

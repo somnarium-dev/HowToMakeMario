@@ -1,3 +1,6 @@
+//These are used for arbitrarily flinging the player object around.
+//Use them to test physics interactions or relieve stress.
+
 var player_1 = global.player_1.current_id;
 
 if (player_1 == noone)

@@ -6,7 +6,6 @@ event_inherited();
 state_machine[item_from_block_state.appear] = function()
 {
 	v_speed = -popup_strength;
-	show_debug_message("PWING");
 	state = item_from_block_state.jump;
 }
 
