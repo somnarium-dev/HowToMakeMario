@@ -1,8 +1,8 @@
 /// @function		audioPlaySoundNoOverlap
 /// @description	Stop a sound if it is already playing, then start playing that sound. If an array of sounds is sent, it will silence all of the contents of that array, then play a random entry from it.
 /// @param			_soundid The ID of the sound to stop, then play.
-/// @param			_priority The priority of the sound upon being replayed.
-/// @param			_loops Whether the sound should loop upon being replayed.
+/// @param {real}	_priority The priority of the sound upon being replayed.
+/// @param {bool}	_loops Whether the sound should loop upon being replayed.
 function audioPlaySoundNoOverlap(_soundid, _priority = 1, _loops = false)
 {
 	var this_sound;
@@ -60,10 +60,11 @@ function playSFX(_soundid, _loops = false, _priority = 1)
 /// @return {Bool}
 function alignedWithGrid(_x = undefined, _y = undefined)
 {
-	if (_x == undefined) { _x = x; }
-	if (_y == undefined) { _y = y; }
+	//Nullish check for arguments.
+	var x_check = _x ?? x;
+	var y_check = _y ?? y;
 	
-	return (_x mod global.tile_size == 0) && (_y mod global.tile_size == 0);
+	return (x_check mod global.tile_size == 0) && (y_check mod global.tile_size == 0);
 }
 
 /// @function		pacmanClamp(_value, _lower_boundary, _upper_boundary)
@@ -71,7 +72,7 @@ function alignedWithGrid(_x = undefined, _y = undefined)
 /// @param			_value Value to adjust.
 /// @param			_lower_boundary Lower boundary to clamp to.
 /// @param			_upper_boundary Upper boundary to clamp to.
-/// @return {Int}
+/// @return {real}
 function pacmanClamp(_value, _lower_boundary, _upper_boundary)
 {
 	var clamped_value = _value;
@@ -82,11 +83,11 @@ function pacmanClamp(_value, _lower_boundary, _upper_boundary)
 	return clamped_value;
 }
 
-/// @function		room_x_to_gui_x(_x)
+/// @function		roomXToGUIX(_x)
 /// @description	Takes x relevant to the current room and converts it to x relative to the GUI.
 /// @param			_x Value to convert.
 /// @return {real}
-function room_x_to_gui_x(_x) {
+function roomXToGUIX(_x) {
     _x -= camera_get_view_x(view);
     _x /= camera_get_view_width(view);
 

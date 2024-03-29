@@ -41,7 +41,7 @@ function initializeMusic()
 /// @function		convertSamplesToSeconds(_samples, _sample_rate)
 /// @description	Convert a number of samples by a given rate into a number of seconds.
 /// @param			_samples x Number to convert in samples.
-/// @param			_sample_rate Sample rate to use for conversion.
+/// @param {real}   _sample_rate Sample rate to use for conversion.
 function convertSamplesToSeconds(_samples, _sample_rate = 44100)
 {
 	if (is_undefined(_samples))
@@ -56,8 +56,8 @@ function convertSamplesToSeconds(_samples, _sample_rate = 44100)
 /// @function		convertSamplesToFrames(_samples, _sample_rate, _frame_rate)
 /// @description	Convert samples by rate to seconds, then to frames by rate. Rounded.
 /// @param			_samples x Number to convert in samples.
-/// @param			_sample_rate Sample rate to use for conversion.
-/// @param			_frame_rate Frame rate to use for conversion.
+/// @param {real}	_sample_rate Sample rate to use for conversion.
+/// @param {real}	_frame_rate Frame rate to use for conversion.
 function convertSamplesToFrames(_samples, _sample_rate = 44100, _frame_rate = 60)
 {
 	if (is_undefined(_samples))

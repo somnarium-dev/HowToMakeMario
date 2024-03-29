@@ -38,7 +38,7 @@ handleEnemyMovementAndCollision = function()
 	//Piranha plants are not affected by gravity.
 	
 	//Piranha plants only need to process inflicted acceleration.
-	handleInflictedAcceleration(decel_rate);
+	handleInflictedAcceleration();
 	
 	handlePixelAccumulation();
 	updateObjectPosition();

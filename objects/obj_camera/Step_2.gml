@@ -1,6 +1,4 @@
 ///@desc Update camera position.
-#macro view view_camera[0]
-
 camera_set_view_size(view, global.view_width, global.view_height);
 
 var camera_target = noone;

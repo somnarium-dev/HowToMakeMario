@@ -30,6 +30,10 @@ function handleHorizontalAcceleration(_input)
 {
 	if (!process_acceleration) { return; }
 	
+	var starting_speed;
+	var adjustment;
+	var new_speed;
+	
 	//Handle acceleration;
 	var absolute_speed = abs(h_speed);
 	var h_sign = sign(h_speed);
@@ -37,11 +41,11 @@ function handleHorizontalAcceleration(_input)
 	//If we have not yet reached top speed, accelerate.
 	if (absolute_speed < current_top_speed)
 	{ 
-		var starting_speed = h_speed;
+		starting_speed = h_speed;
 		
-		var adjustment = (_input * accel_rate);
+		adjustment = (_input * accel_rate);
 		
-		var new_speed = starting_speed + adjustment;
+		new_speed = starting_speed + adjustment;
 	
 		//If the proposed new speed would exceed the current top speed,
 		//Then cap it to the current top speed.
@@ -116,6 +120,9 @@ function handleVerticalAcceleration(_short_jump_triggered)
 {
 	if (!process_acceleration) { return; }
 	
+	var adjustment;
+	var new_speed;
+	
 	//Handle acceleration;
 	var absolute_speed = abs(v_speed);
 	var v_sign = sign(v_speed);
@@ -126,9 +133,9 @@ function handleVerticalAcceleration(_short_jump_triggered)
 	
 	if (v_speed < terminal_velocity)
 	{ 
-		var adjustment = (g_sign * g_power);
+		adjustment = (g_sign * g_power);
 		
-		var new_speed = v_speed + adjustment;
+		new_speed = v_speed + adjustment;
 		
 		if (new_speed > terminal_velocity)
 		{ new_speed = g_sign * terminal_velocity; }

@@ -1,9 +1,9 @@
 // With thanks to Alice from the gamemaker forums. Found here:
 //		https://forum.gamemaker.io/index.php?threads/json-save-system-via-buffer-quasi-invalid-response.93946/
 
-/// @function fileReadAllText(filename)
+/// @function fileReadAllText(_filename)
 /// @description Reads entire content of a given file as a string, or returns undefined if the file doesn't exist.
-/// @param {string} filename        The path of the file to read the content of.
+/// @param {string} _filename        The path of the file to read the content of.
 function fileReadAllText(_filename)
 {
     if (!file_exists(_filename))
@@ -17,10 +17,10 @@ function fileReadAllText(_filename)
     return _result;
 }
 
-/// @function fileWriteAllText(filename,content)
+/// @function fileWriteAllText(_filename, _content)
 /// @description Creates or overwrites a given file with the given string content.
-/// @param {string} filename        The path of the file to create/overwrite.
-/// @param {string} content            The content to create/overwrite the file with.
+/// @param {string} _filename        The path of the file to create/overwrite.
+/// @param {string} _content            The content to create/overwrite the file with.
 function fileWriteAllText(_filename, _content)
 {
     var _buffer = buffer_create(string_length(_content), buffer_grow, 1);
@@ -29,9 +29,9 @@ function fileWriteAllText(_filename, _content)
     buffer_delete(_buffer);
 }
 
-/// @function jsonLoad(filename)
+/// @function jsonLoad(_filename)
 /// @description Loads a given JSON file into a GML value (struct/array/string/real).
-/// @param {string} filename        The path of the JSON file to load.
+/// @param {string} _filename        The path of the JSON file to load.
 function jsonLoad(_filename)
 {
     var _json_content = fileReadAllText(_filename);
@@ -51,10 +51,10 @@ function jsonLoad(_filename)
     }
 }
 
-/// @function jsonSave(filename,value)
+/// @function jsonSave(_filename, _value)
 /// @description Saves a given GML value (struct/array/string/real) into a JSON file.
-/// @param {string} filename        The path of the JSON file to save.
-/// @param {any} value                The value to save as a JSON file.
+/// @param {string} _filename        The path of the JSON file to save.
+/// @param {any} _value                The value to save as a JSON file.
 function jsonSave(_filename, _value)
 {
     var _json_content = json_stringify(_value);

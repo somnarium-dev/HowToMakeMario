@@ -139,3 +139,5 @@ function collect1UP(_collector, _amount)
 	if (_collector.stat_block.lives > global.max_lives)
 	{ _collector.stat_block.lives_remaining = global.max_lives; }
 }
+
+collect1UP(_collector, _lives);

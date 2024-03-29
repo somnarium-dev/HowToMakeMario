@@ -9,7 +9,7 @@ generateContents = function()
 	//This will vary depending on the object,
 	//but the below function should cover most cases.
 	
-	if (contents == noone) { return; }
+	if (contents == undefined) { return; }
 	
 	playSFX(contents_sfx);
 	
@@ -21,7 +21,7 @@ generateContents = function()
 	
 	if (coins_remaining < 1)
 	{
-		contents = noone;
+		contents = undefined;
 		idle_sprite = hit_sprite;
 	}
 }

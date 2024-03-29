@@ -30,5 +30,3 @@ plevel_pip_spacing = 8;
 
 number_end_of_level_cards = 3;
 end_of_level_card_spacing = 24;
-
-alarm[0] = 1;

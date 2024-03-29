@@ -37,10 +37,10 @@ function debugDrawState()
 	text_x = clamp(text_x, 0, room_width - text_contents_length);
 	text_y = clamp(text_y, 0, room_height - 2);
 	
-	var box_position_x = room_x_to_gui_x(text_x);
-	var box_position_y = room_y_to_gui_y(text_y);
-	var text_position_x = room_x_to_gui_x(text_x);
-	var text_position_y = room_y_to_gui_y(text_y);
+	var box_position_x = roomXToGUIX(text_x);
+	var box_position_y = roomYToGUIY(text_y);
+	var text_position_x = roomXToGUIX(text_x);
+	var text_position_y = roomYToGUIY(text_y);
 
 	draw_sprite_stretched(spr_hud_textbox_black, 0, box_position_x, box_position_y, text_contents_length + 6, 14);
 	draw_text(text_position_x + 3, text_position_y + 2, text_contents);

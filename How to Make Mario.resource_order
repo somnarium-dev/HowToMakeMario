@@ -119,6 +119,7 @@
     {"name":"InputConstructors","order":1,"path":"scripts/InputConstructors/InputConstructors.yy",},
     {"name":"Level_Object_Functions","order":8,"path":"scripts/Level_Object_Functions/Level_Object_Functions.yy",},
     {"name":"Room_Transitions","order":6,"path":"scripts/Room_Transitions/Room_Transitions.yy",},
+    {"name":"Macros","order":10,"path":"scripts/Macros/Macros.yy",},
     {"name":"Useful_Shortcuts","order":3,"path":"scripts/Useful_Shortcuts/Useful_Shortcuts.yy",},
     {"name":"bgm_gameover","order":2,"path":"sounds/bgm_gameover/bgm_gameover.yy",},
     {"name":"bgm_grassland","order":4,"path":"sounds/bgm_grassland/bgm_grassland.yy",},
@@ -211,6 +212,7 @@
     {"name":"spr_mario_small_swim","order":7,"path":"sprites/spr_mario_small_swim/spr_mario_small_swim.yy",},
     {"name":"spr_mario_small_walk","order":3,"path":"sprites/spr_mario_small_walk/spr_mario_small_walk.yy",},
     {"name":"spr_mask_collision_rect","order":1,"path":"sprites/spr_mask_collision_rect/spr_mask_collision_rect.yy",},
+    {"name":"spr_mask_enemy_standard","order":5,"path":"sprites/spr_mask_enemy_standard/spr_mask_enemy_standard.yy",},
     {"name":"spr_mask_genericsystemobject","order":3,"path":"sprites/spr_mask_genericsystemobject/spr_mask_genericsystemobject.yy",},
     {"name":"spr_mask_threatened_range","order":4,"path":"sprites/spr_mask_threatened_range/spr_mask_threatened_range.yy",},
     {"name":"spr_mask_warppipe","order":2,"path":"sprites/spr_mask_warppipe/spr_mask_warppipe.yy",},
@@ -226,6 +228,5 @@
     {"name":"spr_powerup_mushroom","order":6,"path":"sprites/spr_powerup_mushroom/spr_powerup_mushroom.yy",},
     {"name":"spr_powerup_raccoonleaf","order":8,"path":"sprites/spr_powerup_raccoonleaf/spr_powerup_raccoonleaf.yy",},
     {"name":"spr_powerup_star","order":9,"path":"sprites/spr_powerup_star/spr_powerup_star.yy",},
-    {"name":"spr_mask_enemy_standard","order":5,"path":"sprites/spr_mask_enemy_standard/spr_mask_enemy_standard.yy",},
   ],
 }
