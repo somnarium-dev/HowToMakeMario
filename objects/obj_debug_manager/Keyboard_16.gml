@@ -25,7 +25,7 @@ if (keyboard_check(vk_insert))
 if (keyboard_check(vk_backspace))
 { player_1.marked_for_death = true; }
 
-if (keyboard_check_pressed(ord("C")))
+if (keyboard_checkPressed(ord("C")))
 {
 	if (!layer_exists("Collision")) { exit; }
 	

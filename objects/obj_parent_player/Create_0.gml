@@ -8,7 +8,7 @@ event_user(1);
 stat_block = global.player_1;
 
 //Controls.
-generate_standard_inputs();
+generateStandardInputs();
 
 input_run_pressed = false;
 input_run_held = false;

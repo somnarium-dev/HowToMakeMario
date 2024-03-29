@@ -15,13 +15,13 @@ readPlayerInput = function()
 	
 	input_manager.run();
 	
-	input_run_pressed = run.check_pressed();
+	input_run_pressed = run.checkPressed();
 	input_run_held = run.check();
-	input_run_released = run.check_released();
+	input_run_released = run.checkReleased();
 	
-	input_jump_pressed = jump.check_pressed();
+	input_jump_pressed = jump.checkPressed();
 	input_jump_held = jump.check();
-	input_jump_released = jump.check_released();
+	input_jump_released = jump.checkReleased();
 	
 	input_lr = right.check() - left.check();
 	input_ud = down.check() - up.check();
