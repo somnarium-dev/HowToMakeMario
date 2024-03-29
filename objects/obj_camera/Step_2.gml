@@ -1,5 +1,5 @@
 ///@desc Update camera position.
-camera_set_view_size(view_camera[0], global.view_width, global.view_height);
+camera_set_view_size(global.game_view_camera, global.view_width, global.view_height);
 
 var camera_target = noone;
 
@@ -10,8 +10,8 @@ if (global.camera_target_0 == noone) { return; }
 if (instance_exists(camera_target))
 {
 	//Collect preliminary information.
-	var _x = camera_get_view_x(view_camera[0]);
-	var _y = camera_get_view_y(view_camera[0]);
+	var _x = camera_get_view_x(global.game_view_camera);
+	var _y = camera_get_view_y(global.game_view_camera);
 
 	var _previous_x = _x;
 	var _previous_y = _y;
@@ -27,14 +27,14 @@ if (instance_exists(camera_target))
 	//Update Camera Position
 	if (global.view_track_on_x)
 	{
-		var unadjusted_y = camera_get_view_y(view_camera[0]);
-		camera_set_view_pos(view_camera[0], _x, unadjusted_y);
+		var unadjusted_y = camera_get_view_y(global.game_view_camera);
+		camera_set_view_pos(global.game_view_camera, _x, unadjusted_y);
 	}
 	
 	if (global.view_track_on_y)
 	{ 
-		var unadjusted_x = camera_get_view_x(view_camera[0]);
-		camera_set_view_pos(view_camera[0], unadjusted_x, _y);
+		var unadjusted_x = camera_get_view_x(global.game_view_camera);
+		camera_set_view_pos(global.game_view_camera, unadjusted_x, _y);
 	}
 	
 	//Slide Background with camera.

@@ -111,6 +111,8 @@ function initialize()
 	//Define the camera and its attributes.
 	global.camera_target_0 = "p1";
 	
+	global.game_view_camera = view_camera[0];
+	
 	global.game_camera = instance_create_layer(0,0,"System",obj_camera);
 	global.game_camera.setGameResolutionAndCenter(display_get_width(), display_get_height());
 	

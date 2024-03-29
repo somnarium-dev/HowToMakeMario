@@ -22,7 +22,7 @@ function audioPlaySoundNoOverlap(_soundid, _priority = 1, _loops = false)
 		}
 		
 		audioStopAllOfThese(_soundid);
-		var final_sound = choose_random_entry(_soundid);
+		var final_sound = choseRandomEntry(_soundid);
 		this_sound = audio_play_sound(final_sound, _priority, _loops);
 	}
 	
@@ -42,7 +42,7 @@ function audioStopAllOfThese(_array)
 	{ audio_stop_sound(_array[i]); }
 }
 
-function choose_random_entry(_array)
+function choseRandomEntry(_array)
 {
 	var index = irandom_range(1, array_length(_array)) - 1;
 	return _array[index];
@@ -88,8 +88,8 @@ function pacmanClamp(_value, _lower_boundary, _upper_boundary)
 /// @param			_x Value to convert.
 /// @return {real}
 function roomXToGUIX(_x) {
-    _x -= camera_get_view_x(view);
-    _x /= camera_get_view_width(view);
+    _x -= camera_get_view_x(global.game_view_camera);
+    _x /= camera_get_view_width(global.game_view_camera);
 
     return _x * display_get_gui_width();
 }
@@ -99,8 +99,8 @@ function roomXToGUIX(_x) {
 /// @param			_y Value to convert.
 /// @return {real}
 function room_y_to_gui_y(_y) {
-    _y -= camera_get_view_y(view);
-    _y /= camera_get_view_height(view);
+    _y -= camera_get_view_y(global.game_view_camera);
+    _y /= camera_get_view_height(global.game_view_camera);
 
     return _y * display_get_gui_height();
 }
