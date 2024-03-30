@@ -26,14 +26,6 @@ state_machine[enemy_state.shell] = function()
 	checkIfJumpedOn();
 }
 
-state_machine[enemy_state.die] = function()
-{
-	state_timer++;
-	
-	if (state_timer == death_sequence_timing)
-	{ instance_destroy(); }
-}
-
 //=============================================================================
 // STATE TRANSITIONS
 //=============================================================================
@@ -46,7 +38,7 @@ checkIfJumpedOn = function()
 	{	
 		handleShellKick();
 		
-		//If not shelled:
+		// If not shelled:
 		if (state == enemy_state.walk)
 		{
 			can_strike_objects = {above: true, below: false, left: true, right: true};

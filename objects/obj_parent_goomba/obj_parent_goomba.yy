@@ -29,7 +29,6 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"","%Name":"initial_lr_input","filters":[],"listItems":[],"multiselect":false,"name":"initial_lr_input","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"-1","varType":0,},
     {"$GMObjectProperty":"","%Name":"death_sprite","filters":[],"listItems":[],"multiselect":false,"name":"death_sprite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"spr_goomba_brown_stomped","varType":0,},
   ],
   "resourceType":"GMObject",

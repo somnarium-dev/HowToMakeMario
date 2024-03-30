@@ -1,9 +1,5 @@
 event_inherited();
 
-//Custom Methods and State Machine.
-event_user(0);
-event_user(1);
-
 //Attach to stats.
 stat_block = global.player_1;
 

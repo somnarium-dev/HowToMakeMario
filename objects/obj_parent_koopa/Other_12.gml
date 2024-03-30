@@ -5,7 +5,7 @@ event_inherited();
 
 behavior_machine[enemy_behavior.attack] = function()
 {
-	//Turn around when bumping walls.
+	// Turn around when bumping walls.
 	if (failedToMoveHorizontally())
 	{ shell_direction *= -1; }
 	
@@ -14,11 +14,11 @@ behavior_machine[enemy_behavior.attack] = function()
 
 behavior_machine[enemy_behavior.patrol] = function()
 {
-	//Stop trying to move if shelled.
+	// Stop trying to move if shelled.
 	if (damage_data.inflicted_type = damage_type.jump)
 	{ updateObjectBehavior(enemy_behavior.attack); }
 	
-	//Otherwise, turn around when bumping walls.
+	// Otherwise, turn around when bumping walls.
 	else if (failedToMoveHorizontally())
 	{ ai_input_lr *= -1; }
 }

@@ -7,7 +7,9 @@ hp = 1;
 accel_rate = 0.5;
 decel_rate = 0.1;
 
-current_top_speed = 0.5;
+walk_speed = 0.5;
+
+current_top_speed = walk_speed;
 
 sprites =
 {
@@ -16,7 +18,5 @@ sprites =
 }
 
 // Initialize
-state = enemy_state.walk;
 behavior = enemy_behavior.patrol;
-
-ai_input_lr = initial_lr_input;
+state = enemy_state.walk;

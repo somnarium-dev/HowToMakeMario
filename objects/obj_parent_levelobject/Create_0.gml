@@ -1,3 +1,8 @@
+//Define Custom Methods and State Machines
+event_user(0);
+event_user(1);
+event_user(2);
+
 // Simulated Inputs
 ai_input_run_pressed = false;
 ai_input_run_held = false;
