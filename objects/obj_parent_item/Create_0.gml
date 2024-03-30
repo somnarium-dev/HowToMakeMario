@@ -9,4 +9,4 @@ event_user(0);
 event_user(1);
 
 //Initialize.
-state = item_from_block_state.appear;
+state = item_state.appear;

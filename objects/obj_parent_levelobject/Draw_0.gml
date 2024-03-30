@@ -16,7 +16,7 @@ var v_display_offset = 0;
 
 if (object_is_ancestor(id.object_index, obj_parent_player))
 || (object_is_ancestor(id.object_index, obj_parent_enemy))
-|| (object_is_ancestor(id.object_index, obj_parent_item_box_contents))
+|| (object_is_ancestor(id.object_index, obj_parent_item))
 {
 	h_scale = sprite_horizontal_direction;
 	v_scale = sprite_vertical_direction;

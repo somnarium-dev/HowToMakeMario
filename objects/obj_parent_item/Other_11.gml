@@ -3,7 +3,7 @@
 // Inherit the parent event
 event_inherited();
 
-state_machine[item_from_block_state.idle] = function()
+state_machine[item_state.idle] = function()
 {
 	handleItemBoxContentsMovementAndCollision();
 }

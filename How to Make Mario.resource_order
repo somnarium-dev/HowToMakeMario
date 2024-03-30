@@ -92,7 +92,7 @@
     {"name":"obj_enemy_piranhaplant_red_spitter","order":3,"path":"objects/obj_enemy_piranhaplant_red_spitter/obj_enemy_piranhaplant_red_spitter.yy",},
     {"name":"obj_parent_collectible","order":1,"path":"objects/obj_parent_collectible/obj_parent_collectible.yy",},
     {"name":"obj_parent_goomba","order":1,"path":"objects/obj_parent_goomba/obj_parent_goomba.yy",},
-    {"name":"obj_parent_item_box_contents","order":2,"path":"objects/obj_parent_item_box_contents/obj_parent_item_box_contents.yy",},
+    {"name":"obj_parent_item","order":2,"path":"objects/obj_parent_item/obj_parent_item.yy",},
     {"name":"obj_parent_koopa","order":3,"path":"objects/obj_parent_koopa/obj_parent_koopa.yy",},
     {"name":"obj_parent_levelobject","order":1,"path":"objects/obj_parent_levelobject/obj_parent_levelobject.yy",},
     {"name":"obj_parent_piranhaplant","order":2,"path":"objects/obj_parent_piranhaplant/obj_parent_piranhaplant.yy",},

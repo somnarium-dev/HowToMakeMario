@@ -9,8 +9,8 @@ if (player_1 == noone)
 draw_set_font(global.font_system);
 draw_set_color(c_white);
 
-var draw_x = camera_get_view_x(view) + 16;
-var draw_y = camera_get_view_y(view) + 16;
+var draw_x = camera_get_view_x(global.game_view_camera) + 16;
+var draw_y = camera_get_view_y(global.game_view_camera) + 16;
 
 draw_text(draw_x, draw_y, $"H_SPEED: {player_1.h_speed}")
 

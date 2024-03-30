@@ -45,7 +45,7 @@ function initialize()
 		"stand",
 		"walk",
 		"shell",
-		"burnt",
+		"stomped",
 		"die"
 	]
 	
@@ -70,6 +70,16 @@ function initialize()
 		"destroyed"
 	]
 	
+	global.item_state_string =
+	[
+		"appear",
+		"idle",
+		"roam",
+		"jump",
+		"fall",
+		"destroyed"
+	]
+	
 	//===================================================================================
 	// ASSETS
 	//===================================================================================
@@ -77,7 +87,7 @@ function initialize()
 	initializeCharacters();
 	initializeMusic();
 	
-	//Define fonts.
+	// Define fonts.
 	global.font_system = fnt_lanapixel;
 	global.font_default = font_add_sprite_ext(spr_font_default, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?'., ", false, 0);
 	global.font_hudnumbers = font_add_sprite_ext(spr_font_hudnumbers, "0123456789", false, 0);
@@ -108,7 +118,7 @@ function initialize()
 	// CAMERA
 	//===================================================================================
 
-	//Define the camera and its attributes.
+	// Define the camera and its attributes.
 	global.camera_target_0 = "p1";
 	
 	global.game_view_camera = view_camera[0];
@@ -119,14 +129,14 @@ function initialize()
 	global.game_camera = instance_create_layer(0,0,"System",obj_camera);
 	global.game_camera.setGameResolutionAndCenter(display_get_width(), display_get_height());
 	
-	//These are used to ensure the camera stops traveling
-	//within certain distances of the edges of a room.
+	// These are used to ensure the camera stops traveling
+	// within certain distances of the edges of a room.
 	global.view_travel_boundary_left = 0;
 	global.view_travel_boundary_up = -32;
 	global.view_travel_boundary_right = global.view_travel_boundary_left;
 	global.view_travel_boundary_down = global.view_travel_boundary_up;
 	
-	//This is used to position the camera correctly when rooms are small.
+	// This is used to position the camera correctly when rooms are small.
 	global.view_current_left_margin = 0;
 	global.view_current_top_margin = 0;
 	
@@ -163,7 +173,7 @@ function initialize()
 	// PLAYER PROPERTIES
 	//===================================================================================
 	
-	//Define player 1 defaults.
+	// Define player 1 defaults.
 	global.player_1 = 
 	{	
 		current_id: noone,
@@ -196,7 +206,7 @@ function initialize()
 	// DEBUG
 	//===================================================================================
 	
-	//Debug.
+	// Debug.
 	global.debug_manager = instance_create_layer(0,0, "System", obj_debug_manager);
 	
 	global.show_debug_data = false;
@@ -207,6 +217,6 @@ function initialize()
 	
 	//playBGM(global.music_overworld, true);
 	
-	//Continue.
+	// Continue.
 	transitionIrisToRoom(global.next_room, false, false, true);
 }

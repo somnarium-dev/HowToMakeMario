@@ -1,7 +1,7 @@
 // Inherit the parent event
 event_inherited();
 
-//Stats
+// Stats
 hp = 1;
 
 accel_rate = 0.5;
@@ -15,8 +15,8 @@ sprites =
 	stomped: spr_goomba_brown_stomped
 }
 
-//Initialize
-ai_input_lr = initial_lr_input;
-
+// Initialize
 state = enemy_state.walk;
 behavior = enemy_behavior.patrol;
+
+ai_input_lr = initial_lr_input;

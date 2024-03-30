@@ -50,17 +50,17 @@ enum damage_type
 	star	//Invincibility effects in general.
 }
 
-//Enemy State - Used for state machines inside of enemy objects.
+// Enemy State - Used for state machines inside of enemy objects.
 enum enemy_state
 {
 	stand,
 	walk,
 	shell,
-	stomped,	//Smashed by getting jumped on, likely has unique sprite or effect.
-	die			//Killed by HP reduction, flipping over and jumping offscreen. 
+	stomped,	// Smashed by getting jumped on, likely has unique sprite or effect.
+	die			// Killed by HP reduction, flipping over and jumping offscreen. 
 }
 
-//Enemy Behavior - Used for behavior machines (AI) inside of enemy objects.
+// Enemy Behavior - Used for behavior machines (AI) inside of enemy objects.
 enum enemy_behavior
 {
 	idle,
@@ -73,7 +73,7 @@ enum enemy_behavior
 	post_attack
 }
 
-//Block State - Used for state machines inside of item blocks and bricks.
+// Block State - Used for state machines inside of item blocks and bricks.
 enum block_state
 {
 	idle,
@@ -83,8 +83,8 @@ enum block_state
 	destroyed
 }
 
-//Item From Block State - Used for state machines inside of the contents of item blocks.
-enum item_from_block_state
+// Item From Block State - Used for state machines inside of the contents of item blocks.
+enum item_state
 {
 	appear,
 	idle,
@@ -94,7 +94,7 @@ enum item_from_block_state
 	destroyed
 }
 
-//Gravity Type - Used to select a set of gravitational properties, including things like strength and terminal velocity.
+// Gravity Type - Used to select a set of gravitational properties, including things like strength and terminal velocity.
 enum gravity_type
 {
 	air,
@@ -103,7 +103,7 @@ enum gravity_type
 	coin
 }
 
-//Pause Types - Used to pause for various reasons, while not overwriting existing pauses or destroying information in the process.
+// Pause Types - Used to pause for various reasons, while not overwriting existing pauses or destroying information in the process.
 enum pause_types
 {
 	transition,
