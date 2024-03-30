@@ -1,2 +1,2 @@
-//Bye then.
+// Bye then.
 game_end();

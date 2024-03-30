@@ -20,6 +20,8 @@
     {"$GMFolder":"","%Name":"- Parents","folderPath":"folders/Objects/- Parents.yy","name":"- Parents","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Enemies","folderPath":"folders/Objects/- Parents/Enemies.yy","name":"Enemies","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Functional","folderPath":"folders/Objects/- Parents/Functional.yy","name":"Functional","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Generics","folderPath":"folders/Objects/- Parents/Generics.yy","name":"Generics","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Level Objects","folderPath":"folders/Objects/- Parents/Level Objects.yy","name":"Level Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Collision","folderPath":"folders/Objects/Collision.yy","name":"Collision","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Effects","folderPath":"folders/Objects/Effects.yy","name":"Effects","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Screen Transitions","folderPath":"folders/Objects/Effects/Screen Transitions.yy","name":"Screen Transitions","resourceType":"GMFolder","resourceVersion":"2.0",},

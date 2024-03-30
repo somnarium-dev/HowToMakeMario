@@ -8,8 +8,8 @@
   "name":"obj_parent_collision",
   "overriddenProperties":[],
   "parent":{
-    "name":"- Parents",
-    "path":"folders/Objects/- Parents.yy",
+    "name":"Generics",
+    "path":"folders/Objects/- Parents/Generics.yy",
   },
   "parentObjectId":{
     "name":"obj_parent_levelobject",

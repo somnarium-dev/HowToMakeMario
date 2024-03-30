@@ -11,8 +11,8 @@
   "name":"obj_parent_item_box_contents",
   "overriddenProperties":[],
   "parent":{
-    "name":"- Parents",
-    "path":"folders/Objects/- Parents.yy",
+    "name":"Level Objects",
+    "path":"folders/Objects/- Parents/Level Objects.yy",
   },
   "parentObjectId":{
     "name":"obj_parent_levelobject",
