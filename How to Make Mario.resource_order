@@ -96,7 +96,7 @@
     {"name":"obj_parent_koopa","order":3,"path":"objects/obj_parent_koopa/obj_parent_koopa.yy",},
     {"name":"obj_parent_levelobject","order":1,"path":"objects/obj_parent_levelobject/obj_parent_levelobject.yy",},
     {"name":"obj_parent_piranhaplant","order":2,"path":"objects/obj_parent_piranhaplant/obj_parent_piranhaplant.yy",},
-    {"name":"obj_parent_player","order":8,"path":"objects/obj_parent_player/obj_parent_player.yy",},
+    {"name":"obj_parent_player","order":2,"path":"objects/obj_parent_player/obj_parent_player.yy",},
     {"name":"obj_parent_projectile","order":3,"path":"objects/obj_parent_projectile/obj_parent_projectile.yy",},
     {"name":"obj_parent_spawner_enemy_piranhaplant","order":5,"path":"objects/obj_parent_spawner_enemy_piranhaplant/obj_parent_spawner_enemy_piranhaplant.yy",},
     {"name":"obj_parent_spawner_enemy","order":4,"path":"objects/obj_parent_spawner_enemy/obj_parent_spawner_enemy.yy",},

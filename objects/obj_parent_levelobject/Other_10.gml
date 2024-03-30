@@ -14,10 +14,10 @@ clearDamageData = function()
 ///@func checkIfAboutToMoveOffCliff()
 checkIfAboutToMoveOffCliff = function(_movement_indicator_value)
 {
-	//Reset.
+	// Reset.
 	cliff_detected = false;
 	
-	//Check ahead.
+	// Check ahead.
 	var h_sign = sign(_movement_indicator_value);
 	
 	if (checkForImpassable(x, y+1))
