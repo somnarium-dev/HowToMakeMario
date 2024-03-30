@@ -1,3 +1,4 @@
+// Animation.
 timer++;
 
 if (timer == indicator_flash_timing)
