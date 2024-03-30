@@ -37,6 +37,8 @@ process_pixel_accumulation = true;
 process_movement = true;
 
 // Stats.
+hp = 1;
+
 accel_rate = 0.05;
 decel_rate = 0.01;
 
@@ -99,7 +101,10 @@ can_break_objects = {above: false, below: false, left: false, right: false};
 
 strike_data = {striker: noone, animation_direction: -1};
 
-bounce_when_jump_attacked = false;
+safe_stomp_height = 8;
+bounce_attacker_when_jump_attacked = true;
+
+lose_hp_when_jumped_on = true;
 
 touch_damage_power = 1;
 damage_data = { inflicted_type: damage_type.none , inflicted_power: 0 , attacker: noone};
@@ -114,3 +119,5 @@ sprite_vertical_flip_adjust = 16;
 timer = 0;
 state_timer = 0;
 behavior_timer = 0;
+
+death_sequence_timing = 60;

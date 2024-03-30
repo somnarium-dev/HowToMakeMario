@@ -8,7 +8,7 @@ handleShellKick = function()
 {	
 	playSFX(sfx_kick);
 	
-	move_through_enemies = true;
+	pass_through_enemies = true;
 		
 	current_top_speed = shell_speed;
 		

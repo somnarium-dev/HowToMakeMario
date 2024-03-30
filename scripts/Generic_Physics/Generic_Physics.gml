@@ -28,7 +28,7 @@ function handleGravity()
 	}
 }
 
-/// @function		handleGravity(_input)
+/// @function		handleHorizontalAcceleration(_input)
 /// @description	Calculates h_speed based on _input (acceleration, deceleration, braking, in that order).
 /// @param {Real}	_input A sign is taken of this variable to determine whether the object is attempting to move left or right.
 function handleHorizontalAcceleration(_input)
@@ -384,7 +384,7 @@ function checkForImpassable(_x, _y)
 }
 
 /// @function		checkForCollisionWithAnotherEnemy(_x, _y)
-/// @description	Used by obj_parent_enemy. Clears impassable_list, then checks a precise pixel for all instances of obj_parent_enemy and adds them to impassable_list. If any of those have a move_through_enemies property set to false, return true. Ignores any instance the calling instance is already inside of. Automatically returns false if collision detection is disabled for the calling instance.
+/// @description	Used by obj_parent_enemy. Clears impassable_list, then checks a precise pixel for all instances of obj_parent_enemy and adds them to impassable_list. If any of those have a pass_through_enemies property set to false, return true. Ignores any instance the calling instance is already inside of. Automatically returns false if collision detection is disabled for the calling instance.
 /// @param {real}	_x X pixel to check.
 /// @param {real}	_y Y pixel to check.
 function checkForCollisionWithAnotherEnemy(_x, _y)
@@ -400,7 +400,7 @@ function checkForCollisionWithAnotherEnemy(_x, _y)
 		var this_object = impassable_list[|i];
 		
 		//If the other enemy doesn't collide with enemies, skip it.
-		if (this_object.move_through_enemies)
+		if (this_object.pass_through_enemies)
 		{ continue; }
 		
 		//This is to make sure we can't get stuck inside of other enemies.

@@ -10,7 +10,7 @@ event_user(2);
 direction = create_direction;
 
 //Configuration
-bounce_when_jump_attacked = false;
+bounce_attacker_when_jump_attacked = false;
 process_collision_detection = false;
 
 //Unique Attributes

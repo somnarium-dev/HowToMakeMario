@@ -4,19 +4,13 @@
 event_inherited();
 
 state_machine[enemy_state.stand] = function()
-{
-	handleEnemyMovementAndCollision();
-}
+{ handleEnemyMovementAndCollision(); }
 
 state_machine[enemy_state.walk] = function()
-{
-	handleEnemyMovementAndCollision();
-}
+{ handleEnemyMovementAndCollision(); }
 
 state_machine[enemy_state.die] = function()
-{
-	
-}
+{ handleEnemyMovementAndCollision(); }
 
 //=============================================================================
 // STATE TRANSITIONS
@@ -27,7 +21,9 @@ standardDeathTransition = function()
 {
 	playSFX(sfx_kick);
 	
-	bounce_when_jump_attacked = false;
+	// "Jump" upward and flip the sprite over.
+	// Collision detection is disabled, so the object will fall out of view.
+	bounce_attacker_when_jump_attacked = false;
 	process_collision_detection = false;
 	
 	sprite_vertical_direction = -1;
@@ -43,7 +39,7 @@ standardStompTransition = function()
 {
 	playSFX(sfx_stomp);
 	
-	bounce_when_jump_attacked = false;
+	bounce_attacker_when_jump_attacked = false;
 	
 	sprite_index = sprites.stomped;
 	

@@ -241,7 +241,7 @@ shouldBounceOffOfEnemy = function(_v_adjustment)
 	{ return false; }
 	
 	//Enemy does not bounce you when jumped on.
-	if (!enemy.bounce_when_jump_attacked)
+	if (!enemy.bounce_attacker_when_jump_attacked)
 	{ return false; }
 	
 	//You are dead.

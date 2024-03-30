@@ -47,6 +47,14 @@ updateEnemyPosition = function ()
 	
 	var repetitions = max(h_pixels, v_pixels);
 	
+	// While pixels remain in a given queue:
+	
+	// If it's not possible to move in the direction queued
+	// AND that is the direction this object is intending to move
+	// Zero out speed and queued pixels.
+	
+	// Otherwise, move one pixel in the specified direction.
+	
 	repeat (repetitions)
 	{
 		//If both queues have zeroed out, break.
@@ -61,12 +69,10 @@ updateEnemyPosition = function ()
 		{
 			var collision_with_enemy = false;
 			
-			if (!move_through_enemies)
+			if (!pass_through_enemies)
 			{ collision_with_enemy = checkForCollisionWithAnotherEnemy(x + h_adjustment, y); }
 			
-			//If it's not possible to move in the direction queued*
-			//AND that is the direction this object is intending to move
-			//Zero out speed and queued pixels.
+			
 			if (checkForImpassable(x + h_adjustment, y))
 			|| (collision_with_enemy)
 			{
@@ -90,9 +96,6 @@ updateEnemyPosition = function ()
 		//============
 		if (vertical_pixels_queued != 0)
 		{
-			//If it's not possible to move in the direction queued*
-			//AND that is the direction the player is intending to move
-			//Zero out speed and queued pixels.
 			if (checkForImpassable(x, y + v_adjustment))
 			&& (v_sign == v_adjustment)
 			{ 
@@ -113,27 +116,7 @@ updateEnemyPosition = function ()
 ///@func determineTopHSpeed()
 determineTopHSpeed = function()
 {	
-	//This space left empty by design.
-}
-
-///@func failedToMoveHorizontally()
-failedToMoveHorizontally = function()
-{	
-	if (attempted_movement_this_frame_x != 0)
-	&& (actual_movement_this_frame_x == 0)
-	{ return true; }
-	
-	return false;
-}
-
-///@func failedToMoveVertically()
-failedToMoveVertically = function()
-{
-	if (attempted_movement_this_frame_y > 0)
-	&& (actual_movement_this_frame_y == 0)
-	{ return true; }
-	
-	return false;
+	// This space left empty by design.
 }
 
 //=================================================================================================
@@ -147,18 +130,18 @@ checkForHarmfulEnemyCollision = function()
 	var this_damage = 0;
 	var this_attacker = noone;
 	
-	//Take damage from shells.
+	// Take damage from shells.
 	if (other.state == enemy_state.shell)
 	{
-		//Analyze the shell's movement.
+		// Analyze the shell's movement.
 		var h_sign = sign(other.x - x);
 		var speed_sign = sign(other.h_speed);
 		
-		//An unmoving shell does not inflict damage.
+		// An unmoving shell does not inflict damage.
 		if (speed_sign == 0) { return; }
 		
-		//If the shell is moving toward this enemy,
-		//Then take damage.
+		// If the shell is moving toward this enemy,
+		// Then take damage.
 		if (speed_sign == (-1 * h_sign))
 		{ 
 			this_damage_type = damage_type.shell;
