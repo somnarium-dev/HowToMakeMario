@@ -144,7 +144,7 @@ function initialize()
 	// GENERAL GAME PROPERTIES
 	//===================================================================================
 	
-	global.next_room = Level_0;
+	global.next_room = Level_1_1;
 	
 	global.world = 1;
 	
