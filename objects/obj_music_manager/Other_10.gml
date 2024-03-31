@@ -6,9 +6,7 @@ play_music = function(_new_song, _looping)
 	stop_music()
 	
 	if (_new_song == -1)
-	{
-		show_debug_message("[Warning] play_music() - Attempted to play undefined music.");
-	}
+	{ show_debug_message("[Warning] play_music() - Attempted to play undefined music."); }
 	
 	current_music = audio_play_sound(_new_song, 1, _looping);
 	
@@ -27,9 +25,7 @@ stop_music = function()
 fade_out = function(_frames)
 {
 	if (state != awaiting_command)
-	{
-		show_debug_message("[Warning] MusicManager is busy. Cannot execute fade_out().");
-	}
+	{ show_debug_message("[Warning] MusicManager is busy. Cannot execute fade_out()."); }
 	
 	max_fade_time = _frames;
 	fade_time = max_fade_time;

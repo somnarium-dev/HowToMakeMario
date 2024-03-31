@@ -3,30 +3,44 @@
 ///@func clearDamageData()
 clearDamageData = function()
 {
-	damage_data.inflicted_type = damage_type.none;
-	damage_data.inflicted_power = 0;
-	damage_data.attacker = noone;
+	damage_data = 
+	{
+		inflicted_type: damage_type.none,
+		inflicted_power: 0,
+		attacker:  noone
+	}
+}
+
+///@func failedToMoveHorizontally()
+failedToMoveHorizontally = function()
+{	
+	if (attempted_movement_this_frame_x != 0)
+	&& (actual_movement_this_frame_x == 0)
+	{ return true; }
+	
+	return false;
+}
+
+///@func failedToMoveVertically()
+failedToMoveVertically = function()
+{
+	if (attempted_movement_this_frame_y != 0)
+	&& (actual_movement_this_frame_y == 0)
+	{ return true; }
+	
+	return false;
 }
 
 ///@func checkIfAboutToMoveOffCliff()
 checkIfAboutToMoveOffCliff = function(_movement_indicator_value)
 {
-	//Can't walk off of a cliff while in midair.
-	if (!checkForImpassable(x, y+1))
-	{ 
-		cliff_detected = false;
-		return;
-	}
+	// Reset.
+	cliff_detected = false;
 	
-	//Otherwise, check ahead.
+	// Check ahead.
 	var h_sign = sign(_movement_indicator_value);
 	
-	if (!checkForImpassable(x + h_sign, y + 8))
-	{ 
-		cliff_detected = true;
-		return;
-	}
-	
-	cliff_detected =  false;
-	return;
+	if (checkForImpassable(x, y+1))
+	&& (!checkForImpassable(x + h_sign, y + 8))
+	{ cliff_detected = true; }
 }

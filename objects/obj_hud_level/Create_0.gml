@@ -1,3 +1,6 @@
+// Configuration:
+
+// Display offsets for various HUD components.
 offsets =
 {
 	emblem:				{ _x: 16,  _y: 16 },
@@ -12,10 +15,12 @@ offsets =
 	
 };
 
-timer = 0;
-indicator_flash_timing = 6;
-indicator_flash = false;
+plevel_pip_spacing = 8;
 
+number_end_of_level_cards = 3;
+end_of_level_card_spacing = 24;
+
+// Text display settings.
 coins_num_places  = 2;
 lives_num_places  = 2;
 point_total_num_places = 7;
@@ -26,9 +31,7 @@ lives_string = string_repeat("0", lives_num_places);
 point_total_string = string_repeat("0", point_total_num_places);
 level_timer_string = string_repeat("0", timer_num_places);
 
-plevel_pip_spacing = 8;
-
-number_end_of_level_cards = 3;
-end_of_level_card_spacing = 24;
-
-alarm[0] = 1;
+// Internal functionality.
+timer = 0;
+indicator_flash_timing = 6;
+indicator_flash = false;

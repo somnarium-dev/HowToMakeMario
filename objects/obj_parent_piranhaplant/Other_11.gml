@@ -1,4 +1,4 @@
-// Inherit the parent event
+///@desc State Machine
 
 // Inherit the parent event
 event_inherited();

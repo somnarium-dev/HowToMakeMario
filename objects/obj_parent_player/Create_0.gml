@@ -1,42 +1,12 @@
 event_inherited();
 
-//Custom Methods and State Machine.
-event_user(0);
-event_user(1);
-
-//Attach to stats.
-stat_block = global.player_1;
-
 //Controls.
-generate_standard_inputs();
-
-input_run_pressed = false;
-input_run_held = false;
-input_run_released = false;
-	
-input_jump_pressed = false;
-input_jump_held = false;
-input_jump_released = false;
-	
-input_lr = 0;
-input_ud = 0;
-
-input_direction = 0;
-previous_input_direction = input_direction;
+generatePlayerInputs();
 
 //Stats
-hp = 1;
+stat_block = global.player_data[player_slot];
 
-h_startup_boost = stat_block.h_startup_boost;
-
-accel_rate = stat_block.accel_rate;
-decel_rate = stat_block.decel_rate;
-
-walk_speed = stat_block.walk_speed;
-run_speed = stat_block.run_speed;
-max_speed = stat_block.max_speed;
-
-current_top_speed = walk_speed;
+updateStats();
 
 plevel_charge = 0;
 plevel_charge_rate = 3;

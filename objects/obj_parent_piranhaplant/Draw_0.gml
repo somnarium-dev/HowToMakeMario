@@ -1,8 +1,14 @@
+// Don't draw this object during screen transitions.
 if (global.pause_during_transition) { exit; }
 
-//if (global.show_debug_data)
-//{ draw_sprite(mask_index, 0, x, y); }
+// If the object mask is set to something other than its sprite, display it.
+if (global.show_debug_data)
+{ 
+	if (mask_index != -1)
+	{draw_sprite(mask_index, 0, x, y); }
+}
 
+// Draw the head.
 draw_sprite_ext
 (
 	sprite_index,
@@ -16,7 +22,7 @@ draw_sprite_ext
 	image_alpha
 );
 
-//Draw the stem.
+// Draw the stem.
 var stem_offset_amount = 16;
 var stem_offset_direction = (direction + 180) mod 360;
 

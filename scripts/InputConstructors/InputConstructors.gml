@@ -11,7 +11,7 @@ function Input(_manager) constructor {
     __keys = [];
 
     // Called by input manager's run method
-    __update = function() {
+    updateInputs = function() {
         var active = false;
 
         var len = array_length(__keys);
@@ -30,7 +30,7 @@ function Input(_manager) constructor {
             __time = min(__time + 1, 0);
     }
 
-    add_keyboard_key = function(_key) {
+    addKeyboardKey = function(_key) {
         var key = {
             button: _key,
             check: function() {
@@ -42,7 +42,7 @@ function Input(_manager) constructor {
         return self;
     }
 
-    add_gamepad_button = function(_button) {
+    addGamepadButton = function(_button) {
         var key = {
             creator: other,
             button: _button,
@@ -55,7 +55,7 @@ function Input(_manager) constructor {
         return self;
     }
 
-    add_gamepad_left_stick = function(_direction) {
+    addGamepadLeftStick = function(_direction) {
         var key = {
             creator: other,
             axis: _direction == INPUT_AXIS.right || _direction == INPUT_AXIS.left ?
@@ -73,7 +73,7 @@ function Input(_manager) constructor {
         return self;
     }
 
-    add_gamepad_right_stick = function(_direction) {
+    addGamepadRightStick = function(_direction) {
         var key = {
             creator: other,
             axis: _direction == INPUT_AXIS.right || _direction == INPUT_AXIS.left ?
@@ -97,21 +97,21 @@ function Input(_manager) constructor {
     }
 
     // Check for a press
-    check_pressed = function(_buffered = false) {
+    checkPressed = function(_buffered = false) {
         if (_buffered)
                return __time > 0 && __time <= __manager.buffer;
         return __time == 1;
     }
 
     // Check for a release
-    check_released = function(_buffered = false) {
+    checkReleased = function(_buffered = false) {
         if (_buffered)
             return __time < 0;
         return __time == -__manager.buffer;
     }
 
     // Check for sporadic presses over intervals of time
-    check_stutter = function(_initial_delay, _interval) {
+    checkStutter = function(_initial_delay, _interval) {
         if (__time == 1)
             return true;
 
@@ -119,69 +119,69 @@ function Input(_manager) constructor {
     }
 
     // Sets input to a state that a buffered press check does not find true
-    fully_press = function() {
+    fullyPress = function() {
         __time = __manager.buffer + 1;
     }
 
     // Sets input to a state that a buffered release check does not find true
-    fully_release = function() {
+    fullyRelease = function() {
         __time = 0;
     }
 }
 
-function generate_standard_inputs()
+function generateStandardInputs()
 {
 	input_manager = new InputManager();
 	
-	right = input_manager.create_input();
+	right = input_manager.createInput();
 	right
-			.add_keyboard_key(vk_right)
-			.add_gamepad_button(gp_padr)
-			.add_gamepad_left_stick(INPUT_AXIS.right);
+			.addKeyboardKey(vk_right)
+			.addGamepadButton(gp_padr)
+			.addGamepadLeftStick(INPUT_AXIS.right);
 
-	up = input_manager.create_input();
+	up = input_manager.createInput();
 	up
-			.add_keyboard_key(vk_up)
-			.add_gamepad_button(gp_padu)
-			.add_gamepad_left_stick(INPUT_AXIS.up);
+			.addKeyboardKey(vk_up)
+			.addGamepadButton(gp_padu)
+			.addGamepadLeftStick(INPUT_AXIS.up);
 
-	left = input_manager.create_input()
+	left = input_manager.createInput()
 	left
-			.add_keyboard_key(vk_left)
-			.add_gamepad_button(gp_padl)
-			.add_gamepad_left_stick(INPUT_AXIS.left);
+			.addKeyboardKey(vk_left)
+			.addGamepadButton(gp_padl)
+			.addGamepadLeftStick(INPUT_AXIS.left);
 
-	down = input_manager.create_input()
+	down = input_manager.createInput()
 	down
-			.add_keyboard_key(vk_down)
-			.add_gamepad_button(gp_padd)
-			.add_gamepad_left_stick(INPUT_AXIS.down);
+			.addKeyboardKey(vk_down)
+			.addGamepadButton(gp_padd)
+			.addGamepadLeftStick(INPUT_AXIS.down);
 			
-	confirm = input_manager.create_input()
+	confirm = input_manager.createInput()
 	confirm
-			.add_keyboard_key(ord("Z"))
-			.add_gamepad_button(gp_face2);
+			.addKeyboardKey(ord("Z"))
+			.addGamepadButton(gp_face2);
 			
-	cancel = input_manager.create_input()
+	cancel = input_manager.createInput()
 	cancel
-			.add_keyboard_key(ord("X"))
-			.add_gamepad_button(gp_face1);
+			.addKeyboardKey(ord("X"))
+			.addGamepadButton(gp_face1);
 			
-	run = input_manager.create_input()
+	run = input_manager.createInput()
 	run
-			.add_keyboard_key(ord("Z"))
-			.add_gamepad_button(gp_face3);
+			.addKeyboardKey(ord("Z"))
+			.addGamepadButton(gp_face3);
 			
-	jump = input_manager.create_input()
+	jump = input_manager.createInput()
 	jump
-			.add_keyboard_key(ord("X"))
-			.add_gamepad_button(gp_face1);
+			.addKeyboardKey(ord("X"))
+			.addGamepadButton(gp_face1);
 			
-	start = input_manager.create_input()
+	start = input_manager.createInput()
 	start
-			.add_keyboard_key(vk_enter)
-			.add_gamepad_button(gp_start);
+			.addKeyboardKey(vk_enter)
+			.addGamepadButton(gp_start);
 
-	input_manager.fully_press_all();
+	input_manager.fullyPressAll();
 }
 

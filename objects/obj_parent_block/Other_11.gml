@@ -6,8 +6,10 @@ event_inherited();
 //Awaiting a hit while filled.
 state_machine[block_state.idle] = function()
 {
+	// Check if this block was triggered.
 	blockDetectStrikes();
 	
+	// If it was, then transition to the animation state.
 	if (strike_data.striker != noone)
 	{
 		sprite_index = hit_sprite;
@@ -22,11 +24,13 @@ state_machine[block_state.idle] = function()
 	}
 }
 
-//Awaiting a hit.
+// Awaiting a hit.
 state_machine[block_state.empty] = function()
 {
+	// Check if this block was triggered.
 	blockDetectStrikes();
 	
+	// If it was, then transition to the animation state.
 	if (strike_data.striker != noone)
 	{
 		sprite_index = hit_sprite;

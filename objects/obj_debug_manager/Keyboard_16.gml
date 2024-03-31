@@ -1,4 +1,12 @@
-var player_1 = global.player_1.current_id;
+// Shift Commands
+
+// On demand executions that allow you to test things immediately.
+// These can also affect the game display and other features.
+
+// These are used for arbitrarily flinging the player object around.
+// Use them to test physics interactions or relieve stress.
+
+var player_1 = global.player_data[1].current_id;
 
 if (player_1 == noone)
 || (!instance_exists(player_1))
@@ -25,6 +33,7 @@ if (keyboard_check(vk_insert))
 if (keyboard_check(vk_backspace))
 { player_1.marked_for_death = true; }
 
+// Display the collision layer.
 if (keyboard_check_pressed(ord("C")))
 {
 	if (!layer_exists("Collision")) { exit; }

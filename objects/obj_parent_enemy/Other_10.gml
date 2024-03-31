@@ -47,6 +47,16 @@ updateEnemyPosition = function ()
 	
 	var repetitions = max(h_pixels, v_pixels);
 	
+	// While pixels remain in a given queue:
+	
+	// If it's not possible to move in the direction queued
+	// AND that is the direction this object is intending to move
+	// Zero out speed and queued pixels.
+	
+	// Next, handle direction specific checks for interruptions.
+	
+	// Otherwise, move one pixel in the specified direction.
+	
 	repeat (repetitions)
 	{
 		//If both queues have zeroed out, break.
@@ -59,14 +69,13 @@ updateEnemyPosition = function ()
 		//============
 		if (horizontal_pixels_queued != 0)
 		{
+			// Check for a collision with another enemy, if relevant.
 			var collision_with_enemy = false;
 			
-			if (!move_through_enemies)
+			if (!pass_through_enemies)
 			{ collision_with_enemy = checkForCollisionWithAnotherEnemy(x + h_adjustment, y); }
 			
-			//If it's not possible to move in the direction queued*
-			//AND that is the direction this object is intending to move
-			//Zero out speed and queued pixels.
+			// Stop if the next pixel is impassable.
 			if (checkForImpassable(x + h_adjustment, y))
 			|| (collision_with_enemy)
 			{
@@ -77,6 +86,7 @@ updateEnemyPosition = function ()
 				}
 			}
 			
+			// If not otherwise interrupted, move.
 			else
 			{
 				x += h_adjustment;
@@ -90,9 +100,7 @@ updateEnemyPosition = function ()
 		//============
 		if (vertical_pixels_queued != 0)
 		{
-			//If it's not possible to move in the direction queued*
-			//AND that is the direction the player is intending to move
-			//Zero out speed and queued pixels.
+			// Stop if the next pixel is impassable.
 			if (checkForImpassable(x, y + v_adjustment))
 			&& (v_sign == v_adjustment)
 			{ 
@@ -100,6 +108,7 @@ updateEnemyPosition = function ()
 				vertical_pixels_queued = 0;
 			}
 		
+			// If not otherwise interrupted, move.
 			else
 			{ 
 				y += v_adjustment;
@@ -113,27 +122,8 @@ updateEnemyPosition = function ()
 ///@func determineTopHSpeed()
 determineTopHSpeed = function()
 {	
-	//This space left empty by design.
-}
-
-///@func failedToMoveHorizontally()
-failedToMoveHorizontally = function()
-{	
-	if (attempted_movement_this_frame_x != 0)
-	&& (actual_movement_this_frame_x == 0)
-	{ return true; }
-	
-	return false;
-}
-
-///@func failedToMoveVertically()
-failedToMoveVertically = function()
-{
-	if (attempted_movement_this_frame_y > 0)
-	&& (actual_movement_this_frame_y == 0)
-	{ return true; }
-	
-	return false;
+	// This space left empty by design.
+	// It will be overwritten as needed by child objects.
 }
 
 //=================================================================================================
@@ -147,18 +137,18 @@ checkForHarmfulEnemyCollision = function()
 	var this_damage = 0;
 	var this_attacker = noone;
 	
-	//Take damage from shells.
+	// Take damage from shells.
 	if (other.state == enemy_state.shell)
 	{
-		//Analyze the shell's movement.
+		// Analyze the shell's movement.
 		var h_sign = sign(other.x - x);
 		var speed_sign = sign(other.h_speed);
 		
-		//An unmoving shell does not inflict damage.
+		// An unmoving shell does not inflict damage.
 		if (speed_sign == 0) { return; }
 		
-		//If the shell is moving toward this enemy,
-		//Then take damage.
+		// If the shell is moving toward this enemy,
+		// Then take damage.
 		if (speed_sign == (-1 * h_sign))
 		{ 
 			this_damage_type = damage_type.shell;
@@ -187,19 +177,19 @@ getProximityToNearestPlayer = function()
 {
 	var nearest_player = instance_nearest(x, y, obj_parent_player);
 	
-	var direct_distance = -1;
+	var directional_distance = -1;
 	var x_distance = -1;
 	var y_distance = -1;
 	
 	if (nearest_player != noone)
 	{
-		direct_distance = point_distance(x, y, nearest_player.x, nearest_player.y);
+		directional_distance = point_distance(x, y, nearest_player.x, nearest_player.y);
 		
 		x_distance = abs(nearest_player.x - x);
 		y_distance = abs(nearest_player.y - y);
 	}
 	
-	directional_distance_to_nearest_player = direct_distance;
+	directional_distance_to_nearest_player = directional_distance;
 	x_distance_to_nearest_player = x_distance;
 	y_distance_to_nearest_player = y_distance;
 }

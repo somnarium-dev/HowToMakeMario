@@ -15,7 +15,30 @@ state_machine[player_state.crouch] = function()
 
 state_machine[player_state.die] = function()
 {
-	processDeathSequencing();
+	//Unlike most timer based functionality, this is deductive.
+	timer--;
+	
+	//We only want to move after the initial pause.
+	if (death_sequence_phase == 2)
+	{ handlePlayerMovementAndCollision(); }
+	
+	//When the timer runs out, advance the phase.
+	if (timer == 0)
+	{ 
+		//If we were in the pause phase, advance to the jump off screen phase.
+		if (death_sequence_phase == 1)
+		{
+			death_sequence_phase = 2;
+			timer = global.death_pause_timing.play_off_length;
+			
+			if (y < room_height + 32)
+			{ v_speed = -jump_strength; }
+		}
+		
+		//If the jump off screen phase has completed, then leave the level.
+		else if (death_sequence_phase == 2)
+		{ transitionIrisToRoom(global.post_death_room, true, true, false); }
+	}
 }
 
 state_machine[player_state.enter_door] = function()
@@ -99,7 +122,7 @@ state_machine[player_state.run] = function()
 	
 	handlePlayerMovementAndCollision();
 	
-	setImageSpeedPerHSpeed(global.player_1.walk_speed);
+	setImageSpeedPerHSpeed(walk_speed);
 	
 	checkTransitionToFall();
 	checkTransitionToStand();
@@ -164,7 +187,7 @@ state_machine[player_state.stand] = function()
 	
 	handlePlayerMovementAndCollision();
 	
-	setImageSpeedPerHSpeed(global.player_1.walk_speed);
+	setImageSpeedPerHSpeed(walk_speed);
 	
 	checkTransitionToFall();
 	checkTransitionToJump();
@@ -185,7 +208,7 @@ state_machine[player_state.walk] = function()
 	
 	handlePlayerMovementAndCollision();
 	
-	setImageSpeedPerHSpeed(global.player_1.walk_speed);
+	setImageSpeedPerHSpeed(walk_speed);
 	
 	checkTransitionToFall();
 	checkTransitionToStand();
@@ -203,6 +226,8 @@ checkTransitionToStand = function()
 {
 	var on_the_ground = checkForImpassable(x, y+1);
 	
+	//Only transition to a standing state if stopped on the ground.
+	//Even if mario is moved by other sources, we don't want him to appear motionless.
 	if (on_the_ground)
 	&& (actual_movement_this_frame_x == 0)
 	{ 
@@ -237,7 +262,7 @@ checkTransitionToSkid = function()
 {
 	if (input_lr != 0)
 	&& (input_lr != sign(h_speed))
-	&& (abs(h_speed) > global.player_1.walk_speed)
+	&& (abs(h_speed) > walk_speed)
 	{ updatePlayerState(player_state.skid); }
 }
 
@@ -245,7 +270,7 @@ checkTransitionToSkid = function()
 checkTransitionSkidToWalk = function()
 {
 	if (input_lr == sign(h_speed))
-	|| (abs(h_speed) <= global.player_1.walk_speed)
+	|| (abs(h_speed) <= walk_speed)
 	{ updatePlayerState(player_state.walk); }
 }
 
@@ -263,16 +288,16 @@ checkTransitionToJump = function()
 	playSFX(sfx_jump);
 	
 	//Set jump strength.
-	var jump_strength = global.player_1.jump_strength;
+	var current_jump_strength = jump_strength;
 	
 	//Increase jump strength if moving.
 	var current_speed = abs(h_speed);
 	
-	if (current_speed > global.player_1.walk_speed)
-	{ jump_strength = global.player_1.moving_jump_strength; }
+	if (current_speed > walk_speed)
+	{ current_jump_strength = moving_jump_strength; }
 	
 	//Convert jump strength to negative vertical speed.
-	v_speed = -jump_strength;
+	v_speed = -current_jump_strength;
 		
 	//Determine the next appropriate state.
 	var new_state = player_state.jump;

@@ -1,2 +1,3 @@
+updateStats();
 updateSprites();
 readPlayerInput();

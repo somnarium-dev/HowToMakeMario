@@ -8,17 +8,17 @@ function InputManager(_gamepad = 0, _deadzone = 0.4) constructor {
     run = function() {
         var len = array_length(__inputs);
         for (var i = 0; i < len; i++)
-            __inputs[i].__update();
+            __inputs[i].updateInputs();
     }
 
-    create_input = function() {
+    createInput = function() {
         var _input = new Input(self);
         array_push(__inputs, _input);
         return _input;
     }
 	
-	fully_press_all = function() {
+	fullyPressAll = function() {
     for (var i = 0; i < array_length(__inputs); i++)
-        __inputs[i].fully_press();
+        __inputs[i].fullyPress();
 	}
 }

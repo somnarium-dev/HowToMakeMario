@@ -7,6 +7,26 @@ event_inherited();
 // INPUT HANDLING
 //=================================================================================================
 
+///@func generatePlayerInputs()
+generatePlayerInputs = function()
+{
+	generateStandardInputs();
+
+	input_run_pressed = false;
+	input_run_held = false;
+	input_run_released = false;
+	
+	input_jump_pressed = false;
+	input_jump_held = false;
+	input_jump_released = false;
+	
+	input_lr = 0;
+	input_ud = 0;
+
+	input_direction = 0;
+	previous_input_direction = input_direction;
+}
+
 ///@func readPlayerInput()
 readPlayerInput = function()
 {
@@ -15,13 +35,13 @@ readPlayerInput = function()
 	
 	input_manager.run();
 	
-	input_run_pressed = run.check_pressed();
+	input_run_pressed = run.checkPressed();
 	input_run_held = run.check();
-	input_run_released = run.check_released();
+	input_run_released = run.checkReleased();
 	
-	input_jump_pressed = jump.check_pressed();
+	input_jump_pressed = jump.checkPressed();
 	input_jump_held = jump.check();
-	input_jump_released = jump.check_released();
+	input_jump_released = jump.checkReleased();
 	
 	input_lr = right.check() - left.check();
 	input_ud = down.check() - up.check();
@@ -73,6 +93,7 @@ updatePlayerPosition = function()
 {
 	if (!process_movement) { return; }
 	
+	//Reset tracking.
 	starting_x = x;
 	starting_y = y;
 	
@@ -82,6 +103,7 @@ updatePlayerPosition = function()
 	actual_movement_this_frame_x = 0;
 	actual_movement_this_frame_y = 0;
 	
+	//Prepare.
 	var h_sign = sign(h_speed);
 	var v_sign = sign(v_speed);
 	
@@ -93,9 +115,19 @@ updatePlayerPosition = function()
 	
 	var repetitions = max(h_pixels, v_pixels);
 	
+	// While pixels remain in a given queue:
+	
+	// If it's not possible to move in the direction queued
+	// AND that is the direction this object is intending to move
+	// Zero out speed and queued pixels.
+	
+	// Next, handle direction specific checks for interruptions.
+	
+	// Otherwise, move one pixel in the specified direction.
+	
 	repeat (repetitions)
 	{
-		//If both queues have zeroed out, break.
+		// If both queues have zeroed out, break.
 		if (vertical_pixels_queued == 0)
 		&& (horizontal_pixels_queued == 0)
 		{ break; }
@@ -105,9 +137,7 @@ updatePlayerPosition = function()
 		//============
 		if (horizontal_pixels_queued != 0)
 		{
-			//If it's not possible to move in the direction queued*
-			//AND that is the direction the player is intending to move
-			//Zero out speed and queued pixels.
+			// Stop if the next pixel is impassable.
 			if (checkForImpassable(x + h_adjustment, y))
 			&& (h_sign == h_adjustment)
 			{ 
@@ -115,6 +145,7 @@ updatePlayerPosition = function()
 				horizontal_pixels_queued = 0;
 			}
 			
+			// If not otherwise interrupted, move.
 			else
 			{
 				x += h_adjustment;
@@ -128,9 +159,7 @@ updatePlayerPosition = function()
 		//============
 		if (vertical_pixels_queued != 0)
 		{	
-			//If it's not possible to move in the direction queued*
-			//AND that is the direction the player is intending to move
-			//Zero out speed and queued pixels.
+			// Stop if the next pixel is impassable.
 			if (checkForImpassable(x, y + v_adjustment))
 			&& (v_sign == v_adjustment)
 			{ 
@@ -138,10 +167,11 @@ updatePlayerPosition = function()
 				vertical_pixels_queued = 0;
 			}
 			
-			//If bouncing on an enemy, handle that next.
+			// If this object should bounce on an enemy, handle that next.
 			else if (shouldBounceOffOfEnemy(v_adjustment))
 			{ bounceOffOfEnemy(v_adjustment); }
 		
+			// If not otherwise interrupted, move.
 			else
 			{ 
 				y += v_adjustment;
@@ -159,16 +189,17 @@ checkForHarmfulEnemyCollision = function()
 	var this_damage = 0;
 	var this_attacker = noone;
 	
+	// Damage from shells.
 	if (other.state == enemy_state.shell)
 	{
 		var h_sign = sign(other.x - x);
 		var speed_sign = sign(other.h_speed);
 		
-		//An unmoving shell does not inflict damage.
+		// An unmoving shell does not inflict damage.
 		if (speed_sign == 0) { return; }
 		
-		//If the shell is moving toward the player,
-		//Then take damage.
+		// If the shell is moving toward the player,
+		// Then take damage.
 		if (speed_sign == (-1 * h_sign))
 		&& ((other.y - y) < other.safe_stomp_height)
 		{ 
@@ -178,7 +209,7 @@ checkForHarmfulEnemyCollision = function()
 		}
 	}
 	
-	//Basic bump damage.
+	// Basic bump damage.
 	else if (other.state != enemy_state.die)
 	&& (other.state != enemy_state.stomped)
 	&& ((other.y - y) < other.safe_stomp_height)
@@ -191,91 +222,43 @@ checkForHarmfulEnemyCollision = function()
 	damage_data = { inflicted_type: this_damage_type, inflicted_power: this_damage, attacker: this_attacker };
 }
 
-///@func checkForShellKicks()
-checkForShellKicks = function()
-{
-	if (other.state == enemy_state.shell)
-	&& ((other.y - y) < other.safe_stomp_height)
-	&& (other.shell_direction == 0)
-	{
-		kicking = true;
-		kick_timer = 0;
-		sprite_index = sprites[player_state.kick]
-		
-		//Inform the victim.		
-		other.damage_data.inflicted_type = damage_type.touch;
-		other.damage_data.inflicted_power = 1;
-		other.damage_data.attacker = id;
-	}
-}
-
-///@func manageKickSprite()
-manageKickSprite = function()
-{
-	if (kicking)
-	&& (sprite_index != sprites[state])
-	{ 
-		kick_timer++; 
-		if (kick_timer >= kick_timer_max)
-		{ sprite_index = sprites[state]; }
-	}
-}
-
 ///@func shouldBounceOffOfEnemy(_v_adjustment)
 shouldBounceOffOfEnemy = function(_v_adjustment)
 {	
 	var enemy = instance_place(x, y + 1, obj_parent_enemy);
 	
-	//Reasons *not* to bounce:
-	
-	//There's not an enemy underneath you.
-	if (enemy == noone)
+	// Reasons *not* to bounce:
+	if (enemy == noone) // There's not an enemy underneath you.
+	|| (_v_adjustment < 1) // You're moving the wrong way.
+	|| ((enemy.y - y) < enemy.safe_stomp_height) // Too low compared to enemy, unsafe.
+	|| (!enemy.bounce_attacker_when_jump_attacked) // Enemy does not bounce you when jumped on.
+	|| (state == player_state.die) // You are dead.
 	{ return false; }
 	
-	//You're moving the wrong way.
-	if (_v_adjustment < 1)
-	{ return false; }
-	
-	//Too low compared to enemy. You're taking damage from this.
-	if ((enemy.y - y) < enemy.safe_stomp_height)
-	{ return false; }
-	
-	//Enemy does not bounce you when jumped on.
-	if (!enemy.bounce_when_jump_attacked)
-	{ return false; }
-	
-	//You are dead.
-	if (state == player_state.die)
-	{ return false; }
-	
-	//Alright, looks like we're bouncing.
+	// Alright, looks like we're bouncing.
 	return true;
 }
 	
 ///@func bounceOffOfEnemy()
 bounceOffOfEnemy = function()
-{
-	var enemy = instance_place(x, y + 1, obj_parent_enemy);
-	
-	var new_v_speed;
-	
-	//Clear the vertical pixel queue.
+{	
+	// Clear the vertical pixel queue.
 	vertical_pixels_queued = 0;
 	
-	//Handle the bounce height.
+	// Handle the bounce height.
+	var new_v_speed = -stat_block.flat_bounce_strength;
+	
 	if (input_jump_held)
 	{ new_v_speed = -stat_block.jump_strength; }
 	
-	else
-	{ new_v_speed = -stat_block.flat_bounce_strength; }
+	v_speed = new_v_speed;
 	
-	//Inform the victim.		
+	// Inform the victim.		
+	var enemy = instance_place(x, y + 1, obj_parent_enemy);
+
 	enemy.damage_data.inflicted_type = damage_type.jump;
 	enemy.damage_data.inflicted_power = 1;
 	enemy.damage_data.attacker = id;
-	
-	//Update v speed.
-	v_speed = new_v_speed;
 }
 
 ///@func updatePLevel()
@@ -284,7 +267,7 @@ updatePLevel = function()
 	var current_speed = abs(h_speed);
 	
 	if (input_run_held)
-	&& (current_speed >= global.player_1.run_speed)
+	&& (current_speed >= global.player_data[1].run_speed)
 	&& (checkForImpassable(x, y + 1))
 	{ plevel_charge += plevel_charge_rate; }
 	
@@ -302,7 +285,7 @@ updatePLevel = function()
 	
 	plevel_charge = clamp(plevel_charge, 0, plevel_charge_max);
 	
-	global.player_1.plevel = plevel_charge div plevel_pip_value;
+	global.player_data[1].plevel = plevel_charge div plevel_pip_value;
 }
 
 //=================================================================================================
@@ -346,7 +329,7 @@ checkIfDead = function()
 ///@func atMaxPLevel()
 atMaxPLevel = function()
 {
-	if (global.player_1.plevel >= global.plevel_max)
+	if (global.player_data[1].plevel >= global.plevel_max)
 	{ return true; }
 	
 	return false;
@@ -366,46 +349,72 @@ updatePlayerState = function(_new_state, _change_sprite = true)
 }
 
 //=================================================================================================
+// OBJECT INTERACTIONS
+//=================================================================================================
+
+///@func checkForShellKicks()
+checkForShellKicks = function()
+{
+	if (other.state == enemy_state.shell)
+	&& ((other.y - y) < other.safe_stomp_height)
+	&& (other.shell_direction == 0)
+	{
+		// Handle this object's display.
+		kicking = true;
+		kick_timer = 0;
+		sprite_index = sprites[player_state.kick]
+		
+		// Inform the victim.		
+		other.damage_data.inflicted_type = damage_type.touch;
+		other.damage_data.inflicted_power = 1;
+		other.damage_data.attacker = id;
+	}
+}
+
+//=================================================================================================
 // INTERNAL FUNCTIONALITY
 //=================================================================================================
+
+///@func updateStats()
+updateStats = function()
+{
+	h_startup_boost = stat_block.h_startup_boost;
+
+	accel_rate = stat_block.accel_rate;
+	decel_rate = stat_block.decel_rate;
+
+	walk_speed = stat_block.walk_speed;
+	run_speed = stat_block.run_speed;
+	max_speed = stat_block.max_speed;
+
+	current_top_speed = walk_speed;
+
+	jump_strength = stat_block.jump_strength;
+	moving_jump_strength = stat_block.moving_jump_strength;
+}
 
 ///@func updateSprites()
 updateSprites = function()
 {
-	sprites = global.player_1.sprites[current_power];
+	sprites = global.player_data[1].sprites[current_power];
 	mask_index = sprites[player_state.mask];
 }
 
+///@func manageKickSprite()
+manageKickSprite = function()
+{
+	if (kicking)
+	&& (sprite_index != sprites[state])
+	{ 
+		kick_timer++; 
+		if (kick_timer >= kick_timer_max)
+		{ sprite_index = sprites[state]; }
+	}
+}
 
 //=================================================================================================
 // INTERNAL FUNCTIONALITY - DEATH SEQUENCE
 //=================================================================================================
-
-///@func processDeathSequencing()
-processDeathSequencing = function()
-{
-	timer--;
-	
-	if (death_sequence_phase == 2)
-	{
-		handlePlayerMovementAndCollision();
-	}
-	
-	if (timer == 0)
-	{ 
-		if (death_sequence_phase == 2)
-		{ transitionIrisToRoom(Initializer, true, true, false); }
-		
-		if (death_sequence_phase == 1)
-		{
-			death_sequence_phase = 2;
-			timer = global.death_pause_timing.play_off_length;
-			
-			if (y < room_height + 32)
-			{ v_speed = -4; }
-		}
-	}
-}
 
 ///@func ceaseAllMovement()
 ceaseAllMovement = function()

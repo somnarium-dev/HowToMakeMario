@@ -1,3 +1,5 @@
+/// @function		handleGravity()
+/// @description	Processes gravity based on global.gravity_direction and global.gravity_data.strength.
 function handleGravity()
 {
 	if (!process_gravity) { return; }
@@ -26,9 +28,17 @@ function handleGravity()
 	}
 }
 
+/// @function		handleHorizontalAcceleration(_input)
+/// @description	Calculates h_speed based on _input (acceleration, deceleration, braking, in that order).
+/// @param {Real}	_input A sign is taken of this variable to determine whether the object is attempting to move left or right.
 function handleHorizontalAcceleration(_input)
 {
 	if (!process_acceleration) { return; }
+	
+	var input_sign = sign(_input);
+	var starting_speed;
+	var adjustment;
+	var new_speed;
 	
 	//Handle acceleration;
 	var absolute_speed = abs(h_speed);
@@ -37,16 +47,16 @@ function handleHorizontalAcceleration(_input)
 	//If we have not yet reached top speed, accelerate.
 	if (absolute_speed < current_top_speed)
 	{ 
-		var starting_speed = h_speed;
+		starting_speed = h_speed;
 		
-		var adjustment = (_input * accel_rate);
+		adjustment = (input_sign * accel_rate);
 		
-		var new_speed = starting_speed + adjustment;
+		new_speed = starting_speed + adjustment;
 	
 		//If the proposed new speed would exceed the current top speed,
 		//Then cap it to the current top speed.
 		if (abs(new_speed) > current_top_speed)
-		{ new_speed = _input * current_top_speed; }
+		{ new_speed = input_sign * current_top_speed; }
 	
 		//If the starting speed was zero,
 		if (starting_speed == 0)
@@ -66,7 +76,7 @@ function handleHorizontalAcceleration(_input)
 	if (absolute_speed != 0)
 	&& (cap_to_top_speed)
 	{
-		if (_input == 0)
+		if (input_sign == 0)
 		|| (absolute_speed > current_top_speed)
 		{
 			//If it's possible to decelerate without crossing zero
@@ -93,8 +103,8 @@ function handleHorizontalAcceleration(_input)
 	//Handle braking.
 	if (absolute_speed != 0)
 	{
-		if (_input != 0)
-		&& (_input != h_sign)
+		if (input_sign != 0)
+		&& (input_sign != h_sign)
 		{
 			//If it's possible to decelerate without crossing zero
 			//Then do so.
@@ -112,9 +122,15 @@ function handleHorizontalAcceleration(_input)
 	absolute_speed = abs(h_speed);
 }
 
+/// @function		handleVerticalAcceleration(_short_jump_triggered)
+/// @description	Calculates v_speed based on inflicted_v_gravity. Also handles "short jumping".
+/// @param {Real}	_short_jump_triggered Determines whether, if v_speed is negative, it should zero. For example, you might provide a "button released" variable.
 function handleVerticalAcceleration(_short_jump_triggered)
 {
 	if (!process_acceleration) { return; }
+	
+	var adjustment;
+	var new_speed;
 	
 	//Handle acceleration;
 	var absolute_speed = abs(v_speed);
@@ -126,9 +142,9 @@ function handleVerticalAcceleration(_short_jump_triggered)
 	
 	if (v_speed < terminal_velocity)
 	{ 
-		var adjustment = (g_sign * g_power);
+		adjustment = (g_sign * g_power);
 		
-		var new_speed = v_speed + adjustment;
+		new_speed = v_speed + adjustment;
 		
 		if (new_speed > terminal_velocity)
 		{ new_speed = g_sign * terminal_velocity; }
@@ -170,6 +186,8 @@ function handleVerticalAcceleration(_short_jump_triggered)
 	absolute_speed = abs(v_speed);
 }
 
+/// @function		handleInflictedAcceleration()
+/// @description	Decelerates inflicted_h_speed and inflicted_v_speed.
 function handleInflictedAcceleration()
 {
 	if (!process_inflicted_acceleration) { return; }
@@ -203,6 +221,8 @@ function handleInflictedAcceleration()
 	inflicted_v_speed = new_inflicted_v_speed;
 }
 
+/// @function		handlePixelAccumulation()
+/// @description	Converts speed, inflicted speed, and adjusted pixels into queued pixels. Reduces adjustment pixels directly after calculations.
 function handlePixelAccumulation()
 {
 	if (!process_pixel_accumulation) { return; }
@@ -231,6 +251,7 @@ function handlePixelAccumulation()
 	var integer_adjustment_v_pixels = adjustment_v_pixels div 1;
 	
 	//Remove complete adjustment pixels from accumulated adjustment pixels.
+	//Adjustment pixels are reduced directly after being counted.
 	adjustment_h_pixels -= integer_adjustment_h_pixels;
 	adjustment_v_pixels -= integer_adjustment_v_pixels;
 	
@@ -239,6 +260,8 @@ function handlePixelAccumulation()
 	vertical_pixels_queued += integer_adjustment_v_pixels;
 }
 
+/// @function		updateObjectPosition()
+/// @description	Runs a loop, repositioning the object by one x pixel and one y pixel at a time, zeroing out movement on that axis when predicting a collision with an impassable object.
 function updateObjectPosition()
 {
 	if (!process_movement) { return; }
@@ -263,6 +286,16 @@ function updateObjectPosition()
 	
 	var repetitions = max(h_pixels, v_pixels);
 	
+	// While pixels remain in a given queue:
+	
+	// If it's not possible to move in the direction queued
+	// AND that is the direction this object is intending to move
+	// Zero out speed and queued pixels.
+	
+	// Next, handle direction specific checks for interruptions.
+	
+	// Otherwise, move one pixel in the specified direction.
+	
 	repeat (repetitions)
 	{
 		//If both queues have zeroed out, break.
@@ -275,9 +308,7 @@ function updateObjectPosition()
 		//============
 		if (horizontal_pixels_queued != 0)
 		{
-			//If it's not possible to move in the direction queued*
-			//AND that is the direction the player is intending to move
-			//Zero out speed and queued pixels.
+			// Stop if the next pixel is impassable.
 			if (checkForImpassable(x + h_adjustment, y))
 			&& (h_sign == h_adjustment)
 			{ 
@@ -285,6 +316,7 @@ function updateObjectPosition()
 				horizontal_pixels_queued = 0;
 			}
 			
+			// If not otherwise interrupted, move.
 			else
 			{
 				x += h_adjustment;
@@ -298,9 +330,7 @@ function updateObjectPosition()
 		//============
 		if (vertical_pixels_queued != 0)
 		{
-			//If it's not possible to move in the direction queued*
-			//AND that is the direction the player is intending to move
-			//Zero out speed and queued pixels.
+			// Stop if the next pixel is impassable.
 			if (checkForImpassable(x, y + v_adjustment))
 			&& (v_sign == v_adjustment)
 			{ 
@@ -308,6 +338,7 @@ function updateObjectPosition()
 				vertical_pixels_queued = 0;
 			}
 		
+			// If not otherwise interrupted, move.
 			else
 			{ 
 				y += v_adjustment;
@@ -318,6 +349,10 @@ function updateObjectPosition()
 	}
 }
 
+/// @function		checkForImpassable(_x, _y)
+/// @description	Clears impassable_list, then checks a precise pixel for all instances of obj_parent_collision and adds them to impassable_list. If any of those have an impassable property set to true, return true. If none do, return false. Ignores any instances the calling instance is already inside of. Automatically returns false if collision detection is disabled for the calling instance.
+/// @param {real}	_x X pixel to check.
+/// @param {real}	_y Y pixel to check.
 function checkForImpassable(_x, _y)
 {
 	if (!process_collision_detection) { return false; }
@@ -356,6 +391,10 @@ function checkForImpassable(_x, _y)
 	return false;
 }
 
+/// @function		checkForCollisionWithAnotherEnemy(_x, _y)
+/// @description	Used by obj_parent_enemy. Clears impassable_list, then checks a precise pixel for all instances of obj_parent_enemy and adds them to impassable_list. If any of those have a pass_through_enemies property set to false, return true. Ignores any instance the calling instance is already inside of. Automatically returns false if collision detection is disabled for the calling instance.
+/// @param {real}	_x X pixel to check.
+/// @param {real}	_y Y pixel to check.
 function checkForCollisionWithAnotherEnemy(_x, _y)
 {
 	if (!process_collision_detection) { return false; }
@@ -369,7 +408,7 @@ function checkForCollisionWithAnotherEnemy(_x, _y)
 		var this_object = impassable_list[|i];
 		
 		//If the other enemy doesn't collide with enemies, skip it.
-		if (this_object.move_through_enemies)
+		if (this_object.pass_through_enemies)
 		{ continue; }
 		
 		//This is to make sure we can't get stuck inside of other enemies.

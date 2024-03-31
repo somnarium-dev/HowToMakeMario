@@ -13,8 +13,8 @@
   "name":"obj_parent_block",
   "overriddenProperties":[],
   "parent":{
-    "name":"- Parents",
-    "path":"folders/Objects/- Parents.yy",
+    "name":"Level Objects",
+    "path":"folders/Objects/- Parents/Level Objects.yy",
   },
   "parentObjectId":{
     "name":"obj_parent_collision",
@@ -34,10 +34,12 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"","%Name":"contents","filters":[],"listItems":[],"multiselect":false,"name":"contents","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"noone","varType":0,},
-    {"$GMObjectProperty":"","%Name":"contents_sfx","filters":[],"listItems":[],"multiselect":false,"name":"contents_sfx","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"undefined","varType":0,},
-    {"$GMObjectProperty":"","%Name":"idle_sprite","filters":[],"listItems":[],"multiselect":false,"name":"idle_sprite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"spr_block_question","varType":0,},
-    {"$GMObjectProperty":"","%Name":"hit_sprite","filters":[],"listItems":[],"multiselect":false,"name":"hit_sprite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"spr_block_empty","varType":0,},
+    {"$GMObjectProperty":"","%Name":"contents","filters":[
+        "GMObject",
+      ],"listItems":[],"multiselect":false,"name":"contents","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"noone","varType":5,},
+    {"$GMObjectProperty":"","%Name":"contents_sfx","filters":[],"listItems":[],"multiselect":false,"name":"contents_sfx","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"noone","varType":5,},
+    {"$GMObjectProperty":"","%Name":"idle_sprite","filters":[],"listItems":[],"multiselect":false,"name":"idle_sprite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"spr_block_question","varType":5,},
+    {"$GMObjectProperty":"","%Name":"hit_sprite","filters":[],"listItems":[],"multiselect":false,"name":"hit_sprite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"spr_block_empty","varType":5,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

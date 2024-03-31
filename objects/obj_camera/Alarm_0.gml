@@ -1,2 +1,2 @@
-/// @description Center on screen.
+///@desc Center on screen.
 window_center();

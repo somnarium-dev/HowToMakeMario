@@ -1,22 +1,11 @@
 // Inherit the parent event
 event_inherited();
 
-//Define Custom Methods and State Machines
-event_user(0);
-event_user(1);
-event_user(2);
-
 //Configuration
-move_through_enemies = false;
-bounce_when_jump_attacked = true;
-
-//Internal functionality.
-safe_stomp_height = 8;
-lose_hp_when_jumped_on = true;
-hp = 1;
-
-death_sequence_timing = 60;
+pass_through_enemies = false;
 
 //Initialization.
 behavior = enemy_behavior.idle;
 state = enemy_state.stand;
+
+ai_input_lr = initial_lr_input;

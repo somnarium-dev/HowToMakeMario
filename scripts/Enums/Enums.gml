@@ -1,12 +1,15 @@
+//Player Power - the current powerup held by a given player.
 enum player_power
 {
     small,
 	mid,
     big,
     fire,
-    raccoon,
+    raccoon
+	//Surely more to come.
 }
 
+//Player State - used for state machines, sprite settings, and some other checks.
 enum player_state
 {
 	mask, //This is used to set the collision mask.
@@ -24,7 +27,7 @@ enum player_state
 	grab_stand,
 	grab_walk,
 	jump,
-	kick,
+	kick, //The player object never actually enters this state. It's just for sprite data.
 	run,
 	run_fall,
 	run_jump,
@@ -35,26 +38,29 @@ enum player_state
 	walk
 }
 
+//Damage Type - used when processing potentially damaging attacks between objects.
 enum damage_type
 {
-	none,
-	touch,
-	jump,
-	shell,
-	fire,
-	tail,
-	star
+	none,	//Used for reseting damage data structs, and indicates no hit is registered.
+	touch,	//Contact damage, touching spikes etc.
+	jump,	//Specifically for when a player jumps onto/into something to attack it.
+	shell,	//As you'd expect.
+	fire,	//Fireballs, firebars, etc.
+	tail,	//Raccoon / Tanuki suit tail flips.
+	star	//Invincibility effects in general.
 }
 
+// Enemy State - Used for state machines inside of enemy objects.
 enum enemy_state
 {
 	stand,
 	walk,
 	shell,
-	stomped,
-	die
+	stomped,	// Smashed by getting jumped on, likely has unique sprite or effect.
+	die			// Killed by HP reduction, flipping over and jumping offscreen. 
 }
 
+// Enemy Behavior - Used for behavior machines (AI) inside of enemy objects.
 enum enemy_behavior
 {
 	idle,
@@ -67,6 +73,7 @@ enum enemy_behavior
 	post_attack
 }
 
+// Block State - Used for state machines inside of item blocks and bricks.
 enum block_state
 {
 	idle,
@@ -76,7 +83,8 @@ enum block_state
 	destroyed
 }
 
-enum item_from_block_state
+// Item From Block State - Used for state machines inside of the contents of item blocks.
+enum item_state
 {
 	appear,
 	idle,
@@ -86,6 +94,7 @@ enum item_from_block_state
 	destroyed
 }
 
+// Gravity Type - Used to select a set of gravitational properties, including things like strength and terminal velocity.
 enum gravity_type
 {
 	air,
@@ -94,6 +103,7 @@ enum gravity_type
 	coin
 }
 
+// Pause Types - Used to pause for various reasons, while not overwriting existing pauses or destroying information in the process.
 enum pause_types
 {
 	transition,

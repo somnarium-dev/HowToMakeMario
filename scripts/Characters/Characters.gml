@@ -19,7 +19,9 @@ function initializeCharacters()
 		}
 	}
 }
-
+/// @function		loadAllCharacterSprites(_character_code_name)
+/// @description	Load all character sprites for all states for a given character code_name.
+/// @param {real}	_character_code_name The code_name of the character data being loaded. This should match the name as written in sprite assets.
 function loadAllCharacterSprites(_character_code_name)
 {
 	var return_data = [];
@@ -29,6 +31,10 @@ function loadAllCharacterSprites(_character_code_name)
 	return return_data;
 }
 
+/// @function		loadCharacterSprites(_character_code_name, _player_power_name)
+/// @description	Used by loadAllCharacterSprites(). Load all character sprites for all states for a given character code_name and player_power.
+/// @param {real}	_character_code_name The code_name of the character data being loaded. This should match the name as written in sprite assets.
+/// @param {real}	_player_power_name The name of a player power as a string. This should match the name as written in sprite assets.
 function loadCharacterSprites(_character_code_name, _player_power_name)
 {
 	var return_data = [];
