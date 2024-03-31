@@ -1,8 +1,5 @@
 event_inherited();
 
-//Attach to stats.
-stat_block = global.player_1;
-
 //Controls.
 generateStandardInputs();
 
@@ -21,7 +18,7 @@ input_direction = 0;
 previous_input_direction = input_direction;
 
 //Stats
-hp = 1;
+stat_block = global.player_1;
 
 h_startup_boost = stat_block.h_startup_boost;
 

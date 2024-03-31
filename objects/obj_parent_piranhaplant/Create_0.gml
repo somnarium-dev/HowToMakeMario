@@ -1,14 +1,11 @@
 // Inherit the parent event
 event_inherited();
 
-// Define Custom Methods and State Machines
-//event_user(0);
-//event_user(1);
-//event_user(2);
-
 // Load create data.
 direction = create_direction;
 
+if (!is_spitter)
+{  image_angle = direction; }
 
 // Configuration
 process_gravity = false;

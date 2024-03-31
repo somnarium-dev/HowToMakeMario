@@ -4,6 +4,4 @@
 event_inherited();
 
 state_machine[item_state.idle] = function()
-{
-	handleItemBoxContentsMovementAndCollision();
-}
+{ handleItemBoxContentsMovementAndCollision(); }
