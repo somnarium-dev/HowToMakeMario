@@ -2,9 +2,9 @@
 x = camera_get_view_x(global.game_view_camera) + global.view_margin_width;
 y = camera_get_view_y(global.game_view_camera) + global.view_height - sprite_height;
 
-coins_string = string_repeat("0", coins_num_places - string_length(global.player_1.coins)) + string(global.player_1.coins);
-lives_string = string_repeat("0", lives_num_places - string_length(global.player_1.lives_remaining)) + string(global.player_1.lives_remaining);
-point_total_string = string_repeat("0", point_total_num_places - string_length(global.player_1.point_total)) + string(global.player_1.point_total);
+coins_string = string_repeat("0", coins_num_places - string_length(global.player_data[1].coins)) + string(global.player_data[1].coins);
+lives_string = string_repeat("0", lives_num_places - string_length(global.player_data[1].lives_remaining)) + string(global.player_data[1].lives_remaining);
+point_total_string = string_repeat("0", point_total_num_places - string_length(global.player_data[1].point_total)) + string(global.player_data[1].point_total);
 level_timer_string = string_repeat("0", timer_num_places - string_length(global.level_timer)) + string(global.level_timer);
 
 // Blackout.
@@ -17,7 +17,7 @@ draw_self();
 draw_sprite
 (
 	spr_hud_characteremblem,
-	global.player_1.character_index,
+	global.player_data[1].character_index,
 	x + offsets.emblem._x,
 	y + offsets.emblem._y
 );
@@ -29,7 +29,7 @@ for (var i = 0; i < (global.plevel_max - 1); i++;)
 	// This is why we check if "i" is *less* than the p level.
 	// Furthermore, the *symbol* indicates maximum. So we stop 1 before.
 	
-	var filled = i < global.player_1.plevel;
+	var filled = i < global.player_data[1].plevel;
 	
 	draw_sprite
 	(
@@ -41,7 +41,7 @@ for (var i = 0; i < (global.plevel_max - 1); i++;)
 }
 
 // P symbol.
-var do_flash = (global.player_1.plevel >= global.plevel_max) && indicator_flash;
+var do_flash = (global.player_data[1].plevel >= global.plevel_max) && indicator_flash;
 
 draw_sprite
 (
@@ -100,7 +100,7 @@ for (var i = 0; i < number_end_of_level_cards; i++)
 	draw_sprite
 	(
 		spr_endoflevelcard,
-		global.player_1.cards[i],
+		global.player_data[1].cards[i],
 		x + offsets.end_of_level_cards._x + (i * end_of_level_card_spacing),
 		y + offsets.end_of_level_cards._y
 	);

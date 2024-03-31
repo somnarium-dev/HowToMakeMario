@@ -4,18 +4,9 @@ event_inherited();
 generatePlayerInputs();
 
 //Stats
-stat_block = global.player_1;
+stat_block = global.player_data[player_slot];
 
-h_startup_boost = stat_block.h_startup_boost;
-
-accel_rate = stat_block.accel_rate;
-decel_rate = stat_block.decel_rate;
-
-walk_speed = stat_block.walk_speed;
-run_speed = stat_block.run_speed;
-max_speed = stat_block.max_speed;
-
-current_top_speed = walk_speed;
+updateStats();
 
 plevel_charge = 0;
 plevel_charge_rate = 3;

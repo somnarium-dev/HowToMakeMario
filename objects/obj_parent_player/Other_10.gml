@@ -267,7 +267,7 @@ updatePLevel = function()
 	var current_speed = abs(h_speed);
 	
 	if (input_run_held)
-	&& (current_speed >= global.player_1.run_speed)
+	&& (current_speed >= global.player_data[1].run_speed)
 	&& (checkForImpassable(x, y + 1))
 	{ plevel_charge += plevel_charge_rate; }
 	
@@ -285,7 +285,7 @@ updatePLevel = function()
 	
 	plevel_charge = clamp(plevel_charge, 0, plevel_charge_max);
 	
-	global.player_1.plevel = plevel_charge div plevel_pip_value;
+	global.player_data[1].plevel = plevel_charge div plevel_pip_value;
 }
 
 //=================================================================================================
@@ -329,7 +329,7 @@ checkIfDead = function()
 ///@func atMaxPLevel()
 atMaxPLevel = function()
 {
-	if (global.player_1.plevel >= global.plevel_max)
+	if (global.player_data[1].plevel >= global.plevel_max)
 	{ return true; }
 	
 	return false;
@@ -375,10 +375,28 @@ checkForShellKicks = function()
 // INTERNAL FUNCTIONALITY
 //=================================================================================================
 
+///@func updateStats()
+updateStats = function()
+{
+	h_startup_boost = stat_block.h_startup_boost;
+
+	accel_rate = stat_block.accel_rate;
+	decel_rate = stat_block.decel_rate;
+
+	walk_speed = stat_block.walk_speed;
+	run_speed = stat_block.run_speed;
+	max_speed = stat_block.max_speed;
+
+	current_top_speed = walk_speed;
+
+	jump_strength = stat_block.jump_strength;
+	moving_jump_strength = stat_block.moving_jump_strength;
+}
+
 ///@func updateSprites()
 updateSprites = function()
 {
-	sprites = global.player_1.sprites[current_power];
+	sprites = global.player_data[1].sprites[current_power];
 	mask_index = sprites[player_state.mask];
 }
 
@@ -397,32 +415,6 @@ manageKickSprite = function()
 //=================================================================================================
 // INTERNAL FUNCTIONALITY - DEATH SEQUENCE
 //=================================================================================================
-
-///@func processDeathSequencing()
-processDeathSequencing = function()
-{
-	timer--;
-	
-	if (death_sequence_phase == 2)
-	{
-		handlePlayerMovementAndCollision();
-	}
-	
-	if (timer == 0)
-	{ 
-		if (death_sequence_phase == 2)
-		{ transitionIrisToRoom(Initializer, true, true, false); }
-		
-		if (death_sequence_phase == 1)
-		{
-			death_sequence_phase = 2;
-			timer = global.death_pause_timing.play_off_length;
-			
-			if (y < room_height + 32)
-			{ v_speed = -4; }
-		}
-	}
-}
 
 ///@func ceaseAllMovement()
 ceaseAllMovement = function()

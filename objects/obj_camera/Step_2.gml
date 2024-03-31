@@ -3,7 +3,7 @@ camera_set_view_size(global.game_view_camera, global.view_width, global.view_hei
 
 var camera_target = noone;
 
-if (global.camera_target_0 == "p1") { camera_target = global.player_1.current_id; }
+if (global.camera_target_0 == "p1") { camera_target = global.player_data[1].current_id; }
 
 if (global.camera_target_0 == noone) { return; }
 

@@ -145,6 +145,7 @@ function initialize()
 	//===================================================================================
 	
 	global.next_room = Level_1_1;
+	global.post_death_room = Initializer;
 	
 	global.world = 1;
 	
@@ -174,7 +175,9 @@ function initialize()
 	//===================================================================================
 	
 	// Define player 1 defaults.
-	global.player_1 = 
+	global.player_data = [];
+	
+	global.player_data[1] = 
 	{	
 		current_id: noone,
 		character_index: 0,
