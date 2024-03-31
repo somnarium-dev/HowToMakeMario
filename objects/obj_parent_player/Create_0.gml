@@ -1,21 +1,7 @@
 event_inherited();
 
 //Controls.
-generateStandardInputs();
-
-input_run_pressed = false;
-input_run_held = false;
-input_run_released = false;
-	
-input_jump_pressed = false;
-input_jump_held = false;
-input_jump_released = false;
-	
-input_lr = 0;
-input_ud = 0;
-
-input_direction = 0;
-previous_input_direction = input_direction;
+generatePlayerInputs();
 
 //Stats
 stat_block = global.player_1;

@@ -53,6 +53,8 @@ updateEnemyPosition = function ()
 	// AND that is the direction this object is intending to move
 	// Zero out speed and queued pixels.
 	
+	// Next, handle direction specific checks for interruptions.
+	
 	// Otherwise, move one pixel in the specified direction.
 	
 	repeat (repetitions)
@@ -67,12 +69,13 @@ updateEnemyPosition = function ()
 		//============
 		if (horizontal_pixels_queued != 0)
 		{
+			// Check for a collision with another enemy, if relevant.
 			var collision_with_enemy = false;
 			
 			if (!pass_through_enemies)
 			{ collision_with_enemy = checkForCollisionWithAnotherEnemy(x + h_adjustment, y); }
 			
-			
+			// Stop if the next pixel is impassable.
 			if (checkForImpassable(x + h_adjustment, y))
 			|| (collision_with_enemy)
 			{
@@ -83,6 +86,7 @@ updateEnemyPosition = function ()
 				}
 			}
 			
+			// If not otherwise interrupted, move.
 			else
 			{
 				x += h_adjustment;
@@ -96,6 +100,7 @@ updateEnemyPosition = function ()
 		//============
 		if (vertical_pixels_queued != 0)
 		{
+			// Stop if the next pixel is impassable.
 			if (checkForImpassable(x, y + v_adjustment))
 			&& (v_sign == v_adjustment)
 			{ 
@@ -103,6 +108,7 @@ updateEnemyPosition = function ()
 				vertical_pixels_queued = 0;
 			}
 		
+			// If not otherwise interrupted, move.
 			else
 			{ 
 				y += v_adjustment;
@@ -117,6 +123,7 @@ updateEnemyPosition = function ()
 determineTopHSpeed = function()
 {	
 	// This space left empty by design.
+	// It will be overwritten as needed by child objects.
 }
 
 //=================================================================================================
@@ -170,19 +177,19 @@ getProximityToNearestPlayer = function()
 {
 	var nearest_player = instance_nearest(x, y, obj_parent_player);
 	
-	var direct_distance = -1;
+	var directional_distance = -1;
 	var x_distance = -1;
 	var y_distance = -1;
 	
 	if (nearest_player != noone)
 	{
-		direct_distance = point_distance(x, y, nearest_player.x, nearest_player.y);
+		directional_distance = point_distance(x, y, nearest_player.x, nearest_player.y);
 		
 		x_distance = abs(nearest_player.x - x);
 		y_distance = abs(nearest_player.y - y);
 	}
 	
-	directional_distance_to_nearest_player = direct_distance;
+	directional_distance_to_nearest_player = directional_distance;
 	x_distance_to_nearest_player = x_distance;
 	y_distance_to_nearest_player = y_distance;
 }

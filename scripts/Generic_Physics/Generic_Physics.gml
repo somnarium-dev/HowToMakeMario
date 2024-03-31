@@ -286,6 +286,16 @@ function updateObjectPosition()
 	
 	var repetitions = max(h_pixels, v_pixels);
 	
+	// While pixels remain in a given queue:
+	
+	// If it's not possible to move in the direction queued
+	// AND that is the direction this object is intending to move
+	// Zero out speed and queued pixels.
+	
+	// Next, handle direction specific checks for interruptions.
+	
+	// Otherwise, move one pixel in the specified direction.
+	
 	repeat (repetitions)
 	{
 		//If both queues have zeroed out, break.
@@ -298,9 +308,7 @@ function updateObjectPosition()
 		//============
 		if (horizontal_pixels_queued != 0)
 		{
-			//If it's not possible to move in the direction queued*
-			//AND that is the direction the player is intending to move
-			//Zero out speed and queued pixels.
+			// Stop if the next pixel is impassable.
 			if (checkForImpassable(x + h_adjustment, y))
 			&& (h_sign == h_adjustment)
 			{ 
@@ -308,6 +316,7 @@ function updateObjectPosition()
 				horizontal_pixels_queued = 0;
 			}
 			
+			// If not otherwise interrupted, move.
 			else
 			{
 				x += h_adjustment;
@@ -321,9 +330,7 @@ function updateObjectPosition()
 		//============
 		if (vertical_pixels_queued != 0)
 		{
-			//If it's not possible to move in the direction queued*
-			//AND that is the direction the player is intending to move
-			//Zero out speed and queued pixels.
+			// Stop if the next pixel is impassable.
 			if (checkForImpassable(x, y + v_adjustment))
 			&& (v_sign == v_adjustment)
 			{ 
@@ -331,6 +338,7 @@ function updateObjectPosition()
 				vertical_pixels_queued = 0;
 			}
 		
+			// If not otherwise interrupted, move.
 			else
 			{ 
 				y += v_adjustment;
