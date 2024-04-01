@@ -270,8 +270,8 @@
   ],
   "name":"Level_1_1",
   "parent":{
-    "name":"Rooms",
-    "path":"folders/Rooms.yy",
+    "name":"World 1",
+    "path":"folders/Rooms/Levels/World 1.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

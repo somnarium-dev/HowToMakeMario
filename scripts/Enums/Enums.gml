@@ -113,3 +113,10 @@ enum pause_types
 	time_stop,
 	special
 }
+
+// Obstacle Types - World map objects the block passage unless unlocked or destroyed.
+enum obstacle_types
+{
+	lock,
+	rock
+}

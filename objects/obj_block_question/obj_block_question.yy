@@ -6,8 +6,8 @@
   "name":"obj_block_question",
   "overriddenProperties":[],
   "parent":{
-    "name":"World Objects",
-    "path":"folders/Objects/World Objects.yy",
+    "name":"Level Objects",
+    "path":"folders/Objects/Level Objects.yy",
   },
   "parentObjectId":{
     "name":"obj_parent_block",

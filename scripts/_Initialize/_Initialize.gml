@@ -86,6 +86,7 @@ function initialize()
 
 	initializeCharacters();
 	initializeMusic();
+	initializeWorlds();
 	
 	// Define fonts.
 	global.font_system = fnt_lanapixel;
@@ -144,8 +145,8 @@ function initialize()
 	// GENERAL GAME PROPERTIES
 	//===================================================================================
 	
-	global.next_room = Level_1_1;
-	global.post_death_room = Initializer;
+	global.next_room = World_1;
+	global.post_death_room = World_1;
 	
 	global.world = 1;
 	

@@ -13,8 +13,8 @@
   "name":"obj_parent_enemy",
   "overriddenProperties":[],
   "parent":{
-    "name":"Enemies",
-    "path":"folders/Objects/- Parents/Enemies.yy",
+    "name":"Generics",
+    "path":"folders/Objects/- Parents/Generics.yy",
   },
   "parentObjectId":{
     "name":"obj_parent_levelobject",
