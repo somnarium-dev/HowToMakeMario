@@ -3,7 +3,6 @@ if (!surface_exists(transition_surface))
 { transition_surface = surface_create(global.focal_width, global.focal_height); }
 
 // Black out the transition surface, then subtract a circle from it.
-
 var this_draw_x = draw_x_out;
 var this_draw_y = draw_y_out;
 

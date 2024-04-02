@@ -50,7 +50,8 @@ enum player_map_state
 	enter_level,
 	post_level_death,
 	post_level_clear,
-	kickback
+	kickback,
+	reshuffle
 }
 
 // Damage Type - used when processing potentially damaging attacks between objects.

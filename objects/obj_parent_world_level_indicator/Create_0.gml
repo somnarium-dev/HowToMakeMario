@@ -3,6 +3,7 @@ event_inherited();
 
 // Load level data.
 level_contained = global.world_data[global.world].levels[level_number].level_contained;
+level_bgm = global.world_data[global.world].levels[level_number].initial_bgm;
 cleared = global.world_data[global.world].levels[level_number].cleared;
 help_indicator = global.world_data[global.world].levels[level_number].help_indicator;
 help_indicator_object = noone;

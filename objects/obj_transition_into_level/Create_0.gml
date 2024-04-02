@@ -21,7 +21,7 @@ show_start_message = false;
 
 // When irising out to a level, the iris moves slowly, then quickly.
 // These values control what percentage of the iris progresses at each speed.
-slow_iris_percentage = 0.4;
+slow_iris_percentage = 0.33;
 normal_iris_percentage = 1 - slow_iris_percentage;
 
 // Initialize.

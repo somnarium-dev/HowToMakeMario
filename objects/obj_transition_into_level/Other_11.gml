@@ -9,7 +9,7 @@ transition_out_slow = function()
 	
 	// Use the timer vs the transition timing to generate a percentage of
 	// the screen to leave revealed.
-	section_progress = 0.33 * (timer / transition_out_slow_timing);
+	section_progress = slow_iris_percentage * (timer / transition_out_slow_timing);
 	
 	percent_displayed = 1 - section_progress;
 	draw_r = round(max_radius * percent_displayed);
@@ -31,9 +31,9 @@ transition_out_normal = function()
 	
 	// Use the timer vs the transition timing to generate a percentage of
 	// the screen to leave revealed.
-	section_progress = 0.67 * (timer / transition_out_slow_timing);
+	section_progress = normal_iris_percentage * (timer / transition_out_slow_timing);
 	
-	percent_displayed = 0.67 - section_progress;
+	percent_displayed = normal_iris_percentage - section_progress;
 	draw_r = round(max_radius * percent_displayed);
 	
 	// When the timer is maxed out, move to the transition pause state.
@@ -84,5 +84,8 @@ transition_in = function()
 	
 	// If the timer is at maximum, destroy this object.
 	if (timer == transition_in_timing)
-	{ instance_destroy(); }
+	{
+		playBGM(initial_bgm, true);
+		instance_destroy(); 
+	}
 }

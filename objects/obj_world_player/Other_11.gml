@@ -51,13 +51,15 @@ state_machine[player_map_state.kickback] = function()
 	
 	if (arrived_at_last_clear)
 	{
-		playBGM(global.world_data[1].music, true);
-		sprite_index = map_sprite;
-		updateMapState(player_map_state.select_level);
+		sprite_index = pin_sprite;
+		updateMapState(player_map_state.reshuffle);
 	}
 }
 
-
+state_machine[player_map_state.reshuffle] = function()
+{
+	// Empty.
+}
 
 //=======================================================================================
 // STATE TRANSITIONS
@@ -97,6 +99,6 @@ checkIfEnteringLevel = function()
 	{
 		updateMapState(player_map_state.enter_level);
 		global.post_death_room = room;
-		transitionIrisToLevel(target_level);
+		transitionIrisToLevel(target_level, target_level_bgm);
 	}
 }

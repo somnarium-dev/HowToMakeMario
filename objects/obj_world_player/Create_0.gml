@@ -29,6 +29,7 @@ bump_sound_timer = 0;
 bump_sound_buffer_timing = 15;
 
 target_level = undefined;
+target_level_bgm = -1;
 
 // Initialize.
 x = global.player_data[global.current_player].map_coordinates._x;

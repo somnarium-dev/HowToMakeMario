@@ -49,7 +49,8 @@ function initialize()
 		"enter_level",
 		"post_level_death",
 		"post_level_clear",
-		"kickback"
+		"kickback",
+		"reshuffle"
 	]
 	
 	global.enemy_state_string =
@@ -182,6 +183,7 @@ function initialize()
 	}
 	
 	global.max_coins = 100;
+	global.starting_lives = 2;
 	global.max_lives = 99;
 	
 	global.current_player = 1;
@@ -209,7 +211,7 @@ function initialize()
 		jump_strength: 6.25,
 		moving_jump_strength: 7,
 		flat_bounce_strength: 2,
-		lives_remaining: 0,
+		lives_remaining: global.starting_lives,
 		point_total: 0,
 		coins: 0,
 		plevel: 0,

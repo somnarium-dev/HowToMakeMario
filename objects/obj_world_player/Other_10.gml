@@ -257,4 +257,5 @@ getSelectedLevel = function()
 	{ return; }
 	
 	target_level = current_level_indicator.level_contained;
+	target_level_bgm = current_level_indicator.level_bgm;
 }

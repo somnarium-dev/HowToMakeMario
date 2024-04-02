@@ -15,9 +15,6 @@ play_music = function(_new_song, _looping)
 	
 	// Play and store in variable for later reference/control.
 	current_music = audio_play_sound(_new_song, 1, _looping, new_vol);
-	
-	// Debug.
-	show_debug_message($"New Music: {_new_song} - ID: {current_music}");
 }
 
 ///@func stop_music()
