@@ -114,9 +114,9 @@ function initialize()
 	
 	global.preferences =
 	{
-		master_volume: 100,
-		music_volume: 100,
-		sfx_volume: 100
+		master_volume: 1,
+		music_volume: 1,
+		sfx_volume: 1
 	};
 	
 	//===================================================================================

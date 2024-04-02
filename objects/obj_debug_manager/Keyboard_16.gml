@@ -8,6 +8,14 @@
 
 var player_1 = global.player_data[global.current_player].current_id;
 
+if (keyboard_check_pressed(ord("F")))
+{
+	show_debug_message("I heard you.");
+	
+	//audio_stop_sound(global.world_data[1].music);
+	fadeoutBGM(90);
+}
+
 if (player_1 == noone)
 || (!instance_exists(player_1))
 { exit; }

@@ -29,13 +29,11 @@ fading_out = function()
 	
 	fade_time--;
 	
-	show_debug_message($"Fade Time: {fade_time}");
+	current_volume_modifier = (fade_time / max_fade_time);
 	
-	//current_volume_modifier = (fade_time / max_fade_time);
+	var new_vol = global.preferences.master_volume * global.preferences.music_volume * current_volume_modifier;
 	
-	//var new_vol = global.preferences.master_volume * global.preferences.music_volume * current_volume_modifier;
-	
-	//audio_sound_gain(current_music, new_vol, 0);
+	audio_sound_gain(current_music, new_vol, 0);
 	
 	if (fade_time == 0)
 	{
