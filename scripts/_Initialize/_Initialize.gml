@@ -203,7 +203,7 @@ function initialize()
 		plevel: 0,
 		cards: [0, 0, 0],
 		map_state: player_map_state.load_in,
-		map_coordinates_start: {_x: 32, _y: 48},
+		map_coordinates_last_clear: {_x: 32, _y: 48},
 		map_coordinates: {_x: 32, _y: 48, _previous_x: 32, _previous_y: 48}
 	}
 	

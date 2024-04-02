@@ -44,10 +44,13 @@ enum player_state
 enum player_map_state
 {
 	load_in,
+	new_world_map,
 	select_level,
 	in_motion,
 	enter_level,
-	kick_back
+	post_level_death,
+	post_level_clear,
+	kickback
 }
 
 // Damage Type - used when processing potentially damaging attacks between objects.

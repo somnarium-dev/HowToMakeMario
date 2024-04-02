@@ -57,7 +57,7 @@ function convertSamplesToSeconds(_samples, _sample_rate = 44100)
 
 /// @function		convertSamplesToFrames(_samples, _sample_rate, _frame_rate)
 /// @description	Convert samples by rate to seconds, then to frames by rate. Rounded.
-/// @param {real}	_samples x Number to convert in samples.
+/// @param {real}	_samples Number to convert in samples.
 /// @param {real}	_sample_rate Sample rate to use for conversion.
 /// @param {real}	_frame_rate Frame rate to use for conversion.
 function convertSamplesToFrames(_samples, _sample_rate = 44100, _frame_rate = 60)
@@ -69,6 +69,21 @@ function convertSamplesToFrames(_samples, _sample_rate = 44100, _frame_rate = 60
 	}
 	
 	return round((_samples / _sample_rate) * _frame_rate)
+}
+
+/// @function		convertFramesToMilliseconds(_frames, _frame_rate)
+/// @description	Convert _frames to milliseconds based on _frame_rate. Rounded.
+/// @param {real}	_frames Number to convert in frames.
+/// @param {real}	_frame_rate Frame rate to use for conversion.
+function convertFramesToMilliseconds(_frames, _frame_rate = 60)
+{
+	if (is_undefined(_frames))
+	{
+		show_debug_message("[Warning] convertFramesToMilliseconds() - Attempted to convert undefined number of frames.");
+		return 0;
+	}
+	
+	return round(((1 / _frame_rate) * 1000) * _frames)
 }
 
 //===============================================

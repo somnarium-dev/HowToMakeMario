@@ -173,6 +173,39 @@ processMapMovement = function()
 	return false;
 }
 
+///@func handleKickback()
+handleKickback = function()
+{
+	if (x != kickback_x)
+	|| (y != kickback_y)
+	{
+		var distance_to_destination = point_distance(x, y, kickback_x, kickback_y)
+		
+		if (distance_to_destination > move_speed)
+		{
+			var kickback_direction = point_direction(x, y, kickback_x, kickback_y);
+			var next_x = x + lengthdir_x(move_speed, kickback_direction);
+			var next_y = y + lengthdir_y(move_speed, kickback_direction);
+			
+			x = round(next_x);
+			y = round(next_y);
+		}
+		
+		else
+		{
+			x = kickback_x;
+			y = kickback_y;
+			
+			updatePlayerMapCoordinates();
+		}
+		
+		return false;
+	}
+	
+	else
+	{ return true; }
+}
+
 //=======================================================================================
 // INTERNAL FUNCTIONALITY
 //=======================================================================================
@@ -190,7 +223,6 @@ updateMapSprites = function()
 ///@func updateMapState(_new_state)
 updateMapState = function(_new_state)
 {
-	state = _new_state;
 	global.player_data[global.current_player].map_state = _new_state;
 	state_timer = 0;
 }

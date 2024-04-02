@@ -33,6 +33,32 @@ state_machine[player_map_state.enter_level] = function()
 	// Empty.
 }
 
+state_machine[player_map_state.post_level_death] = function()
+{
+	state_timer++;
+	
+	if (state_timer == post_level_timing)
+	{
+		playSFX(sfx_levelkickback);
+		sprite_index = map_sprite;
+		updateMapState(player_map_state.kickback);
+	}
+}
+
+state_machine[player_map_state.kickback] = function()
+{
+	var arrived_at_last_clear = handleKickback()
+	
+	if (arrived_at_last_clear)
+	{
+		playBGM(global.world_data[1].music, true);
+		sprite_index = map_sprite;
+		updateMapState(player_map_state.select_level);
+	}
+}
+
+
+
 //=======================================================================================
 // STATE TRANSITIONS
 //=======================================================================================

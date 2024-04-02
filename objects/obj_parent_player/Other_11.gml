@@ -37,7 +37,10 @@ state_machine[player_state.die] = function()
 		
 		//If the jump off screen phase has completed, then leave the level.
 		else if (death_sequence_phase == 2)
-		{ transitionIrisToRoom(global.post_death_room, true, true, false); }
+		{ 
+			global.player_data[global.current_player].map_state = player_map_state.post_level_death;
+			transitionIrisToRoom(global.post_death_room, true, true, false); 
+		}
 	}
 }
 

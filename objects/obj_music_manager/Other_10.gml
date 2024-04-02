@@ -27,6 +27,10 @@ fade_out = function(_frames)
 	if (state != awaiting_command)
 	{ show_debug_message("[Warning] MusicManager is busy. Cannot execute fade_out()."); }
 	
+	var fade_milliseconds = convertFramesToMilliseconds(_frames);
+	
+	audio_sound_gain(current_music, 0, fade_milliseconds);
+	
 	max_fade_time = _frames;
 	fade_time = max_fade_time;
 	state = fading_out;

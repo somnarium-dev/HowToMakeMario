@@ -13,6 +13,7 @@ updateMapSprites();
 
 // Internal functionality.
 load_in_timing = 15;
+post_level_timing = 30;
 
 move_speed = 2;
 
@@ -33,6 +34,7 @@ target_level = undefined;
 x = global.player_data[global.current_player].map_coordinates._x;
 y = global.player_data[global.current_player].map_coordinates._y;
 
-state = global.player_data[global.current_player].map_state;
+kickback_x = global.player_data[global.current_player].map_coordinates_last_clear._x;
+kickback_y = global.player_data[global.current_player].map_coordinates_last_clear._y;
 
 sprite_index = pin_sprite;
