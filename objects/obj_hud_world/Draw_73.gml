@@ -2,9 +2,9 @@
 x = camera_get_view_x(global.game_view_camera) + global.view_margin_width;
 y = camera_get_view_y(global.game_view_camera) + global.view_height - sprite_height;
 
-coins_string = string_repeat("0", coins_num_places - string_length(global.player_data[1].coins)) + string(global.player_data[1].coins);
-lives_string = string_repeat("0", lives_num_places - string_length(global.player_data[1].lives_remaining)) + string(global.player_data[1].lives_remaining);
-point_total_string = string_repeat("0", point_total_num_places - string_length(global.player_data[1].point_total)) + string(global.player_data[1].point_total);
+coins_string = string_repeat("0", coins_num_places - string_length(source.stat_block.coins)) + string(source.stat_block.coins);
+lives_string = string_repeat("0", lives_num_places - string_length(source.stat_block.lives_remaining)) + string(source.stat_block.lives_remaining);
+point_total_string = string_repeat("0", point_total_num_places - string_length(source.stat_block.point_total)) + string(source.stat_block.point_total);
 
 // Blackout.
 draw_sprite_stretched(spr_black, 0, x, y, sprite_width, sprite_height);
@@ -16,7 +16,7 @@ draw_self();
 draw_sprite
 (
 	spr_hud_characteremblem,
-	global.player_data[1].character_index,
+	source.stat_block.character_index,
 	x + offsets.emblem._x,
 	y + offsets.emblem._y
 );
@@ -28,7 +28,7 @@ for (var i = 0; i < (global.plevel_max - 1); i++;)
 	// This is why we check if "i" is *less* than the p level.
 	// Furthermore, the *symbol* indicates maximum. So we stop 1 before.
 	
-	var filled = i < global.player_data[1].plevel;
+	var filled = i < source.stat_block.plevel;
 	
 	draw_sprite
 	(
@@ -40,7 +40,7 @@ for (var i = 0; i < (global.plevel_max - 1); i++;)
 }
 
 // P symbol.
-var do_flash = (global.player_data[1].plevel >= global.plevel_max) && indicator_flash;
+var do_flash = (source.stat_block.plevel >= global.plevel_max) && indicator_flash;
 
 draw_sprite
 (
@@ -51,7 +51,7 @@ draw_sprite
 );
 
 // Set font.
-draw_set_font(global.font_hudnumbers);
+draw_set_font(global.font_hud_numbers);
 
 // World number.
 draw_text
@@ -99,7 +99,7 @@ for (var i = 0; i < number_end_of_level_cards; i++)
 	draw_sprite
 	(
 		spr_endoflevelcard,
-		global.player_data[1].cards[i],
+		source.stat_block.cards[i],
 		x + offsets.end_of_level_cards._x + (i * end_of_level_card_spacing),
 		y + offsets.end_of_level_cards._y
 	);

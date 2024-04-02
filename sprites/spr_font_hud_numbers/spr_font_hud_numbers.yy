@@ -1,6 +1,6 @@
 {
   "$GMSprite":"",
-  "%Name":"spr_font_hudnumbers",
+  "%Name":"spr_font_hud_numbers",
   "bboxMode":0,
   "bbox_bottom":7,
   "bbox_left":0,
@@ -30,7 +30,7 @@
   "layers":[
     {"$GMImageLayer":"","%Name":"39a5471d-ee3b-4a0f-9483-5f009aef8e96","blendMode":0,"displayName":"default","isLocked":false,"name":"39a5471d-ee3b-4a0f-9483-5f009aef8e96","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
-  "name":"spr_font_hudnumbers",
+  "name":"spr_font_hud_numbers",
   "nineSlice":null,
   "origin":0,
   "parent":{
@@ -42,7 +42,7 @@
   "resourceVersion":"2.0",
   "sequence":{
     "$GMSequence":"",
-    "%Name":"spr_font_hudnumbers",
+    "%Name":"spr_font_hud_numbers",
     "autoRecord":true,
     "backdropHeight":768,
     "backdropImageOpacity":0.5,
@@ -66,7 +66,7 @@
       "resourceType":"KeyframeStore<MomentsEventKeyframe>",
       "resourceVersion":"2.0",
     },
-    "name":"spr_font_hudnumbers",
+    "name":"spr_font_hud_numbers",
     "playback":1,
     "playbackSpeed":30.0,
     "playbackSpeedType":0,
@@ -78,34 +78,34 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"ceee833f-bab2-4e61-83e9-08f9723a1d36","path":"sprites/spr_font_hudnumbers/spr_font_hudnumbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"ceee833f-bab2-4e61-83e9-08f9723a1d36","path":"sprites/spr_font_hud_numbers/spr_font_hud_numbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"63903242-52b7-47b9-9cc8-430eabf556bf","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"f111badf-3f6a-4d83-9b8a-4ee0d64c5ceb","path":"sprites/spr_font_hudnumbers/spr_font_hudnumbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"f111badf-3f6a-4d83-9b8a-4ee0d64c5ceb","path":"sprites/spr_font_hud_numbers/spr_font_hud_numbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"13c8bec7-6310-465b-a723-895eb5fc0e32","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"523ddd7e-4bb1-4a67-8442-3b8e505383f4","path":"sprites/spr_font_hudnumbers/spr_font_hudnumbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"523ddd7e-4bb1-4a67-8442-3b8e505383f4","path":"sprites/spr_font_hud_numbers/spr_font_hud_numbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"ac48742d-9c78-457e-bdf3-5e1fdd33c9cb","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"a27699a8-2eaf-4445-a302-223b678a1ee8","path":"sprites/spr_font_hudnumbers/spr_font_hudnumbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"a27699a8-2eaf-4445-a302-223b678a1ee8","path":"sprites/spr_font_hud_numbers/spr_font_hud_numbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"954a964a-f8a4-4ac0-b206-c51a47efe275","IsCreationKey":false,"Key":3.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"c7cc68db-e090-409a-92d1-7054a95135f9","path":"sprites/spr_font_hudnumbers/spr_font_hudnumbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"c7cc68db-e090-409a-92d1-7054a95135f9","path":"sprites/spr_font_hud_numbers/spr_font_hud_numbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"7d3b86bf-044c-4a7d-b7c2-289723c7a87b","IsCreationKey":false,"Key":4.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"f74e01ad-c264-44fb-aaff-8be9d221f0f2","path":"sprites/spr_font_hudnumbers/spr_font_hudnumbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"f74e01ad-c264-44fb-aaff-8be9d221f0f2","path":"sprites/spr_font_hud_numbers/spr_font_hud_numbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"06395903-c050-4ee5-8396-8382e8f1e525","IsCreationKey":false,"Key":5.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"b92b42db-ae35-4460-bd81-1b3e7cfe7041","path":"sprites/spr_font_hudnumbers/spr_font_hudnumbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"b92b42db-ae35-4460-bd81-1b3e7cfe7041","path":"sprites/spr_font_hud_numbers/spr_font_hud_numbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"b590a761-4a40-42b9-9a4b-d7505d8532db","IsCreationKey":false,"Key":6.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"57a22711-7e62-457d-b5ea-6d33329cc24f","path":"sprites/spr_font_hudnumbers/spr_font_hudnumbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"57a22711-7e62-457d-b5ea-6d33329cc24f","path":"sprites/spr_font_hud_numbers/spr_font_hud_numbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"7b1000cf-1efe-405f-bd09-df1315774067","IsCreationKey":false,"Key":7.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"5ea8f698-296c-437a-a64d-376c53cad24e","path":"sprites/spr_font_hudnumbers/spr_font_hudnumbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"5ea8f698-296c-437a-a64d-376c53cad24e","path":"sprites/spr_font_hud_numbers/spr_font_hud_numbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"20b95a4d-da73-46f1-9460-4b57006a5a54","IsCreationKey":false,"Key":8.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"06ea2087-9d01-4157-8eeb-7b4c39ce0341","path":"sprites/spr_font_hudnumbers/spr_font_hudnumbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"06ea2087-9d01-4157-8eeb-7b4c39ce0341","path":"sprites/spr_font_hud_numbers/spr_font_hud_numbers.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"d2640e92-5901-4fda-86d1-dc4ed9c92161","IsCreationKey":false,"Key":9.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],

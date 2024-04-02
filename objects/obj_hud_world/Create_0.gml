@@ -1,3 +1,7 @@
+// Failsafe.
+if (source == noone)
+{ instance_destroy(); }
+
 // Configuration:
 
 // Display offsets for various HUD components.

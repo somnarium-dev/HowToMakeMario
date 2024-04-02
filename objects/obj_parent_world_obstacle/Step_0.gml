@@ -1,3 +1,6 @@
+// Inherit the parent event.
+event_inherited();
+
 // If the level associated with this obstacle is cleared, then clear the obstacle.
 if (associated_level != false)
 {

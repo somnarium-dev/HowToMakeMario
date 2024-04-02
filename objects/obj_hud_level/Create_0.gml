@@ -1,3 +1,7 @@
+// Failsafe.
+if (source == noone)
+{ instance_destroy(); }
+
 // Configuration:
 
 // Display offsets for various HUD components.
@@ -29,7 +33,7 @@ timer_num_places  = 3;
 coins_string = string_repeat("0", coins_num_places);
 lives_string = string_repeat("0", lives_num_places);
 point_total_string = string_repeat("0", point_total_num_places);
-level_timer_string = string_repeat("0", timer_num_places);
+level_timer_string = "000";
 
 // Internal functionality.
 timer = 0;

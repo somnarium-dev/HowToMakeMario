@@ -6,8 +6,8 @@
   "name":"obj_world_coin_land",
   "overriddenProperties":[],
   "parent":{
-    "name":"Paths",
-    "path":"folders/Objects/World Objects/Paths.yy",
+    "name":"Props",
+    "path":"folders/Objects/World Objects/Props.yy",
   },
   "parentObjectId":{
     "name":"obj_parent_world_object_animated",

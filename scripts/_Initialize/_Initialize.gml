@@ -91,7 +91,8 @@ function initialize()
 	// Define fonts.
 	global.font_system = fnt_lanapixel;
 	global.font_default = font_add_sprite_ext(spr_font_default, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?'., ", false, 0);
-	global.font_hudnumbers = font_add_sprite_ext(spr_font_hudnumbers, "0123456789", false, 0);
+	global.font_hud_numbers = font_add_sprite_ext(spr_font_hud_numbers, "0123456789", false, 0);
+	global.font_stage_start = font_add_sprite_ext(spr_font_stage_start, "ABCDEFGHIJKLMNOPQRSTUVWXYZ! ", true, 1);
 
 	draw_set_font(global.font_default);
 	
@@ -171,6 +172,8 @@ function initialize()
 	global.max_coins = 100;
 	global.max_lives = 99;
 	
+	global.current_player = 1;
+	
 	//===================================================================================
 	// PLAYER PROPERTIES
 	//===================================================================================
@@ -184,6 +187,7 @@ function initialize()
 		character_index: 0,
 		sprites: variable_clone(loadAllCharacterSprites("mario")),
 		sounds: variable_clone(global.character_data[0].sounds),
+		current_power: player_power.small,
 		accel_rate: 0.05,
 		decel_rate: 0.1,
 		walk_speed: 1.25,
@@ -197,7 +201,10 @@ function initialize()
 		point_total: 0,
 		coins: 0,
 		plevel: 0,
-		cards: [0, 0, 0]
+		cards: [0, 0, 0],
+		map_state: player_map_state.load_in,
+		map_coordinates_start: {_x: 32, _y: 48},
+		map_coordinates: {_x: 32, _y: 48, _previous_x: 32, _previous_y: 48}
 	}
 	
 	//===================================================================================

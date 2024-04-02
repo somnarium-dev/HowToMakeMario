@@ -267,7 +267,7 @@ updatePLevel = function()
 	var current_speed = abs(h_speed);
 	
 	if (input_run_held)
-	&& (current_speed >= global.player_data[1].run_speed)
+	&& (current_speed >= run_speed)
 	&& (checkForImpassable(x, y + 1))
 	{ plevel_charge += plevel_charge_rate; }
 	
@@ -285,7 +285,7 @@ updatePLevel = function()
 	
 	plevel_charge = clamp(plevel_charge, 0, plevel_charge_max);
 	
-	global.player_data[1].plevel = plevel_charge div plevel_pip_value;
+	stat_block.plevel = plevel_charge div plevel_pip_value;
 }
 
 //=================================================================================================
@@ -329,7 +329,7 @@ checkIfDead = function()
 ///@func atMaxPLevel()
 atMaxPLevel = function()
 {
-	if (global.player_data[1].plevel >= global.plevel_max)
+	if (stat_block.plevel >= global.plevel_max)
 	{ return true; }
 	
 	return false;
@@ -396,7 +396,7 @@ updateStats = function()
 ///@func updateSprites()
 updateSprites = function()
 {
-	sprites = global.player_data[1].sprites[current_power];
+	sprites = stat_block.sprites[current_power];
 	mask_index = sprites[player_state.mask];
 }
 

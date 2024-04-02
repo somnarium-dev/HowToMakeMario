@@ -1,3 +1,6 @@
+// Inherit the parent event.
+event_inherited();
+
 // Load obstacle data.
 cleared =			global.world_data[global.world].obstacles[obstacle_number].cleared;
 associated_level =	global.world_data[global.world].obstacles[obstacle_number].associated_level;

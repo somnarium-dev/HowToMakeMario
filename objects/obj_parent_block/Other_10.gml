@@ -27,7 +27,7 @@ blockStrikeDetection = function(_x, _y)
 	var confirmations = 0;
 	var required_confirmations = abs(h_sign) + abs(v_sign);
 		
-	var _num = instance_place_list(_x, _y, obj_parent_levelobject, strike_detection_list, true);
+	var _num = instance_place_list(_x, _y, obj_parent_level_object, strike_detection_list, true);
 	
 	for (var i = 0;  i < _num; i++)
 	{

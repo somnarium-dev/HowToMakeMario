@@ -9,3 +9,7 @@ pauses_inflicted[pause_types.time_stop] = false;
 pauses_inflicted[pause_types.special] = false;
 
 paused = false;
+
+// Internal functionality.
+timer = 0;
+state_timer = 0;

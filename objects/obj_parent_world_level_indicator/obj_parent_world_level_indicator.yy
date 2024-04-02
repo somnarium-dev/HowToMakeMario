@@ -11,7 +11,10 @@
     "name":"World Objects",
     "path":"folders/Objects/- Parents/World Objects.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_parent_world_object",
+    "path":"objects/obj_parent_world_object/obj_parent_world_object.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -26,10 +29,6 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"","%Name":"left_exit","filters":[],"listItems":[],"multiselect":false,"name":"left_exit","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"invalid","varType":0,},
-    {"$GMObjectProperty":"","%Name":"up_exit","filters":[],"listItems":[],"multiselect":false,"name":"up_exit","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"invalid","varType":0,},
-    {"$GMObjectProperty":"","%Name":"right_exit","filters":[],"listItems":[],"multiselect":false,"name":"right_exit","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"invalid","varType":0,},
-    {"$GMObjectProperty":"","%Name":"down_exit","filters":[],"listItems":[],"multiselect":false,"name":"down_exit","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"invalid","varType":0,},
     {"$GMObjectProperty":"","%Name":"cleared","filters":[],"listItems":[],"multiselect":false,"name":"cleared","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"false","varType":0,},
     {"$GMObjectProperty":"","%Name":"level_contained","filters":[],"listItems":[],"multiselect":false,"name":"level_contained","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Level_1_1","varType":0,},
     {"$GMObjectProperty":"","%Name":"level_number","filters":[],"listItems":[],"multiselect":false,"name":"level_number","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"1","varType":0,},
