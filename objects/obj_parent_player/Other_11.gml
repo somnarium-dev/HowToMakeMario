@@ -39,6 +39,8 @@ state_machine[player_state.die] = function()
 		else if (death_sequence_phase == 2)
 		{ 
 			global.player_data[global.current_player].map_state = player_map_state.post_level_death;
+			global.view_track_on_y = true;
+			global.accept_player_input = true;
 			transitionIrisToRoom(global.post_death_room, true, true, false); 
 		}
 	}

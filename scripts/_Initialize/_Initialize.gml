@@ -40,6 +40,18 @@ function initialize()
 		"walk"
 	]
 	
+	global.player_map_state_string = 
+	[
+		"load_in",
+		"new_world_map",
+		"select_level",
+		"in_motion",
+		"enter_level",
+		"post_level_death",
+		"post_level_clear",
+		"kickback"
+	]
+	
 	global.enemy_state_string =
 	[
 		"stand",

@@ -6,7 +6,7 @@
 
 ///@func generatePlayerInputs()
 generatePlayerInputs = function()
-{
+{	
 	generateStandardInputs();
 
 	input_run_pressed = false;
