@@ -52,13 +52,46 @@ state_machine[player_map_state.kickback] = function()
 	if (arrived_at_last_clear)
 	{
 		sprite_index = pin_sprite;
+		
+		var number_of_enemies = instance_number(obj_parent_world_enemy);
+		var number_of_shuffle_steps = irandom_range(2, 3);
+		
+		for (var i = 0; i < number_of_enemies; i++;)
+		{
+		    array_of_reshuffling_enemies[i] = instance_find(obj_parent_world_enemy, i);
+			array_of_reshuffling_enemies[i].shuffle_moves_remaining = number_of_shuffle_steps;
+			array_of_reshuffling_enemies[i].state = enemy_map_state.shuffle;
+		}
+		
 		updateMapState(player_map_state.reshuffle);
 	}
 }
 
 state_machine[player_map_state.reshuffle] = function()
 {
-	// Empty.
+	var done_with_reshuffle = true;
+	
+	var number_of_enemies = array_length(array_of_reshuffling_enemies);
+	
+	show_debug_message($"Checking {number_of_enemies}.");
+	
+	for (var i = 0; i < number_of_enemies; i++;)
+	{
+		if (array_of_reshuffling_enemies[i].state != enemy_map_state.idle)
+		{ 
+			show_debug_message($"{array_of_reshuffling_enemies[i]} isn't done!");
+			done_with_reshuffle = false; 
+			break;
+		}
+	}
+	
+	if (done_with_reshuffle)
+	{
+		show_debug_message("Finito.");
+		playBGM(global.world_data[1].music, true);
+		sprite_index = map_sprite;
+		updateMapState(player_map_state.select_level);
+	}
 }
 
 //=======================================================================================

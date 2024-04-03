@@ -1,18 +1,19 @@
 {
   "$GMSprite":"",
-  "%Name":"spr_world_hammer_brother_sleeping",
+  "%Name":"spr_world_enemy_hammer_bro_active",
   "bboxMode":0,
   "bbox_bottom":15,
   "bbox_left":0,
   "bbox_right":15,
-  "bbox_top":6,
+  "bbox_top":0,
   "collisionKind":1,
   "collisionTolerance":0,
   "DynamicTexturePage":false,
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"16638792-7207-4119-bed9-d2dd175e73c3","name":"16638792-7207-4119-bed9-d2dd175e73c3","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"21d2fa47-ff07-4a4f-9510-dee4b47365a5","name":"21d2fa47-ff07-4a4f-9510-dee4b47365a5","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"0e05ecd0-de42-4827-acbe-23e912db60c2","name":"0e05ecd0-de42-4827-acbe-23e912db60c2","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
@@ -21,19 +22,19 @@
   "layers":[
     {"$GMImageLayer":"","%Name":"e20f7fc1-2f71-44f6-b431-325d73b3107d","blendMode":0,"displayName":"default","isLocked":false,"name":"e20f7fc1-2f71-44f6-b431-325d73b3107d","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
-  "name":"spr_world_hammer_brother_sleeping",
+  "name":"spr_world_enemy_hammer_bro_active",
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Objects",
-    "path":"folders/Sprites/World Objects/Objects.yy",
+    "name":"Enemies",
+    "path":"folders/Sprites/World Objects/Enemies.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
   "resourceVersion":"2.0",
   "sequence":{
     "$GMSequence":"",
-    "%Name":"spr_world_hammer_brother_sleeping",
+    "%Name":"spr_world_enemy_hammer_bro_active",
     "autoRecord":true,
     "backdropHeight":768,
     "backdropImageOpacity":0.5,
@@ -49,7 +50,7 @@
     },
     "eventStubScript":null,
     "eventToFunction":{},
-    "length":1.0,
+    "length":2.0,
     "lockOrigin":false,
     "moments":{
       "$KeyframeStore<MomentsEventKeyframe>":"",
@@ -57,7 +58,7 @@
       "resourceType":"KeyframeStore<MomentsEventKeyframe>",
       "resourceVersion":"2.0",
     },
-    "name":"spr_world_hammer_brother_sleeping",
+    "name":"spr_world_enemy_hammer_bro_active",
     "playback":1,
     "playbackSpeed":8.0,
     "playbackSpeedType":0,
@@ -69,8 +70,11 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"16638792-7207-4119-bed9-d2dd175e73c3","path":"sprites/spr_world_hammer_brother_sleeping/spr_world_hammer_brother_sleeping.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"476b541f-cb75-44a2-9e15-2f66b23abcd1","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"21d2fa47-ff07-4a4f-9510-dee4b47365a5","path":"sprites/spr_world_enemy_hammer_bro_active/spr_world_enemy_hammer_bro_active.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"3c2f4520-1b41-4cb2-bd72-650046bca803","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"0e05ecd0-de42-4827-acbe-23e912db60c2","path":"sprites/spr_world_enemy_hammer_bro_active/spr_world_enemy_hammer_bro_active.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"1839ad1a-b591-4f56-8ba0-3a201eb71c8e","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

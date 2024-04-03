@@ -54,6 +54,15 @@ enum player_map_state
 	reshuffle
 }
 
+// Enemy Map State - Used to control enemy state on world maps.
+enum enemy_map_state
+{
+	idle, 
+	shuffle,
+	move,
+	dead
+}
+
 // Damage Type - used when processing potentially damaging attacks between objects.
 enum damage_type
 {

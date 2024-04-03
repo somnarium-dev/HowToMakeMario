@@ -13,6 +13,7 @@ function debugDrawState()
 	var is_enemy = object_is_ancestor(id.object_index, obj_parent_enemy);
 	var is_block = object_is_ancestor(id.object_index, obj_parent_block);
 	var is_item = object_is_ancestor(id.object_index, obj_parent_item);
+	var is_map_enemy = object_is_ancestor(id.object_index, obj_parent_world_enemy);
 	
 	if (is_player)
 	{ read_array = global.player_state_string; }
@@ -25,6 +26,9 @@ function debugDrawState()
 	
 	else if (is_item)
 	{ read_array = global.item_state_string; }
+	
+	else if (is_map_enemy)
+	{ read_array = global.enemy_map_state_string; }
 	
 	// If the object is not a child of one of the above objects,
 	// Then this method does not support it.
@@ -49,6 +53,14 @@ function debugDrawState()
 
 	draw_sprite_stretched(spr_hud_textbox_black, 0, box_position_x, box_position_y, text_contents_length + 6, 14);
 	draw_text(text_position_x + 3, text_position_y + 2, text_contents);
+	
+	// Some temporary stuff for map enemies.
+	if (is_map_enemy)
+	{
+		//Shuffle Moves Remaining
+		draw_sprite_stretched(spr_hud_textbox_black, 0, box_position_x, box_position_y + 14, text_contents_length + 6, 14);
+		draw_text(text_position_x + 3, text_position_y + 16, string(shuffle_moves_remaining));
+	}
 
 	// Tidy.
 	draw_set_font(global.font_default);

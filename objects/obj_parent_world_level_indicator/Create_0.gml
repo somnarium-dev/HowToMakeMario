@@ -16,4 +16,4 @@ if (cleared != false)
 // If this level should display a "Help!" indicator,
 // create it now.
 else if (help_indicator)
-{ instance_create_layer(x + 16, y - 8, "Level_Indicators", obj_world_prop_help_bubble); }
+{ instance_create_layer(x + 16, y - 16, "Level_Indicators", obj_world_prop_help_bubble); }

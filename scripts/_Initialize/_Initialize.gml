@@ -53,6 +53,14 @@ function initialize()
 		"reshuffle"
 	]
 	
+	global.enemy_map_state_string =
+	[
+		"idle", 
+		"shuffle",
+		"move",
+		"dead"
+	]
+	
 	global.enemy_state_string =
 	[
 		"stand",
@@ -115,7 +123,7 @@ function initialize()
 	
 	global.preferences =
 	{
-		master_volume: 1,
+		master_volume: .6,
 		music_volume: 1,
 		sfx_volume: 1
 	};

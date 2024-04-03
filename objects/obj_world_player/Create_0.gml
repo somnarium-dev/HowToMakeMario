@@ -31,6 +31,8 @@ bump_sound_buffer_timing = 15;
 target_level = undefined;
 target_level_bgm = -1;
 
+array_of_reshuffling_enemies = [];
+
 // Initialize.
 x = global.player_data[global.current_player].map_coordinates._x;
 y = global.player_data[global.current_player].map_coordinates._y;
