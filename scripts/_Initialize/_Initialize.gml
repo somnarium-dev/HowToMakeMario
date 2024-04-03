@@ -180,7 +180,10 @@ function initialize()
 	global.gravity_data[gravity_type.low] = { strength: 0.1, terminal_velocity: 2 };
 	global.gravity_data[gravity_type.coin] = { strength: 0.5, terminal_velocity: 5 }; // For coinblocks.
 	
-	global.level_timer = 300;
+	global.level_music = { normal: undefined, hurry: undefined };
+	global.level_timer_starting_value = 300;
+	global.level_timer_timing = 30;
+	global.level_timer = 0;
 	
 	global.plevel_max = 7;
 	
@@ -247,8 +250,6 @@ function initialize()
 	//===================================================================================
 	// CONTINUE
 	//===================================================================================
-	
-	//playBGM(global.music_overworld, true);
 	
 	// Continue.
 	transitionIrisToRoom(global.next_room, false, false, true);

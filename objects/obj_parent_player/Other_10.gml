@@ -456,6 +456,7 @@ clearAllInputVariables = function()
 ///@func applyPauseForDeathSequence()
 applyPauseForDeathSequence = function()
 {
+	applyPauseTypeTo(pause_types.player_death_pause, obj_hud_level);
 	applyPauseTypeTo(pause_types.player_death_pause, obj_parent_enemy);
 	applyPauseTypeTo(pause_types.player_death_pause, obj_parent_projectile);
 	applyPauseTypeTo(pause_types.player_death_pause, obj_parent_block);

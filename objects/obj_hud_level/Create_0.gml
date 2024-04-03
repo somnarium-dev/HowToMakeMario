@@ -2,6 +2,22 @@
 if (source == noone)
 { instance_destroy(); }
 
+// Load custom methods.
+event_user(0);
+
+// Pausing variables.
+stored_image_speed = 0;
+
+pauses_inflicted = [];
+pauses_inflicted[pause_types.transition] = false;
+pauses_inflicted[pause_types.all_execution] = false;
+pauses_inflicted[pause_types.player_pause] = false;
+pauses_inflicted[pause_types.player_death_pause] = false;
+pauses_inflicted[pause_types.time_stop] = false;
+pauses_inflicted[pause_types.special] = false;
+
+paused = false;
+
 // Configuration:
 
 // Display offsets for various HUD components.
@@ -33,9 +49,10 @@ timer_num_places  = 3;
 coins_string = string_repeat("0", coins_num_places);
 lives_string = string_repeat("0", lives_num_places);
 point_total_string = string_repeat("0", point_total_num_places);
-level_timer_string = "000";
+level_timer_string = string_repeat("0", timer_num_places);
 
 // Internal functionality.
 timer = 0;
+level_timer_timer = 0;
 indicator_flash_timing = 6;
 indicator_flash = false;

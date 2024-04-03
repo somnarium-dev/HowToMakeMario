@@ -16,20 +16,6 @@ function initializeMusic()
 	//Map - Grass Land
 	global.music_map_grassland = bgm_grassland;
 	
-	//Stage - "Overworld"
-	global.music_overworld = bgm_overworld;
-	_intro_length = convertSamplesToSeconds(156441);
-	_song_length = convertSamplesToSeconds(1312597);
-	audio_sound_loop_start(global.music_overworld, _intro_length);
-	audio_sound_loop_end(global.music_overworld, _song_length);
-	
-	//Stage - "Overworld - Hurry Up!"
-	global.music_overworld_hurry = bgm_overworld_hurry;
-	_intro_length = convertSamplesToSeconds(117212);
-	_song_length = convertSamplesToSeconds(984331);
-	audio_sound_loop_start(global.music_overworld_hurry, _intro_length);
-	audio_sound_loop_end(global.music_overworld_hurry, _song_length);
-	
 	//Player Down
 	global.music_playerdown = bgm_playerdown;
 	
@@ -38,6 +24,23 @@ function initializeMusic()
 	
 	//Level Clear
 	global.music_levelclear = bgm_levelclear;
+	
+	//Stage - "Overworld - Normal"
+	global.music_overworld_normal = bgm_overworld;
+	_intro_length = convertSamplesToSeconds(156441);
+	_song_length = convertSamplesToSeconds(1312597);
+	audio_sound_loop_start(global.music_overworld_normal, _intro_length);
+	audio_sound_loop_end(global.music_overworld_normal, _song_length);
+	
+	//Stage - "Overworld - Hurry Up!"
+	global.music_overworld_hurry = bgm_overworld_hurry;
+	_intro_length = convertSamplesToSeconds(117212);
+	_song_length = convertSamplesToSeconds(984331);
+	audio_sound_loop_start(global.music_overworld_hurry, _intro_length);
+	audio_sound_loop_end(global.music_overworld_hurry, _song_length);
+	
+	//Stage - "Overworld" Music Object
+	global.music_overworld = {normal: global.music_overworld_normal, hurry: global.music_overworld_hurry };
 }
 
 /// @function		convertSamplesToSeconds(_samples, _sample_rate)

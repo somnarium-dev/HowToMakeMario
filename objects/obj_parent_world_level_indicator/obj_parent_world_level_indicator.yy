@@ -12,8 +12,8 @@
     "path":"folders/Objects/- Parents/World Objects.yy",
   },
   "parentObjectId":{
-    "name":"obj_parent_world_object",
-    "path":"objects/obj_parent_world_object/obj_parent_world_object.yy",
+    "name":"obj_parent_world_object_animated",
+    "path":"objects/obj_parent_world_object_animated/obj_parent_world_object_animated.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -33,6 +33,7 @@
     {"$GMObjectProperty":"","%Name":"level_contained","filters":[],"listItems":[],"multiselect":false,"name":"level_contained","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Level_1_1","varType":0,},
     {"$GMObjectProperty":"","%Name":"level_number","filters":[],"listItems":[],"multiselect":false,"name":"level_number","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"1","varType":0,},
     {"$GMObjectProperty":"","%Name":"level_bgm","filters":[],"listItems":[],"multiselect":false,"name":"level_bgm","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"-1","varType":0,},
+    {"$GMObjectProperty":"","%Name":"level_uses_timer","filters":[],"listItems":[],"multiselect":false,"name":"level_uses_timer","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"true","varType":3,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

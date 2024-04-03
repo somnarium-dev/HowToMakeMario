@@ -132,6 +132,7 @@ checkIfEnteringLevel = function()
 	{
 		updateMapState(player_map_state.enter_level);
 		global.post_death_room = room;
-		transitionIrisToLevel(target_level, target_level_bgm);
+		obj_parent_world_object_animated.animation_lock = true;
+		transitionIrisToLevel(target_level, global.level_music.normal);
 	}
 }

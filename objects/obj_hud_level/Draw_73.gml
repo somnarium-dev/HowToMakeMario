@@ -5,6 +5,7 @@ y = camera_get_view_y(global.game_view_camera) + global.view_height - sprite_hei
 coins_string = string_repeat("0", coins_num_places - string_length(source.stat_block.coins)) + string(source.stat_block.coins);
 lives_string = string_repeat("0", lives_num_places - string_length(source.stat_block.lives_remaining)) + string(source.stat_block.lives_remaining);
 point_total_string = string_repeat("0", point_total_num_places - string_length(source.stat_block.point_total)) + string(source.stat_block.point_total);
+level_timer_string = string_repeat("0", timer_num_places - string_length(global.level_timer)) + string(global.level_timer);
 
 // Blackout.
 draw_sprite_stretched(spr_black, 0, x, y, sprite_width, sprite_height);

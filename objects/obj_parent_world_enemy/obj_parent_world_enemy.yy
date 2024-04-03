@@ -17,8 +17,8 @@
     "path":"folders/Objects/- Parents/World Objects.yy",
   },
   "parentObjectId":{
-    "name":"obj_parent_world_object",
-    "path":"objects/obj_parent_world_object/obj_parent_world_object.yy",
+    "name":"obj_parent_world_object_animated",
+    "path":"objects/obj_parent_world_object_animated/obj_parent_world_object_animated.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

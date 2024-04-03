@@ -256,6 +256,9 @@ getSelectedLevel = function()
 	if (current_level_indicator == noone)
 	{ return; }
 	
+	if (current_level_indicator.level_uses_timer)
+	{ global.level_timer = global.level_timer_starting_value; }
+	
 	target_level = current_level_indicator.level_contained;
-	target_level_bgm = current_level_indicator.level_bgm;
+	global.level_music = current_level_indicator.level_bgm;
 }
