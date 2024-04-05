@@ -1,4 +1,4 @@
-//Player Power - the current powerup held by a given player.
+// Player Power - the current powerup held by a given player.
 enum player_power
 {
     small,
@@ -6,13 +6,15 @@ enum player_power
     big,
     fire,
     raccoon
-	//Surely more to come.
+	// Surely more to come.
 }
 
-//Player State - used for state machines, sprite settings, and some other checks.
+// Player State - used for state machines, sprite settings, and some other checks.
 enum player_state
 {
-	mask, //This is used to set the collision mask.
+	mask,		// This is used to set the collision mask.
+	map,		// This is only used for the world map.
+	pin,		// This is only used for the world map.
 	climb,
 	crouch,
 	die,
@@ -27,7 +29,7 @@ enum player_state
 	grab_stand,
 	grab_walk,
 	jump,
-	kick, //The player object never actually enters this state. It's just for sprite data.
+	kick,		// The player object never actually enters this state. It's just for sprite data.
 	run,
 	run_fall,
 	run_jump,
@@ -38,16 +40,39 @@ enum player_state
 	walk
 }
 
-//Damage Type - used when processing potentially damaging attacks between objects.
+// Player Map State - Used to control player state on world maps.
+enum player_map_state
+{
+	load_in,
+	new_world_map,
+	select_level,
+	in_motion,
+	enter_level,
+	post_level_death,
+	post_level_clear,
+	kickback,
+	reshuffle
+}
+
+// Enemy Map State - Used to control enemy state on world maps.
+enum enemy_map_state
+{
+	idle, 
+	shuffle,
+	move,
+	dead
+}
+
+// Damage Type - used when processing potentially damaging attacks between objects.
 enum damage_type
 {
-	none,	//Used for reseting damage data structs, and indicates no hit is registered.
-	touch,	//Contact damage, touching spikes etc.
-	jump,	//Specifically for when a player jumps onto/into something to attack it.
-	shell,	//As you'd expect.
-	fire,	//Fireballs, firebars, etc.
-	tail,	//Raccoon / Tanuki suit tail flips.
-	star	//Invincibility effects in general.
+	none,	// Used for reseting damage data structs, and indicates no hit is registered.
+	touch,	// Contact damage, touching spikes etc.
+	jump,	// Specifically for when a player jumps onto/into something to attack it.
+	shell,	// As you'd expect.
+	fire,	// Fireballs, firebars, etc.
+	tail,	// Raccoon / Tanuki suit tail flips.
+	star	// Invincibility effects in general.
 }
 
 // Enemy State - Used for state machines inside of enemy objects.
@@ -112,4 +137,11 @@ enum pause_types
 	player_death_pause,
 	time_stop,
 	special
+}
+
+// Obstacle Types - World map objects the block passage unless unlocked or destroyed.
+enum obstacle_types
+{
+	lock,
+	rock
 }

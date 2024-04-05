@@ -8,8 +8,8 @@
     {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_parent_block","path":"objects/obj_parent_block/obj_parent_block.yy",},"propertyId":{"name":"idle_sprite","path":"objects/obj_parent_block/obj_parent_block.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"spr_block_brick",},
   ],
   "parent":{
-    "name":"World Objects",
-    "path":"folders/Objects/World Objects.yy",
+    "name":"Level Objects",
+    "path":"folders/Objects/Level Objects.yy",
   },
   "parentObjectId":{
     "name":"obj_parent_block",

@@ -40,6 +40,27 @@ function initialize()
 		"walk"
 	]
 	
+	global.player_map_state_string = 
+	[
+		"load_in",
+		"new_world_map",
+		"select_level",
+		"in_motion",
+		"enter_level",
+		"post_level_death",
+		"post_level_clear",
+		"kickback",
+		"reshuffle"
+	]
+	
+	global.enemy_map_state_string =
+	[
+		"idle", 
+		"shuffle",
+		"move",
+		"dead"
+	]
+	
 	global.enemy_state_string =
 	[
 		"stand",
@@ -86,11 +107,13 @@ function initialize()
 
 	initializeCharacters();
 	initializeMusic();
+	initializeWorlds();
 	
 	// Define fonts.
 	global.font_system = fnt_lanapixel;
 	global.font_default = font_add_sprite_ext(spr_font_default, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?'., ", false, 0);
-	global.font_hudnumbers = font_add_sprite_ext(spr_font_hudnumbers, "0123456789", false, 0);
+	global.font_hud_numbers = font_add_sprite_ext(spr_font_hud_numbers, "0123456789", false, 0);
+	global.font_stage_start = font_add_sprite_ext(spr_font_stage_start, "ABCDEFGHIJKLMNOPQRSTUVWXYZ! ", true, 1);
 
 	draw_set_font(global.font_default);
 	
@@ -100,9 +123,9 @@ function initialize()
 	
 	global.preferences =
 	{
-		master_volume: 100,
-		music_volume: 100,
-		sfx_volume: 100
+		master_volume: .6,
+		music_volume: 1,
+		sfx_volume: 1
 	};
 	
 	//===================================================================================
@@ -144,8 +167,8 @@ function initialize()
 	// GENERAL GAME PROPERTIES
 	//===================================================================================
 	
-	global.next_room = Level_1_1;
-	global.post_death_room = Initializer;
+	global.next_room = World_1;
+	global.post_death_room = World_1;
 	
 	global.world = 1;
 	
@@ -157,7 +180,10 @@ function initialize()
 	global.gravity_data[gravity_type.low] = { strength: 0.1, terminal_velocity: 2 };
 	global.gravity_data[gravity_type.coin] = { strength: 0.5, terminal_velocity: 5 }; // For coinblocks.
 	
-	global.level_timer = 300;
+	global.level_music = { normal: undefined, hurry: undefined };
+	global.level_timer_starting_value = 300;
+	global.level_timer_timing = 30;
+	global.level_timer = 0;
 	
 	global.plevel_max = 7;
 	
@@ -168,7 +194,10 @@ function initialize()
 	}
 	
 	global.max_coins = 100;
+	global.starting_lives = 2;
 	global.max_lives = 99;
+	
+	global.current_player = 1;
 	
 	//===================================================================================
 	// PLAYER PROPERTIES
@@ -183,6 +212,7 @@ function initialize()
 		character_index: 0,
 		sprites: variable_clone(loadAllCharacterSprites("mario")),
 		sounds: variable_clone(global.character_data[0].sounds),
+		current_power: player_power.small,
 		accel_rate: 0.05,
 		decel_rate: 0.1,
 		walk_speed: 1.25,
@@ -192,11 +222,14 @@ function initialize()
 		jump_strength: 6.25,
 		moving_jump_strength: 7,
 		flat_bounce_strength: 2,
-		lives_remaining: 0,
+		lives_remaining: global.starting_lives,
 		point_total: 0,
 		coins: 0,
 		plevel: 0,
-		cards: [0, 0, 0]
+		cards: [0, 0, 0],
+		map_state: player_map_state.load_in,
+		map_coordinates_last_clear: {_x: 32, _y: 48},
+		map_coordinates: {_x: 32, _y: 48, _previous_x: 32, _previous_y: 48}
 	}
 	
 	//===================================================================================
@@ -217,8 +250,6 @@ function initialize()
 	//===================================================================================
 	// CONTINUE
 	//===================================================================================
-	
-	//playBGM(global.music_overworld, true);
 	
 	// Continue.
 	transitionIrisToRoom(global.next_room, false, false, true);

@@ -76,7 +76,7 @@ all_nearby_collisions[270] = false;
 all_nearby_collisions[315] = false;
 
 //Associated objects.
-hud = instance_create_layer(0, 0, "HUD", obj_hud_level);
+hud = instance_create_layer(0, 0, "HUD", obj_hud_level, {source: id});
 
 //Initialization.
 current_power = player_power.small;

@@ -1,6 +1,6 @@
 if (!global.show_debug_data) { exit; }
 
-var player_1 = global.player_data[1].current_id;
+var player_1 = global.player_data[global.current_player].current_id;
 
 if (player_1 == noone)
 || (!instance_exists(player_1))

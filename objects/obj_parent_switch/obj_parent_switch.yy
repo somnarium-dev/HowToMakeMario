@@ -10,8 +10,8 @@
     "path":"folders/Objects/- Parents/Level Objects.yy",
   },
   "parentObjectId":{
-    "name":"obj_parent_levelobject",
-    "path":"objects/obj_parent_levelobject/obj_parent_levelobject.yy",
+    "name":"obj_parent_level_object",
+    "path":"objects/obj_parent_level_object/obj_parent_level_object.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

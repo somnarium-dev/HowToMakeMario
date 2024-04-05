@@ -56,8 +56,8 @@
   ],
   "name":"Level_0",
   "parent":{
-    "name":"Rooms",
-    "path":"folders/Rooms.yy",
+    "name":"_System",
+    "path":"folders/Rooms/_System.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

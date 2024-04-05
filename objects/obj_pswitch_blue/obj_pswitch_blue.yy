@@ -6,8 +6,8 @@
   "name":"obj_pswitch_blue",
   "overriddenProperties":[],
   "parent":{
-    "name":"World Objects",
-    "path":"folders/Objects/World Objects.yy",
+    "name":"Level Objects",
+    "path":"folders/Objects/Level Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

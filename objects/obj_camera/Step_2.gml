@@ -1,11 +1,9 @@
 ///@desc Update camera position.
 camera_set_view_size(global.game_view_camera, global.view_width, global.view_height);
 
-var camera_target = noone;
-
-if (global.camera_target_0 == "p1") { camera_target = global.player_data[1].current_id; }
-
 if (global.camera_target_0 == noone) { return; }
+
+var camera_target = global.player_data[global.current_player].current_id;
 
 if (instance_exists(camera_target))
 {

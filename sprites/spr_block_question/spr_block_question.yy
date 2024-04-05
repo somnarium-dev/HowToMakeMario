@@ -28,8 +28,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"World Objects",
-    "path":"folders/Sprites/World Objects.yy",
+    "name":"Level Objects",
+    "path":"folders/Sprites/Level Objects.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

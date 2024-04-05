@@ -16,20 +16,6 @@ function initializeMusic()
 	//Map - Grass Land
 	global.music_map_grassland = bgm_grassland;
 	
-	//Stage - "Overworld"
-	global.music_overworld = bgm_overworld;
-	_intro_length = convertSamplesToSeconds(156441);
-	_song_length = convertSamplesToSeconds(1312597);
-	audio_sound_loop_start(global.music_overworld, _intro_length);
-	audio_sound_loop_end(global.music_overworld, _song_length);
-	
-	//Stage - "Overworld - Hurry Up!"
-	global.music_overworld_hurry = bgm_overworld_hurry;
-	_intro_length = convertSamplesToSeconds(117212);
-	_song_length = convertSamplesToSeconds(984331);
-	audio_sound_loop_start(global.music_overworld_hurry, _intro_length);
-	audio_sound_loop_end(global.music_overworld_hurry, _song_length);
-	
 	//Player Down
 	global.music_playerdown = bgm_playerdown;
 	
@@ -38,6 +24,23 @@ function initializeMusic()
 	
 	//Level Clear
 	global.music_levelclear = bgm_levelclear;
+	
+	//Stage - "Overworld - Normal"
+	global.music_overworld_normal = bgm_overworld;
+	_intro_length = convertSamplesToSeconds(156441);
+	_song_length = convertSamplesToSeconds(1312597);
+	audio_sound_loop_start(global.music_overworld_normal, _intro_length);
+	audio_sound_loop_end(global.music_overworld_normal, _song_length);
+	
+	//Stage - "Overworld - Hurry Up!"
+	global.music_overworld_hurry = bgm_overworld_hurry;
+	_intro_length = convertSamplesToSeconds(117212);
+	_song_length = convertSamplesToSeconds(984331);
+	audio_sound_loop_start(global.music_overworld_hurry, _intro_length);
+	audio_sound_loop_end(global.music_overworld_hurry, _song_length);
+	
+	//Stage - "Overworld" Music Object
+	global.music_overworld = {normal: global.music_overworld_normal, hurry: global.music_overworld_hurry };
 }
 
 /// @function		convertSamplesToSeconds(_samples, _sample_rate)
@@ -57,7 +60,7 @@ function convertSamplesToSeconds(_samples, _sample_rate = 44100)
 
 /// @function		convertSamplesToFrames(_samples, _sample_rate, _frame_rate)
 /// @description	Convert samples by rate to seconds, then to frames by rate. Rounded.
-/// @param {real}	_samples x Number to convert in samples.
+/// @param {real}	_samples Number to convert in samples.
 /// @param {real}	_sample_rate Sample rate to use for conversion.
 /// @param {real}	_frame_rate Frame rate to use for conversion.
 function convertSamplesToFrames(_samples, _sample_rate = 44100, _frame_rate = 60)
@@ -69,6 +72,21 @@ function convertSamplesToFrames(_samples, _sample_rate = 44100, _frame_rate = 60
 	}
 	
 	return round((_samples / _sample_rate) * _frame_rate)
+}
+
+/// @function		convertFramesToMilliseconds(_frames, _frame_rate)
+/// @description	Convert _frames to milliseconds based on _frame_rate. Rounded.
+/// @param {real}	_frames Number to convert in frames.
+/// @param {real}	_frame_rate Frame rate to use for conversion.
+function convertFramesToMilliseconds(_frames, _frame_rate = 60)
+{
+	if (is_undefined(_frames))
+	{
+		show_debug_message("[Warning] convertFramesToMilliseconds() - Attempted to convert undefined number of frames.");
+		return 0;
+	}
+	
+	return round(((1 / _frame_rate) * 1000) * _frames)
 }
 
 //===============================================

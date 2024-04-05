@@ -8,4 +8,6 @@ fade_time = 0;
 event_user(0);
 event_user(1);
 
+hold_this = -1;
+
 state = awaiting_command;
